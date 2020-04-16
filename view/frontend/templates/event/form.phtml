@@ -1,0 +1,35 @@
+<?php
+/** @var \Hatimeria\GtmEe\Block\Event\Form $block */
+// @codingStandardsIgnoreFile
+?>
+<script type="text/javascript">
+    require([
+        "jquery"
+    ], function ($) {
+        window.dataLayer = window.dataLayer || [];
+    <?php foreach ($block->getFormData() as $formData): ?>
+            if ($('#<?= $formData['form_id'] ?>').length) {
+                $('#<?= $formData['form_id'] ?>').data('eventname', '<?= $formData['event_name'] ?>');
+                <?php foreach ($formData['form_field_ids'] as $fieldId): ?>
+                    if ($('#<?= $formData['form_id'] ?>').find('#<?= $fieldId ?>').length) {
+                        $('#<?= $formData['form_id'] ?>').find('#<?= $fieldId ?>').addClass('trackfield');
+                    }
+                <?php endforeach; ?>
+                $('#<?= $formData['form_id'] ?>').on("submit", function(event) {
+                    trackFormSubmit(event);
+                });
+            }
+        <?php endforeach; ?>
+        function trackFormSubmit(event) {
+            event.preventDefault();
+            var data = new Array();
+            data['event'] = $(event.target).data('eventname');
+            $(event.target).find('.trackfield').each(function(i, obj) {
+               data[$(obj).attr('id')] = $(obj).val();
+            });
+            window.dataLayer.push(data);
+            $(event.target).unbind('submit');
+            $(event.target).submit();
+        }
+    });
+</script>

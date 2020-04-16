@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+     <type name="Hatimeria\GtmEe\Model\DataLayerService">
+        <arguments>
+            <argument name="dataLayerComponent" xsi:type="array">
+                <item name="product_view" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\ProductView</item>
+                <item name="core_data" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\CoreData</item>
+                <!--<item name="core_data" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\CustomerData</item>-->
+                <item name="add_to_cart" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AddToCart</item>
+                <item name="remove_from_cart" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\RemoveFromCart</item>
+                <item name="transaction_data" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\Transaction</item>
+                <item name="search" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\Search</item>
+                <item name="advanced_search" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AdvancedSearch</item>
+                <item name="review_add" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\ReviewAdd</item>
+                <item name="add_to_wishlist" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AddProductToWishlist</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Hatimeria\GtmEe\Api\DataLayerServiceInterface" type="Hatimeria\GtmEe\Model\DataLayerService" />
+    <preference for="Hatimeria\GtmEe\Api\GuestCheckoutStepInterface" type="Hatimeria\GtmEe\Model\GuestCheckoutStep" />
+    <preference for="Hatimeria\GtmEe\ApiÓ\CheckoutStepInterface" type="Hatimeria\GtmEe\Model\CheckoutStep" />
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin name="hatimeria-gtmee-product-abstract-impression-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="hatimeria-gtmee-product-impression-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+    <type name="Magento\CatalogSearch\Block\SearchResult\ListProduct">
+        <plugin name="hatimeria-gtmee-search-result" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+</config>

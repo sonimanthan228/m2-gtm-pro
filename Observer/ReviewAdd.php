@@ -1,0 +1,64 @@
+<?php
+
+namespace Hatimeria\GtmEe\Observer;
+
+use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Session\Generic;
+use Hatimeria\GtmEe\Model\DataLayerComponent\ReviewAdd as ReviewAddComponent;
+use Hatimeria\GtmEe\Model\Config;
+
+/**
+ * Class ReviewAdd
+ * @package Hatimeria\GtmEe\Observer
+ */
+class ReviewAdd implements ObserverInterface
+{
+    /**
+     * @var Config
+     */
+    private $config;
+
+    /**
+     * @var Generic
+     */
+    private $session;
+
+    /**
+     * @var ReviewAddComponent
+     */
+    private $reviewAddComponent;
+
+    /**
+     * ReviewAdd constructor.
+     * @param Config $config
+     */
+    public function __construct(
+        Config $config,
+        Generic $session,
+        ReviewAddComponent $reviewAddComponent
+    ) {
+        $this->config = $config;
+        $this->session = $session;
+        $this->reviewAddComponent = $reviewAddComponent;
+    }
+
+    /**
+     * @param Observer $observer
+     * @return $this|void
+     */
+    public function execute(Observer $observer)
+    {
+        if (!$this->config->isModuleEnabled() && !$this->config->isAddProductReviewTrackingEnabled()) {
+            return $this;
+        }
+
+        $request = $observer->getData('request');
+        $data = $request->getPostValue();
+        if ($data) {
+            $this->reviewAddComponent->processReview($data);
+        }
+
+        return $this;
+    }
+}

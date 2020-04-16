@@ -1,0 +1,10 @@
+<?php
+/** @var \Hatimeria\GtmEe\Api\DataLayerBlockInterface $block */
+// @codingStandardsIgnoreFile
+?>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    <?php foreach ($block->getDataLayer() as $event): ?>
+        window.dataLayer.push(<?= json_encode($event) ?>);
+    <?php endforeach; ?>
+</script>
