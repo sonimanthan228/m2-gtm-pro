@@ -34,6 +34,8 @@ class Config
 
     const XML_CONFIG_PATH_HATIMERIA_GTMEE_EVENT_ADD_TO_WISHLIST_TRACKING_ENABLED = 'hatimeria_gtmee/event/add_to_wishlist_tracking_enabled';
 
+    const XML_CONFIG_PATH_HATIMERIA_GTMEE_EVENT_ADD_TO_COMPARE_TRACKING_ENABLED = 'hatimeria_gtmee/event/add_to_compare_tracking_enabled';
+
     /**
      * @var ScopeConfigInterface
      */
@@ -146,6 +148,11 @@ class Config
     public function isAddToWishlistTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(self::XML_CONFIG_PATH_HATIMERIA_GTMEE_EVENT_ADD_TO_WISHLIST_TRACKING_ENABLED);
+    }
+
+    public function isAddToCompareTrackingEnabled():bool
+    {
+        return $this->scopeConfig->isSetFlag(self::XML_CONFIG_PATH_HATIMERIA_GTMEE_EVENT_ADD_TO_COMPARE_TRACKING_ENABLED);
 
     }
 }

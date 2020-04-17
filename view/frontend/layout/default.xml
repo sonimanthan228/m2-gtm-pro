@@ -57,5 +57,8 @@
                 </arguments>
             </block>
         </referenceContainer>
+        <referenceBlock name="catalog.product.related">
+            <block class="Hatimeria\GtmEe\Block\Wishlist\Customer\Item\Column\DataLayerData" name="hatimeria.gtmee.catalog.product.related" template="Hatimeria_GtmEe::wishlist/column/datalayerdata.phtml" cacheable="false"/>
+        </referenceBlock>
     </body>
 </page>

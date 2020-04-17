@@ -13,6 +13,9 @@
                 <item name="advanced_search" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AdvancedSearch</item>
                 <item name="review_add" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\ReviewAdd</item>
                 <item name="add_to_wishlist" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AddProductToWishlist</item>
+                <item name="remove_from_wishlist" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\RemoveProductFromWishlist</item>
+                <item name="add_to_compare" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AddProductToCompare</item>
+                <item name="remove_to_compare" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\RemoveProductFromCompare</item>
             </argument>
         </arguments>
     </type>
@@ -20,12 +23,27 @@
     <preference for="Hatimeria\GtmEe\Api\GuestCheckoutStepInterface" type="Hatimeria\GtmEe\Model\GuestCheckoutStep" />
     <preference for="Hatimeria\GtmEe\ApiÓ\CheckoutStepInterface" type="Hatimeria\GtmEe\Model\CheckoutStep" />
     <type name="Magento\Catalog\Block\Product\AbstractProduct">
-        <plugin name="hatimeria-gtmee-product-abstract-impression-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmee-product-abstract-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
     <type name="Magento\Catalog\Block\Product\ListProduct">
-        <plugin name="hatimeria-gtmee-product-impression-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmee-product-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
     <type name="Magento\CatalogSearch\Block\SearchResult\ListProduct">
         <plugin name="hatimeria-gtmee-search-result" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Related">
+        <plugin name="hatimeria-gtmee-product-related-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Upsell">
+        <plugin name="hatimeria-gtmee-product-upsell-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Crosssell">
+        <plugin name="hatimeria-gtmee-product-crossell-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Promotion">
+        <plugin name="hatimeria-gtmee-product-promotion-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Random">
+        <plugin name="hatimeria-gtmee-product-random-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
 </config>

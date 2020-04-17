@@ -1,0 +1,10 @@
+<?php
+/** @var \Hatimeria\GtmEe\Block\Catalog\Product\ProductList\ItemDataLayerData $block */
+// @codingStandardsIgnoreFile
+?>
+<?php if ($block->isProductImpressionTrackingEnabled()): ?>
+    <div class='product-impression-data' data-impression='<?= $block->getProductImpressionData() ?>'></div>
+<?php endif; ?>
+<?php if ($block->isProductClickTrackingEnabled()): ?>
+    <div class='product-click-data' data-click='<?= $block->getProductClickData() ?>'></div>
+<?php endif; ?>

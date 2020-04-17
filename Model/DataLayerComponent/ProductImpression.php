@@ -11,9 +11,13 @@ use Magento\Catalog\Model\Product;
  */
 class ProductImpression extends ComponentAbstract implements DataLayerComponentInterface
 {
-
     const EVENT_NAME = 'product-impression';
 
+    /**
+     * @param $eventData
+     * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
    public function getComponentData($eventData) {
        $data = [];
        if (array_key_exists('object', $eventData)) {
@@ -21,7 +25,7 @@ class ProductImpression extends ComponentAbstract implements DataLayerComponentI
            $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'impressions' => [
-                    'name' => $product->getName(),
+                    'name' => strip_tags($product->getName()),
                     'id' => $product->getId(),
                     'price' => $this->formatPrice($product->getFinalPrice()),
                    'brand' => $this->getBrand($product),

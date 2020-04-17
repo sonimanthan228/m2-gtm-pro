@@ -5,11 +5,20 @@ namespace Hatimeria\GtmEe\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
+use Magento\Wishlist\Model\ItemFactory;
 use Hatimeria\GtmEe\Model\Config;
-use Hatimeria\GtmEe\Model\DataLayerComponent\AddProductToWishlist as AddProductToWishlistComponent;
+use Hatimeria\GtmEe\Model\DataLayerComponent\RemoveProductFromWishlist as RemoveProductFromWishlistComponent;
 
+/**
+ * Class RemoveProductFromWishlist
+ * @package Hatimeria\GtmEe\Observer
+ */
 class RemoveProductFromWishlist implements ObserverInterface
 {
+    /**
+     * @var ItemFactory
+     */
+    private $itemFactory;
 
     /**
      * @var Config
@@ -22,9 +31,9 @@ class RemoveProductFromWishlist implements ObserverInterface
     private $checkoutSession;
 
     /**
-     * @var AddProductToWishlistComponent
+     * @var RemoveProductFromWishlistComponent
      */
-    private $addProductToWishlistComponent;
+    private $removeProductToWishlistComponent;
 
     /**
      * RemoveProductFromWishlist constructor.
@@ -33,29 +42,29 @@ class RemoveProductFromWishlist implements ObserverInterface
      * @param AddProductToWishlistComponent $addProductToWishlistComponent
      */
     public function __construct(
+        ItemFactory $itemFactory,
         Config $config,
         Session $checkoutSession,
-        AddProductToWishlistComponent $addProductToWishlistComponent
+        RemoveProductFromWishlistComponent $removeProductToWishlistComponent
     ) {
+        $this->itemFactory = $itemFactory;
         $this->config = $config;
         $this->checkoutSession = $checkoutSession;
-        $this->addProductToWishlistComponent = $addProductToWishlistComponent;
+        $this->removeProductToWishlistComponent = $removeProductToWishlistComponent;
     }
 
     /**
-     * todo
      * @param Observer $observer
      * @return $this|void
      */
     public function execute(Observer $observer)
     {
-        return $this;
         if (!$this->config->isModuleEnabled() && !$this->config->isAddToWishlistTrackingEnabled()) {
             return $this;
         }
 
-        $product = $observer->getData('product');
-        $this->addProductToWishlistComponent->processProduct($product);
+        $item = $this->itemFactory->create()->load($observer->getRequest()->getParam('item'));
+        $this->removeProductToWishlistComponent->processProduct($item->getProduct());
 
         return $this;
     }

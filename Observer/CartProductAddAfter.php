@@ -8,9 +8,12 @@ use Magento\Framework\Event\Observer;
 use Hatimeria\GtmEe\Model\Config;
 use Hatimeria\GtmEe\Model\DataLayerComponent\AddToCart;
 
-class CheckoutCartAddProductComplete implements ObserverInterface
+/**
+ * Class CartProductAddAfter
+ * @package Hatimeria\GtmEe\Observer
+ */
+class CartProductAddAfter implements ObserverInterface
 {
-
     /**
      * @var Config
      */
@@ -26,6 +29,12 @@ class CheckoutCartAddProductComplete implements ObserverInterface
      */
     private $addToCartComponent;
 
+    /**
+     * CheckoutCartAddProductComplete constructor.
+     * @param Config $config
+     * @param Session $checkoutSession
+     * @param AddToCart $addToCartComponent
+     */
     public function __construct(
         Config $config,
         Session $checkoutSession,
@@ -45,11 +54,7 @@ class CheckoutCartAddProductComplete implements ObserverInterface
         if (!$this->config->isModuleEnabled() && !$this->config->isAddToCartTrackingEnabled()) {
             return $this;
         }
-
-        $product = $observer->getData('product');
-        $quote = $this->checkoutSession->getQuote();
-        $item = $quote->getItemByProduct($product);
-
+        $item = $observer->getData('quote_item');
         $this->addToCartComponent->processProduct($item);
 
         return $this;

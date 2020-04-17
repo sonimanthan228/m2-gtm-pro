@@ -6,21 +6,21 @@ use Magento\Quote\Model\Quote\Item;
 use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 use Magento\Catalog\Model\Product;
 
-
 /**
- * Class AddProductToWishlist
+ * Class AddProductToCompare
  * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
-class AddProductToWishlist extends ComponentAbstract implements DataLayerComponentInterface
+class AddProductToCompare extends ComponentAbstract implements DataLayerComponentInterface
 {
-    const EVENT_NAME = 'add-to-wishlist';
+
+    const EVENT_NAME = 'add-to-compare';
 
     /**
      * @param Product $product
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmEeProductAddToWishlistData());
+        $data = json_decode($this->session->getGtmEeProductAddToCompareData());
         if (!is_array($data)) {
             $data = [];
         }
@@ -33,12 +33,12 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
             'category' => $this->getCategoryName($product),
             'quantity' => $product->getQty()
         ];
-        $this->session->setGtmEeProductAddToWishlistData(json_encode($data));
+        $this->session->setGtmEeProductAddToCompareData(json_encode($data));
     }
 
     public function getComponentData($eventData) {
         $data = [];
-        $products = json_decode($this->session->getGtmEeProductAddToWishlistData());
+        $products = json_decode($this->session->getGtmEeProductAddToCompareData());
         if (is_array($products)) {
            $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
@@ -47,7 +47,7 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
                ]
            ];
 
-           $this->cleanSessionGtmEeProductAddToWishlistData();
+           $this->cleanSessionGtmEeProductAddToCompareData();
         }
 
        return $data;
@@ -56,9 +56,9 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
     /**
      * @return void
      */
-    protected function cleanSessionGtmEeProductAddToWishlistData()
+    protected function cleanSessionGtmEeProductAddToCompareData()
     {
-        $this->session->setGtmEeProductAddToWishlistData(false);
+        $this->session->setGtmEeProductAddToCompareData(false);
     }
 
     /**

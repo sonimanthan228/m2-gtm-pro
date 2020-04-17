@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="checkout_cart_add_product_complete">
-        <observer name="hatimeria_gtmee_cart_add_product" instance="Hatimeria\GtmEe\Observer\CheckoutCartAddProductComplete" />
-    </event>
     <event name="sales_quote_remove_item">
         <observer name="hatimeria_gtmee_quote_remove_item" instance="Hatimeria\GtmEe\Observer\SalesQuoteRemoveItem" />
     </event>
@@ -15,8 +12,17 @@
     <event name="wishlist_add_product">
         <observer name="hatimeria_gtmee_wishlist_add_product" instance="Hatimeria\GtmEe\Observer\AddProductToWishlist" />
     </event>
-    <event name="controller_action_postdispatch_wishlist_index_remove">
+    <event name="controller_action_predispatch_wishlist_index_remove">
         <observer name="hatimeria_gtmee_controller_action_dispatch_wishlist_index_remove" instance="Hatimeria\GtmEe\Observer\RemoveProductFromWishlist" />
     </event>
+    <event name="checkout_cart_product_add_after">
+        <observer name="hatimeria_gtmee_cart_product_add_after" instance="Hatimeria\GtmEe\Observer\CartProductAddAfter" />
+    </event>
+    <event name="catalog_product_compare_add_product">
+        <observer name="hatimeria_gtmee_compare_add_product" instance="Hatimeria\GtmEe\Observer\AddProductToCompare" />
+    </event>
+    <event name="catalog_product_compare_remove_product">
+        <observer name="hatimeria_gtmee_compare_remove_product" instance="Hatimeria\GtmEe\Observer\RemoveProductFromCompare" />
 
+    </event>
 </config>

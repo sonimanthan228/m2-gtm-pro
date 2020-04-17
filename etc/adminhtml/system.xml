@@ -18,8 +18,8 @@
             <group id="event" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Events</label>
                 <field id="product_impression_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Product Impression Tracking</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Product Impression Tracking</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
                 <field id="product_impression_track_class" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Product Impression Track Class</label>
@@ -28,8 +28,8 @@
                     </depends>
                 </field>
                 <field id="product_click_enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Product Click Tracking</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Product Click Tracking</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
                 <field id="product_click_element_class" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Product Click Element Class</label>
@@ -46,8 +46,8 @@
                     <comment>comma separated</comment>
                 </field>
                 <field id="form_tracking_enabled" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Form Tracking</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Form Tracking</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
                 <field id="form_tracking_form_data" translate="label" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Ranges</label>
@@ -58,7 +58,7 @@
                     </depends>
                 </field>
                 <field id="transactions_enabled" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Transactions Tracking</label>
+                    <label>Transactions Tracking</label>
                     <comment>Populates GTM data layer with transaction data.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
@@ -70,23 +70,27 @@
                     </depends>
                 </field>
                 <field id="add_to_cart_tracking_enabled" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Add To Cart Tracking</label>
+                    <label>Add To Cart Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
                 <field id="search_tracking_enabled" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Search Tracking</label>
+                    <label>Search Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
                 <field id="product_view_tracking_enabled" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Product View Tracking</label>
+                    <label>Product View Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
                 <field id="add_product_review_tracking_enabled" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Add Product Review Tracking</label>
+                    <label>Add Product Review Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
                 <field id="add_to_wishlist_tracking_enabled" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Add To Wishlist Tracking</label>
+                    <label>Add To Wishlist Tracking</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="add_to_compare_tracking_enabled" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add To Compare Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
             </group>
