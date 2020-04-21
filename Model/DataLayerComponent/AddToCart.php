@@ -7,11 +7,9 @@ use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 
 /**
  * Class AddToCart
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
 {
-
     const EVENT_NAME = 'add-to-cart';
 
     /**
@@ -37,11 +35,17 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
         $this->checkoutSession->setGtmEeProductAddToCartData(json_encode($data));
     }
 
-    public function getComponentData($eventData) {
+    /**
+     * @param $eventData
+     * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getComponentData($eventData)
+    {
         $data = [];
         $products = json_decode($this->checkoutSession->getGtmEeProductAddToCartData());
         if (is_array($products)) {
-           $data['ecommerce'] = [
+            $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'add' => [
                    'actionField' => [
@@ -50,14 +54,17 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
                    ],
                    'products' => $products
                ]
-           ];
+            ];
 
-           $this->cleanSessionGtmProductAddToCartData();
+            $this->cleanSessionGtmProductAddToCartData();
         }
 
-       return $data;
-   }
+        return $data;
+    }
 
+    /**
+     * @return void
+     */
     protected function cleanSessionGtmProductAddToCartData()
     {
         $this->checkoutSession->setGtmEeProductAddToCartData(false);

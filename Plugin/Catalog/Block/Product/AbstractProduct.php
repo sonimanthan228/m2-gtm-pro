@@ -11,7 +11,6 @@ use Hatimeria\GtmEe\Model\DataLayerComponent\ProductClick;
 
 /**
  * Class AbstractProduct
- * @package Hatimeria\GtmEe\Plugin\Catalog\Block\Product
  */
 class AbstractProduct
 {
@@ -71,7 +70,8 @@ class AbstractProduct
         if ($this->config->isModuleEnabled() && $this->config->isProductClickTrackingEnabled()) {
             $clickData = $this->productClick->getData(['object' => $product]);
             $result .= "<div class='product-click-data' data-click='"
-                . $this->jsonSerializer->serialize($clickData) . "' data-url='" . $product->getProductUrl() . "'></div>";
+                . $this->jsonSerializer->serialize($clickData)
+                . "' data-url='" . $product->getProductUrl() . "'></div>";
         }
 
         return $result;

@@ -7,7 +7,6 @@ use Hatimeria\GtmEe\Model\Config;
 
 /**
  * Class Tag
- * @package Hatimeria\GtmEe\Block
  */
 class Tag extends Template
 {
@@ -27,16 +26,21 @@ class Tag extends Template
         Template\Context $context,
         array $data = []
     ) {
-        parent::__construct($context, $data);
         $this->config = $config;
+        parent::__construct($context, $data);
     }
 
-
+    /**
+     * @return string
+     */
     public function getContainerId()
     {
         return $this->config->getContainerId();
     }
 
+    /**
+     * @return string
+     */
     protected function _toHtml()
     {
         if ($this->config->isModuleEnabled() && $this->config->getContainerId()) {

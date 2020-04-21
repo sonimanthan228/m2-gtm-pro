@@ -7,7 +7,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Class DataLayerService
- * @package Hatimeria\GtmEe\Model
  */
 class DataLayerService implements DataLayerServiceInterface
 {

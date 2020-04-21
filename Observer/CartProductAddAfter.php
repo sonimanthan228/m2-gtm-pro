@@ -10,7 +10,6 @@ use Hatimeria\GtmEe\Model\DataLayerComponent\AddToCart;
 
 /**
  * Class CartProductAddAfter
- * @package Hatimeria\GtmEe\Observer
  */
 class CartProductAddAfter implements ObserverInterface
 {

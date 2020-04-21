@@ -10,7 +10,6 @@ use Hatimeria\GtmEe\Model\DataLayerComponent\AddProductToCompare as AddProductTo
 
 /**
  * Class AddProductToCompare
- * @package Hatimeria\GtmEe\Observer
  */
 class AddProductToCompare implements ObserverInterface
 {
@@ -25,10 +24,16 @@ class AddProductToCompare implements ObserverInterface
     private $checkoutSession;
 
     /**
-     * @var AddProductToWishlistComponent
+     * @var AddProductToCompareComponent
      */
     private $addProductToCompareComponent;
 
+    /**
+     * AddProductToCompare constructor.
+     * @param Config $config
+     * @param Session $checkoutSession
+     * @param AddProductToCompareComponent $addProductToCompareComponent
+     */
     public function __construct(
         Config $config,
         Session $checkoutSession,

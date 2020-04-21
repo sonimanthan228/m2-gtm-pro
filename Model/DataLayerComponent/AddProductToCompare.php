@@ -8,11 +8,9 @@ use Magento\Catalog\Model\Product;
 
 /**
  * Class AddProductToCompare
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class AddProductToCompare extends ComponentAbstract implements DataLayerComponentInterface
 {
-
     const EVENT_NAME = 'add-to-compare';
 
     /**
@@ -36,22 +34,28 @@ class AddProductToCompare extends ComponentAbstract implements DataLayerComponen
         $this->session->setGtmEeProductAddToCompareData(json_encode($data));
     }
 
-    public function getComponentData($eventData) {
+    /**
+     * @param $eventData
+     * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getComponentData($eventData)
+    {
         $data = [];
         $products = json_decode($this->session->getGtmEeProductAddToCompareData());
         if (is_array($products)) {
-           $data['ecommerce'] = [
+            $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'add' => [
                    'products' => $products
                ]
-           ];
+            ];
 
-           $this->cleanSessionGtmEeProductAddToCompareData();
+            $this->cleanSessionGtmEeProductAddToCompareData();
         }
 
-       return $data;
-   }
+        return $data;
+    }
 
     /**
      * @return void

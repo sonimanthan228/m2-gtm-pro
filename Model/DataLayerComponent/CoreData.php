@@ -14,7 +14,6 @@ use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 
 /**
  * Class CoreData
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class CoreData extends ComponentAbstract implements DataLayerComponentInterface
 {
@@ -88,17 +87,19 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
      * @param $eventData
      * @return array
      */
-   public function getComponentData($eventData) {
-       $data = [];
-       $data['siteVersion']  = $this->getSiteVersion();
-       $data['pageCategory'] = $this->request->getFullActionName();
-       $data['pageTemplate'] = '';
-       $data['userId']       = $this->customerSession->isLoggedIn() ? $this->customerSession->getCustomerId() : 'guest';
-       $data['customerType'] = $this->customerSession->getData('group');
-       $data['loggedIn']     = $this->customerSession->isLoggedIn() ? 'Logged In' : 'Not Logged In';
+    public function getComponentData($eventData)
+    {
+        $data = [];
+        $data['siteVersion']  = $this->getSiteVersion();
+        $data['pageCategory'] = $this->request->getFullActionName();
+        $data['pageTemplate'] = '';
+        $data['userId']       =
+            $this->customerSession->isLoggedIn() ? $this->customerSession->getCustomerId() : 'guest';
+        $data['customerType'] = $this->customerSession->getData('group');
+        $data['loggedIn']     = $this->customerSession->isLoggedIn() ? 'Logged In' : 'Not Logged In';
 
-       return $data;
-   }
+        return $data;
+    }
 
     /**
      * @param Product $product

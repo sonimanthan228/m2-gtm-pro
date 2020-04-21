@@ -7,7 +7,6 @@ use Hatimeria\GtmEe\Model\Config;
 
 /**
  * Class Tag
- * @package Hatimeria\GtmEe\Block\Event
  */
 abstract class AbstractEvent extends Template
 {
@@ -46,5 +45,5 @@ abstract class AbstractEvent extends Template
     /**
      * @return bool
      */
-    abstract function isEventEnabled();
+    abstract public function isEventEnabled();
 }

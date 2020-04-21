@@ -10,6 +10,9 @@ use Hatimeria\GtmEe\Model\Config;
 use Hatimeria\GtmEe\Model\DataLayerComponent\ProductImpression;
 use Hatimeria\GtmEe\Model\DataLayerComponent\ProductClick;
 
+/**
+ * Class ItemDataLayerData
+ */
 class ItemDataLayerData extends Block
 {
     /**

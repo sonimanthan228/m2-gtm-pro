@@ -7,7 +7,6 @@ use Hatimeria\GtmEe\Model\Config;
 
 /**
  * Class Tag
- * @package Hatimeria\GtmEe\Block\Event
  */
 class ProductClick extends AbstractEvent
 {
@@ -16,7 +15,7 @@ class ProductClick extends AbstractEvent
      */
     public function isEventEnabled()
     {
-       return $this->config->isProductClickTrackingEnabled();
+        return $this->config->isProductClickTrackingEnabled();
     }
 
     /**

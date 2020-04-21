@@ -7,6 +7,9 @@ use Magento\Framework\Serialize\Serializer\Json;
 use Hatimeria\GtmEe\Api\DataLayerServiceInterface;
 use Hatimeria\GtmEe\Model\Config;
 
+/**
+ * Class DataLayer
+ */
 class DataLayer extends Template
 {
     /**
@@ -44,6 +47,9 @@ class DataLayer extends Template
         parent::__construct($context, $data);
     }
 
+    /**
+     * @return array
+     */
     public function getDataLayer()
     {
         return $this->dataLayerService->getDataLayerComponentData();

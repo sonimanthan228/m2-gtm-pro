@@ -6,6 +6,9 @@ use Magento\Quote\Model\QuoteIdMaskFactory;
 use Hatimeria\GtmEe\Api\GuestCheckoutStepInterface;
 use Hatimeria\GtmEe\Api\CheckoutStepInterface;
 
+/**
+ * Class GuestCheckoutStep
+ */
 class GuestCheckoutStep implements GuestCheckoutStepInterface
 {
     /**

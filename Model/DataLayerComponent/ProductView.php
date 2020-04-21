@@ -9,7 +9,6 @@ use Magento\Catalog\Model\Product;
 
 /**
  * Class ProductView
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class ProductView extends ComponentAbstract implements DataLayerComponentInterface
 {
@@ -21,7 +20,8 @@ class ProductView extends ComponentAbstract implements DataLayerComponentInterfa
      * @return array
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-     public function getComponentData($eventData) {
+    public function getComponentData($eventData)
+    {
         $data = [];
         if ($this->config->isProductViewTrackingEnabled() && $product = $this->coreRegistry->registry('product')) {
             $data['ecommerce'] = [
@@ -42,7 +42,7 @@ class ProductView extends ComponentAbstract implements DataLayerComponentInterfa
         }
 
         return $data;
-     }
+    }
 
     /**
      * @return string

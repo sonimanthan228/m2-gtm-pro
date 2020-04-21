@@ -8,9 +8,11 @@ use Magento\Framework\Event\Observer;
 use Hatimeria\GtmEe\Model\Config;
 use Hatimeria\GtmEe\Model\DataLayerComponent\RemoveFromCart;
 
+/**
+ * Class SalesQuoteRemoveItem
+ */
 class SalesQuoteRemoveItem implements ObserverInterface
 {
-
     /**
      * @var Config
      */

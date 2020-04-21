@@ -20,7 +20,6 @@ use Hatimeria\GtmEe\Model\Config;
 
 /**
  * Class ComponentAbstract
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 abstract class ComponentAbstract implements DataLayerComponentInterface
 {
@@ -105,7 +104,6 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         Generic $session,
         RedirectInterface $redirect,
         Advanced $catalogSearchAdvanced
-
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->storeManager = $storeManager;
@@ -124,7 +122,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      * @param $eventData
      * @return mixed
      */
-    abstract function getComponentData($eventData);
+    abstract public function getComponentData($eventData);
 
     /**
      * @return string
@@ -144,25 +142,28 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
             }
         } catch (\Exception $e) {
             //todo addLogger with config
-            var_dump($e->getMessage());
             $data = [];
         }
 
         return $data;
     }
 
+    /**
+     * @param Product $product
+     * @return string
+     */
     protected function getCategoryName(Product $product)
     {
         $categoryCollection = $product->getCategoryCollection()
             ->addAttributeToSelect('name');
 
         if ($categoryCollection->count() > 0) {
-            foreach($categoryCollection as $category) {
+            foreach ($categoryCollection as $category) {
                 /** @var Category $category */
                 $categories[] = $category->getName();
             }
 
-            return implode('|',$categories);
+            return implode('|', $categories);
         }
 
         return '';
@@ -174,7 +175,8 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      */
     protected function getVariant(Item $item)
     {
-         //todo consider use  Magento\Quote\Model\Cart\Totals\ItemConverter::getFormattedOptionValue() for get Variants with the keys
+         //todo consider use Magento\Quote\Model\Cart\Totals\ItemConverter::getFormattedOptionValue()
+         // for get Variants with the keys
          // or add Labels from $option['label']
         if ($item->getHasChildren()) {
             $variants = [];
@@ -183,7 +185,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
                 $variants[$option['label']] = $option['value'];
             }
 
-            return implode('|',$variants);
+            return implode('|', $variants);
         }
 
         return '';
@@ -204,7 +206,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      */
     protected function formatPrice($price)
     {
-        return (double)number_format($price,2,'.','');
+        return (double)number_format($price, 2, '.', '');
     }
 
     /**
@@ -216,7 +218,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         $brand = '';
         if ($product->getBrand()) {
             $brand = $product->getAttributeText('brand');
-        }  elseif ($product->getManufacturer()) {
+        } elseif ($product->getManufacturer()) {
             $brand = $product->getAttributeText('maunfacturer');
         }
 
@@ -224,7 +226,9 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     }
 
     /**
-     * @return mixed
+     * @param Product $product
+     * @return ReviewCollection
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     protected function getReviewsCollection(Product $product)
     {
@@ -241,6 +245,11 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         return $this->reviewCollection;
     }
 
+    /**
+     * @param Product $product
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     protected function getRatingSummary(Product $product)
     {
         if ($product->getRatingSummary() === null) {

@@ -4,12 +4,11 @@ namespace Hatimeria\GtmEe\Api;
 
 /**
  * Interface DataLayerServiceInterface
- * @package Hatimeria\GtmEe\Api
  */
 interface DataLayerServiceInterface
 {
     /**
-     * @return mixed
+     * @return array
      */
     public function getDataLayerComponentData();
 }

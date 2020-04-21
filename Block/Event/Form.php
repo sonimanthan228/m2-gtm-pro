@@ -7,7 +7,6 @@ use Hatimeria\GtmEe\Model\Config;
 
 /**
  * Class Form
- * @package Hatimeria\GtmEe\Block\Event
  */
 class Form extends AbstractEvent
 {
@@ -16,7 +15,7 @@ class Form extends AbstractEvent
      */
     public function isEventEnabled()
     {
-       return $this->config->isFormTrackingEnabled();
+        return $this->config->isFormTrackingEnabled();
     }
 
     /**

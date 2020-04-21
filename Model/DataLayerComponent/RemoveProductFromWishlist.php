@@ -2,17 +2,14 @@
 
 namespace Hatimeria\GtmEe\Model\DataLayerComponent;
 
-use Magento\Quote\Model\Quote\Item;
 use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 use Magento\Catalog\Model\Product;
 
 /**
  * Class RemoveProductFromWishlist
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerComponentInterface
 {
-
     const EVENT_NAME = 'remove-from-wishlist';
 
     /**
@@ -37,22 +34,28 @@ class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerCo
         $this->session->setGtmEeProductRemoveFromWishlistData(json_encode($data));
     }
 
-    public function getComponentData($eventData) {
+    /**
+     * @param $eventData
+     * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getComponentData($eventData)
+    {
         $data = [];
         $products = json_decode($this->session->getGtmEeProductRemoveFromWishlistData());
         if (is_array($products)) {
-           $data['ecommerce'] = [
+            $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'remove' => [
                    'products' => $products
                ]
-           ];
+            ];
 
-           $this->cleanSessionGtmEeProductRemoveFromWishlistData();
+            $this->cleanSessionGtmEeProductRemoveFromWishlistData();
         }
 
-       return $data;
-   }
+        return $data;
+    }
 
     /**
      * @return void

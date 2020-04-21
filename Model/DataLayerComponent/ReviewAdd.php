@@ -6,11 +6,9 @@ use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 
 /**
  * Class ReviewAdd
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class ReviewAdd extends ComponentAbstract implements DataLayerComponentInterface
 {
-
     const EVENT_NAME = 'rate-product';
 
     /**
@@ -37,15 +35,15 @@ class ReviewAdd extends ComponentAbstract implements DataLayerComponentInterface
         }
 
         return $data;
-   }
+    }
 
     /**
      * @return void
      */
-   protected function cleanSessionGtmEeAddProductReviewData()
-   {
-       $this->session->setGtmEeAddProductReviewData(false);
-   }
+    protected function cleanSessionGtmEeAddProductReviewData()
+    {
+        $this->session->setGtmEeAddProductReviewData(false);
+    }
 
     /**
      * @param $data

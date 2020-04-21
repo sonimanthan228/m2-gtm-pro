@@ -1,11 +1,3 @@
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-/**
- * @api
- */
 define([
     'Magento_Customer/js/model/customer',
     'Magento_Checkout/js/model/url-builder',

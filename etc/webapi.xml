@@ -7,7 +7,6 @@
             <resource ref="anonymous" />
         </resources>
     </route>
-
     <route url="/V1/carts/mine/:step/gtmee-checkout-step-data" method="GET">
         <service class="Hatimeria\GtmEe\Api\CheckoutStepInterface" method="get"/>
         <resources>

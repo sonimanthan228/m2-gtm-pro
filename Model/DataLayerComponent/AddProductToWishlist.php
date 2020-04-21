@@ -6,10 +6,8 @@ use Magento\Quote\Model\Quote\Item;
 use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 use Magento\Catalog\Model\Product;
 
-
 /**
  * Class AddProductToWishlist
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class AddProductToWishlist extends ComponentAbstract implements DataLayerComponentInterface
 {
@@ -36,22 +34,28 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
         $this->session->setGtmEeProductAddToWishlistData(json_encode($data));
     }
 
-    public function getComponentData($eventData) {
+    /**
+     * @param $eventData
+     * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getComponentData($eventData)
+    {
         $data = [];
         $products = json_decode($this->session->getGtmEeProductAddToWishlistData());
         if (is_array($products)) {
-           $data['ecommerce'] = [
+            $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'add' => [
                    'products' => $products
                ]
-           ];
+            ];
 
-           $this->cleanSessionGtmEeProductAddToWishlistData();
+            $this->cleanSessionGtmEeProductAddToWishlistData();
         }
 
-       return $data;
-   }
+        return $data;
+    }
 
     /**
      * @return void

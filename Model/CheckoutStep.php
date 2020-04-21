@@ -13,16 +13,12 @@ use Hatimeria\GtmEe\Model\DataLayerComponent\CheckoutStep as CheckoutStepCompone
 class CheckoutStep implements CheckoutStepInterface
 {
     /**
-     * Cart total repository.
-     *
-     * @var
+     * @var CartTotalRepositoryInterface
      */
     protected $cartTotalRepository;
 
     /**
-     * Quote repository.
-     *
-     * @var
+     * @var CartRepositoryInterface
      */
     protected $cartRepository;
 
@@ -50,7 +46,8 @@ class CheckoutStep implements CheckoutStepInterface
     /**
      * {@inheritDoc}
      */
-    public function get($cartId, $step) {
+    public function get($cartId, $step)
+    {
         /** @var \Magento\Quote\Model\Quote $quote */
         $quote = $this->cartRepository->get($cartId);
         $this->validateQuote($quote);

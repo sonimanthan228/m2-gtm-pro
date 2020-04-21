@@ -6,22 +6,27 @@ use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 
 /**
  * Class Search
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class Search extends ComponentAbstract implements DataLayerComponentInterface
 {
     const EVENT_NAME = 'site-search';
 
-    public function getComponentData($eventData) {
+    /**
+     *
+     * @param $eventData
+     * @return array|mixed
+     */
+    public function getComponentData($eventData)
+    {
         $data = json_decode($this->checkoutSession->getGtmEeSearchCollectionData(), true);
         if (is_array($data)) {
-           $data['searchTerm'] = '';
-           $data['searchResults'] = $data['searchResults'];
+            $data['searchTerm'] = $this->request->getParam('q');
+            $data['searchResults'] = $data['searchResults'];
 
-           $this->cleanSessionGtmEeSearchCollectionData();
+            $this->cleanSessionGtmEeSearchCollectionData();
         }
 
-       return $data;
+        return $data;
     }
 
     /**

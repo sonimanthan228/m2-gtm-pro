@@ -4,7 +4,6 @@ namespace Hatimeria\GtmEe\Api\Data;
 
 /**
  * Interface CheckoutStepInterface
- * @package Hatimeria\GtmEe\Api\Data
  */
 interface CheckoutStepInterface
 {

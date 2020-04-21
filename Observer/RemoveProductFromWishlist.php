@@ -11,7 +11,6 @@ use Hatimeria\GtmEe\Model\DataLayerComponent\RemoveProductFromWishlist as Remove
 
 /**
  * Class RemoveProductFromWishlist
- * @package Hatimeria\GtmEe\Observer
  */
 class RemoveProductFromWishlist implements ObserverInterface
 {
@@ -37,9 +36,10 @@ class RemoveProductFromWishlist implements ObserverInterface
 
     /**
      * RemoveProductFromWishlist constructor.
+     * @param ItemFactory $itemFactory
      * @param Config $config
      * @param Session $checkoutSession
-     * @param AddProductToWishlistComponent $addProductToWishlistComponent
+     * @param RemoveProductFromWishlistComponent $removeProductToWishlistComponent
      */
     public function __construct(
         ItemFactory $itemFactory,
@@ -55,7 +55,8 @@ class RemoveProductFromWishlist implements ObserverInterface
 
     /**
      * @param Observer $observer
-     * @return $this|void
+     * @return $this
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function execute(Observer $observer)
     {

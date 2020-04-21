@@ -9,20 +9,23 @@ use Magento\Catalog\Model\Product;
 
 /**
  * Class ProductImpression
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class ProductClick extends ComponentAbstract implements DataLayerComponentInterface
 {
-
     const EVENT_NAME = 'product-click';
 
-
-   public function getComponentData($eventData) {
-       $data = [];
-       if (array_key_exists('object', $eventData)) {
-           $product = $eventData['object'];
-           $category = $this->getCategoryName($product);
-           $data['ecommerce'] = [
+    /**
+     * @param $eventData
+     * @return array|mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getComponentData($eventData)
+    {
+        $data = [];
+        if (array_key_exists('object', $eventData)) {
+            $product = $eventData['object'];
+            $category = $this->getCategoryName($product);
+            $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'detail' => [
                    'actionField' => [
@@ -36,11 +39,11 @@ class ProductClick extends ComponentAbstract implements DataLayerComponentInterf
                        'category' => $category
                    ]
                ]
-           ];
-       }
+            ];
+        }
 
-       return $data;
-   }
+        return $data;
+    }
 
     /**
      * @return string

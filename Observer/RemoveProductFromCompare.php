@@ -10,7 +10,6 @@ use Hatimeria\GtmEe\Model\DataLayerComponent\RemoveProductFromCompare as RemoveP
 
 /**
  * Class RemoveProductFromCompare
- * @package Hatimeria\GtmEe\Observer
  */
 class RemoveProductFromCompare implements ObserverInterface
 {
@@ -29,6 +28,12 @@ class RemoveProductFromCompare implements ObserverInterface
      */
     private $removeProductFromCompareComponent;
 
+    /**
+     * RemoveProductFromCompare constructor.
+     * @param Config $config
+     * @param Session $checkoutSession
+     * @param RemoveProductFromCompareComponent $removeProductFromCompareComponent
+     */
     public function __construct(
         Config $config,
         Session $checkoutSession,

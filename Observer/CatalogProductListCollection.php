@@ -9,6 +9,9 @@ use Hatimeria\GtmEe\Model\Config;
 use Magento\Framework\App\Request\Http;
 use Hatimeria\GtmEe\Model\DataLayerComponent\Search;
 
+/**
+ * Class CatalogProductListCollection
+ */
 class CatalogProductListCollection implements ObserverInterface
 {
 
@@ -45,7 +48,7 @@ class CatalogProductListCollection implements ObserverInterface
 
     /**
      * @param Observer $observer
-     * @return $this|void
+     * @return $this
      */
     public function execute(Observer $observer)
     {

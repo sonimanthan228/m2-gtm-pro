@@ -10,7 +10,6 @@ use Hatimeria\GtmEe\Model\Config;
 
 /**
  * Class ReviewAdd
- * @package Hatimeria\GtmEe\Observer
  */
 class ReviewAdd implements ObserverInterface
 {
@@ -32,6 +31,8 @@ class ReviewAdd implements ObserverInterface
     /**
      * ReviewAdd constructor.
      * @param Config $config
+     * @param Generic $session
+     * @param ReviewAddComponent $reviewAddComponent
      */
     public function __construct(
         Config $config,
@@ -45,7 +46,7 @@ class ReviewAdd implements ObserverInterface
 
     /**
      * @param Observer $observer
-     * @return $this|void
+     * @return $this
      */
     public function execute(Observer $observer)
     {

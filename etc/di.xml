@@ -5,7 +5,6 @@
             <argument name="dataLayerComponent" xsi:type="array">
                 <item name="product_view" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\ProductView</item>
                 <item name="core_data" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\CoreData</item>
-                <!--<item name="core_data" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\CustomerData</item>-->
                 <item name="add_to_cart" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AddToCart</item>
                 <item name="remove_from_cart" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\RemoveFromCart</item>
                 <item name="transaction_data" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\Transaction</item>

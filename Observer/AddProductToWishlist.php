@@ -8,9 +8,11 @@ use Magento\Framework\Event\Observer;
 use Hatimeria\GtmEe\Model\Config;
 use Hatimeria\GtmEe\Model\DataLayerComponent\AddProductToWishlist as AddProductToWishlistComponent;
 
+/**
+ * Class AddProductToWishlist
+ */
 class AddProductToWishlist implements ObserverInterface
 {
-
     /**
      * @var Config
      */
@@ -26,6 +28,12 @@ class AddProductToWishlist implements ObserverInterface
      */
     private $addProductToWishlistComponent;
 
+    /**
+     * AddProductToWishlist constructor.
+     * @param Config $config
+     * @param Session $checkoutSession
+     * @param AddProductToWishlistComponent $addProductToWishlistComponent
+     */
     public function __construct(
         Config $config,
         Session $checkoutSession,

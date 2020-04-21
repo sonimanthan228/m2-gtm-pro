@@ -6,7 +6,6 @@ use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 
 /**
  * Class AdvancedSearch
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class AdvancedSearch extends ComponentAbstract implements DataLayerComponentInterface
 {
@@ -25,7 +24,7 @@ class AdvancedSearch extends ComponentAbstract implements DataLayerComponentInte
                $data['searchResults'] = $this->catalogSearchAdvanced->getProductCollection()->getSize();
         }
 
-       return $data;
+        return $data;
     }
 
     /**

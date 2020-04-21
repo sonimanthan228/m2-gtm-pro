@@ -4,7 +4,6 @@ namespace Hatimeria\GtmEe\Api;
 
 /**
  * Interface GuestCheckoutStepInterface
- * @package Hatimeria\GtmEe\Api
  */
 interface GuestCheckoutStepInterface
 {

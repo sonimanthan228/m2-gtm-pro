@@ -2,22 +2,13 @@
 /** @var \Hatimeria\GtmEe\Block\Event\ProductClick $block */
 // @codingStandardsIgnoreFile
 ?>
-<script type="text/javascript">
-    require([
-        "jquery"
-    ], function ($) {
-        window.dataLayer = window.dataLayer || [];
-    <?php foreach ($block->getProductClickClasses() as $class): ?>
-            $(".<?= $class ?>").on("click", function (event) {
-                fireProductClick(event)
-            });
-        <?php endforeach; ?>
-        function fireProductClick(event, element) {
-            event.preventDefault();
-            var parent = $(event.target).parents('.<?= $block->getProductClickElementClass() ?>')[0];
-            var data = $(parent).find("*[data-click]").data('click');
-            window.dataLayer.push(data);
-            document.location = $(parent).find("*[data-click]").data('url');
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "product-click-event": {
+                "productClasses": <?= json_encode($block->getProductClickClasses()) ?>,
+                "productClickElementClass": "<?= $block->getProductClickElementClass() ?>"
+            }
         }
-    });
+    }
 </script>

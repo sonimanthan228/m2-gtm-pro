@@ -3,9 +3,8 @@
     <body>
         <referenceBlock name="head.additional">
             <block ifconfig="hatimeria_gtmee/general/enabled" class="Hatimeria\GtmEe\Block\Tag" name="hatimeria.gtmee.tag" before="-" template="Hatimeria_GtmEe::tag.phtml"/>
-            <block ifconfig="hatimeria_gtmee/general/enabled" class="Hatimeria\GtmEe\Block\DataLayer" name="hatimeria.gtmee.tag" cacheable="false" template="Hatimeria_GtmEe::datalayer.phtml"/>
             <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmee.polyfill-intersection.script"
-                   template="hatimeria_gtmee::polyfill-intersection.phtml">
+                   template="Hatimeria_GtmEe::polyfill-intersection.phtml">
                 <arguments>
                     <argument name="ifConfig" xsi:type="string"><![CDATA[
                         config == hatimeria_gtmee/general/enabled &&
@@ -56,6 +55,7 @@
                     ]]></argument>
                 </arguments>
             </block>
+            <block ifconfig="hatimeria_gtmee/general/enabled" class="Hatimeria\GtmEe\Block\DataLayer" name="hatimeria.gtmee.datalayer" template="Hatimeria_GtmEe::datalayer.phtml"/>
         </referenceContainer>
         <referenceBlock name="catalog.product.related">
             <block class="Hatimeria\GtmEe\Block\Wishlist\Customer\Item\Column\DataLayerData" name="hatimeria.gtmee.catalog.product.related" template="Hatimeria_GtmEe::wishlist/column/datalayerdata.phtml" cacheable="false"/>

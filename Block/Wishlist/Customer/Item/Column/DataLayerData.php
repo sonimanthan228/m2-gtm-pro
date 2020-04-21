@@ -15,7 +15,6 @@ use Hatimeria\GtmEe\Model\DataLayerComponent\ProductClick;
 
 /**
  * Class DataLayerData
- * @package Hatimeria\GtmEe\Block\Wishlist\Customer\Item\Column
  */
 class DataLayerData extends Column
 {
@@ -51,7 +50,7 @@ class DataLayerData extends Column
      * @param ConfigInterface|null $config
      * @param UrlBuilder|null $urlBuilder
      */
-   public function __construct(
+    public function __construct(
         Context $context,
         HttpContext $httpContext,
         GtmConfig $gtmConfig,
@@ -61,13 +60,13 @@ class DataLayerData extends Column
         array $data = [],
         ConfigInterface $config = null,
         UrlBuilder $urlBuilder = null
-   ) {
-       $this->gtmConfig = $gtmConfig;
-       $this->jsonSerializer = $jsonSerializer;
-       $this->productImpression = $productImpression;
-       $this->productClick = $productClick;
-       parent::__construct($context, $httpContext, $data, $config, $urlBuilder);
-   }
+    ) {
+        $this->gtmConfig = $gtmConfig;
+        $this->jsonSerializer = $jsonSerializer;
+        $this->productImpression = $productImpression;
+        $this->productClick = $productClick;
+        parent::__construct($context, $httpContext, $data, $config, $urlBuilder);
+    }
 
     /**
      * @return string
@@ -114,6 +113,7 @@ class DataLayerData extends Column
             $this->productClick->getData(['object' => $this->getProductItem()])
         );
     }
+
     /**
      * Return product for current item
      *

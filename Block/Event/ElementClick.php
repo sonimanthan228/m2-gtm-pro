@@ -7,7 +7,6 @@ use Hatimeria\GtmEe\Model\Config;
 
 /**
  * Class Tag
- * @package Hatimeria\GtmEe\Block\Event
  */
 class ElementClick extends AbstractEvent
 {
@@ -16,7 +15,7 @@ class ElementClick extends AbstractEvent
      */
     public function isEventEnabled()
     {
-       return $this->config->isProductImpressionTrackingEnabled();
+        return $this->config->isProductImpressionTrackingEnabled();
     }
 
     /**

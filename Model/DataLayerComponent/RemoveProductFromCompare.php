@@ -8,7 +8,6 @@ use Magento\Catalog\Model\Product;
 
 /**
  * Class RemoveProductFromCompare
- * @package Hatimeria\GtmEe\Model\DataLayerComponent
  */
 class RemoveProductFromCompare extends ComponentAbstract implements DataLayerComponentInterface
 {
@@ -31,22 +30,28 @@ class RemoveProductFromCompare extends ComponentAbstract implements DataLayerCom
         $this->session->setGtmEeProductRemoveFromCompareData(json_encode($data));
     }
 
-    public function getComponentData($eventData) {
+    /**
+     * @param $eventData
+     * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getComponentData($eventData)
+    {
         $data = [];
         $products = json_decode($this->session->getGtmEeProductRemoveFromCompareData());
         if (is_array($products)) {
-           $data['ecommerce'] = [
+            $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'remove' => [
                    'products' => $products
                ]
-           ];
+            ];
 
-           $this->cleanSessionGtmEeProductRemoveFromCompareData();
+            $this->cleanSessionGtmEeProductRemoveFromCompareData();
         }
 
-       return $data;
-   }
+        return $data;
+    }
 
     /**
      * @return void

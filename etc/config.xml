@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <hatimeria_gtmee>
+            <general>
+                <enabled>0</enabled>
+                <container_id></container_id>
+            </general>
+            <event>
+                <product_impression_enabled>1</product_impression_enabled>
+                <product_impression_track_class>product-item</product_impression_track_class>
+                <product_click_enabled>1</product_click_enabled>
+                <product_click_element_class>product-item</product_click_element_class>
+                <product_click_link_class>product-item-photo,product-item-link</product_click_link_class>
+                <form_tracking_enabled>1</form_tracking_enabled>
+                <form_tracking_form_data><![CDATA[{"_1586254150365_365":{"form_id":"newsletter-validate-detail","form_field_ids":"newsletter","event_name":"newsletter-form"},"_1587457420355_355":{"form_id":"contact-form","form_field_ids":"name,email,comment","event_name":"email-form"}} ]]></form_tracking_form_data>
+                <transaction>1</transaction>
+                <transaction_affiliation>1</transaction_affiliation>
+                <add_to_cart_tracking_enabled>1</add_to_cart_tracking_enabled>
+                <search_tracking_enabled>1</search_tracking_enabled>
+                <product_view_tracking_enabled>1</product_view_tracking_enabled>
+                <add_product_review_tracking_enabled>1</add_product_review_tracking_enabled>
+                <add_to_wishlist_tracking_enabled>1</add_to_wishlist_tracking_enabled>
+                <add_to_compare_tracking_enabled>1</add_to_compare_tracking_enabled>
+            </event>
+        </hatimeria_gtmee>
+    </default>
+</config>
