@@ -20,7 +20,7 @@
     </type>
     <preference for="Hatimeria\GtmEe\Api\DataLayerServiceInterface" type="Hatimeria\GtmEe\Model\DataLayerService" />
     <preference for="Hatimeria\GtmEe\Api\GuestCheckoutStepInterface" type="Hatimeria\GtmEe\Model\GuestCheckoutStep" />
-    <preference for="Hatimeria\GtmEe\ApiÓ\CheckoutStepInterface" type="Hatimeria\GtmEe\Model\CheckoutStep" />
+    <preference for="Hatimeria\GtmEe\Api\CheckoutStepInterface" type="Hatimeria\GtmEe\Model\CheckoutStep" />
     <type name="Magento\Catalog\Block\Product\AbstractProduct">
         <plugin name="hatimeria-gtmee-product-abstract-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>

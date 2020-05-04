@@ -20,7 +20,8 @@ class CheckoutStep extends ComponentAbstract implements DataLayerComponentInterf
     public function getComponentData($eventData)
     {
         $data = [];
-        if (is_array($eventData) && array_key_exists('step', $eventData)) {
+        if ($this->config->isCheckoutStepsTrackingEnabled() &&
+            is_array($eventData) && array_key_exists('step', $eventData)) {
             if (is_array($eventData) && array_key_exists('quote', $eventData)) {
                 $quote = $eventData['quote'];
             } else {
@@ -52,7 +53,7 @@ class CheckoutStep extends ComponentAbstract implements DataLayerComponentInterf
             ];
         }
 
-        return [$data];
+        return $data;
     }
 
     /**

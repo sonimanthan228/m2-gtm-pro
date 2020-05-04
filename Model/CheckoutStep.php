@@ -57,7 +57,7 @@ class CheckoutStep implements CheckoutStepInterface
             'step' => $step
         ];
 
-        return $this->checkoutStepComponent->getData($eventData);
+        return [$this->checkoutStepComponent->getData($eventData)];
     }
 
     /**

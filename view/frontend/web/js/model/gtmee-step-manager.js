@@ -15,18 +15,20 @@ define([
                     gtmUrlManager.getUrlForCheckoutStepData(step)
                 ).done(
                     function (response) {
-                        if (step == 'shipping' && window.checkoutConfig['selectedShippingMethod'] != null) {
-                            var method = window.checkoutConfig['selectedShippingMethod']['carrier_code'] +
-                                '_' + window.checkoutConfig['selectedShippingMethod']['method_code'];
-                            response[0]['ecommerce']['add']['actionField']['option'] = 'shipping = ' + method;
-                        }
+                        if (response) {
+                            if (step == 'shipping' && window.checkoutConfig['selectedShippingMethod'] != null) {
+                                var method = window.checkoutConfig['selectedShippingMethod']['carrier_code'] +
+                                    '_' + window.checkoutConfig['selectedShippingMethod']['method_code'];
+                                response[0]['ecommerce']['add']['actionField']['option'] = 'shipping = ' + method;
+                            }
 
-                        if (step == 'payment' && checkoutData.getSelectedPaymentMethod()) {
-                            response[0]['ecommerce']['add']['actionField']['option'] = 'payment = '
-                                + checkoutData.getSelectedPaymentMethod();
-                        }
+                            if (step == 'payment' && checkoutData.getSelectedPaymentMethod()) {
+                                response[0]['ecommerce']['add']['actionField']['option'] = 'payment = '
+                                    + checkoutData.getSelectedPaymentMethod();
+                            }
 
-                        window.dataLayer.push(response);
+                            window.dataLayer.push(response[0]);
+                        }
                     }
                 );
 
