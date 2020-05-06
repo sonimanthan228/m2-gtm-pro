@@ -11,10 +11,10 @@ use Magento\Catalog\Helper\Product\Configuration;
 use Magento\Quote\Model\Quote\Item;
 use Magento\Review\Model\ResourceModel\Review\Collection as ReviewCollection;
 use Magento\Review\Model\ResourceModel\Review\CollectionFactory as ReviewCollectionFactory;
-use Magento\Review\Model\ReviewSummary;
 use Magento\Framework\Session\Generic;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\CatalogSearch\Model\Advanced;
+use Magento\Review\Model\ReviewFactory;
 use Psr\Log\LoggerInterface;
 use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 use Hatimeria\GtmEe\Model\Config;
@@ -65,9 +65,9 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     protected $reviewsColFactory;
 
     /**
-     * @var ReviewSummary
+     * @var ReviewSummaryFactory
      */
-    protected $reviewSummary;
+    protected $reviewSummaryFactory;
 
     /**
      * @var Generic
@@ -90,6 +90,11 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     protected $logger;
 
     /**
+     * @var ReviewFactory
+     */
+    protected $reviewFactory;
+
+    /**
      * ComponentAbstract constructor.
      * @param StoreManagerInterface $storeManager
      * @param Session $checkoutSession
@@ -99,7 +104,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      * @param Configuration $productHelper
      * @param ReviewCollection $reviewCollection
      * @param ReviewCollectionFactory $reviewCollectionFactory
-     * @param ReviewSummary $reviewSummary
+     * @param ReviewFactory $reviewFactory
      * @param Generic $session
      * @param RedirectInterface $redirect
      * @param Advanced $catalogSearchAdvanced
@@ -114,7 +119,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         Configuration $productHelper,
         ReviewCollection $reviewCollection,
         ReviewCollectionFactory $reviewCollectionFactory,
-        ReviewSummary $reviewSummary,
+        ReviewFactory $reviewFactory,
         Generic $session,
         RedirectInterface $redirect,
         Advanced $catalogSearchAdvanced,
@@ -127,7 +132,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         $this->config = $config;
         $this->productHelper = $productHelper;
         $this->reviewsColFactory = $reviewCollectionFactory;
-        $this->reviewSummary = $reviewSummary;
+        $this->reviewFactory = $reviewFactory;
         $this->session = $session;
         $this->redirect = $redirect;
         $this->catalogSearchAdvanced = $catalogSearchAdvanced;
@@ -258,10 +263,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     protected function getRatingSummary(Product $product)
     {
         if ($product->getRatingSummary() === null) {
-            $this->reviewSummary->appendSummaryDataToObject(
-                $product,
-                $this->storeManager->getStore()->getId()
-            );
+            $this->reviewFactory->create()->getEntitySummary($product, $this->storeManager->getStore()->getId());
         }
 
         return $product->getRatingSummary();
