@@ -6,7 +6,7 @@ use Magento\Framework\View\Element\Template;
 use Hatimeria\GtmEe\Model\Config;
 
 /**
- * Class Tag
+ * Class AbstractEvent
  */
 abstract class AbstractEvent extends Template
 {

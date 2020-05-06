@@ -94,8 +94,13 @@
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
                 <field id="checkout_steps_tracking_enabled" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Checkout Steps Tracking Enabled</label>
+                    <label>Checkout Steps Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="promotion_tracking_enabled" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Promotion Tracking</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment><![CDATA[<b>Example:</b> <a href="promotion" data-promotion-id="id"(required) data-promotion-name="name"(optional) data-promotion-creative="creative(optional)" data-promotion-position="position"(optional | if empty then script will calculate position automatically)> </a>]]></comment>
                 </field>
             </group>
         </section>

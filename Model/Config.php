@@ -58,6 +58,9 @@ class Config
     const XML_CONFIG_PATH_HATIMERIA_GTMEE_EVENT_CHECKOUT_STEPS_TRACKING_ENABLED
         = 'hatimeria_gtmee/event/checkout_steps_tracking_enabled';
 
+    const XML_CONFIG_PATH_HATIMERIA_GTMEE_EVENT_PROMOTION_TRACKING_ENABLED
+        = 'hatimeria_gtmee/event/promotion_tracking_enabled';
+
     /**
      * @var ScopeConfigInterface
      */
@@ -251,6 +254,16 @@ class Config
     {
         return $this->scopeConfig->isSetFlag(
             self::XML_CONFIG_PATH_HATIMERIA_GTMEE_EVENT_CHECKOUT_STEPS_TRACKING_ENABLED
+        );
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPromotionTrackingEnabled():bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMEE_EVENT_PROMOTION_TRACKING_ENABLED
         );
     }
 }

@@ -9,6 +9,7 @@
 - Easy to Install.
 - Easy to Customize.
 - Easy to Extend.
+- Real Product Impression and Promotion Tracking. Module sending data only for items which has been viewed, not rendered.
 
 
 #### Magento 2 module for integrate your store and send all needed data to Google Tag Manager by DataLayer. This module is very easy to install.
@@ -28,6 +29,8 @@ For Magento 2.3.x
 - Add To Compare
 - Product Click
 - Product Impression (AJAX compatible)
+- Promotion Click
+- Promotion Impression
 - Any Element Click
 - Any Form Tracking
 - Checkout Steps Data
@@ -122,6 +125,10 @@ This feature will track Remove Product From Compare as well.
 
 This feature will track Remove Product From Wishlist as well.
 
+####Promotion Tracking
+1. Set `Promotion Tracking` to `Enable`
+
+This feture will track promotion click and promotion impression
 ### Need More Events or Support?
 Feel free with contact us for any help.
 

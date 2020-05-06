@@ -92,7 +92,7 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
         $data = [];
         $data['siteVersion']  = $this->getSiteVersion();
         $data['pageCategory'] = $this->request->getFullActionName();
-        $data['pageTemplate'] = '';
+//        $data['pageTemplate'] = '';
         $data['userId']       =
             $this->customerSession->isLoggedIn() ? $this->customerSession->getCustomerId() : 'guest';
         $data['customerType'] = $this->customerSession->getData('group');

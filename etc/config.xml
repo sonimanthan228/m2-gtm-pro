@@ -23,6 +23,7 @@
                 <add_to_wishlist_tracking_enabled>1</add_to_wishlist_tracking_enabled>
                 <add_to_compare_tracking_enabled>1</add_to_compare_tracking_enabled>
                 <checkout_steps_tracking_enabled>1</checkout_steps_tracking_enabled>
+                <promotion_tracking_enabled>1</promotion_tracking_enabled>
             </event>
         </hatimeria_gtmee>
     </default>

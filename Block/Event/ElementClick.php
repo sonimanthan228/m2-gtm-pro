@@ -2,11 +2,8 @@
 
 namespace Hatimeria\GtmEe\Block\Event;
 
-use Magento\Framework\View\Element\Template;
-use Hatimeria\GtmEe\Model\Config;
-
 /**
- * Class Tag
+ * Class ElementClick
  */
 class ElementClick extends AbstractEvent
 {

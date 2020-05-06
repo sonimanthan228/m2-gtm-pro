@@ -55,6 +55,17 @@
                     ]]></argument>
                 </arguments>
             </block>
+            <block name="hatimeria.gtmee.event.promotion-impression"
+                   class="Hatimeria\GtmEe\Block\Event\Promotion"
+                   template="Hatimeria_GtmEe::event/promotion.phtml"
+            >
+                <arguments>
+                    <argument name="ifConfig" xsi:type="string"><![CDATA[
+                        config == hatimeria_gtmee/general/enabled &&
+                        config == hatimeria_gtmee/advanced/promotion_tracking_enabled
+                    ]]></argument>
+                </arguments>
+            </block>
             <block ifconfig="hatimeria_gtmee/general/enabled" class="Hatimeria\GtmEe\Block\DataLayer" name="hatimeria.gtmee.datalayer" template="Hatimeria_GtmEe::datalayer.phtml"/>
         </referenceContainer>
         <referenceBlock name="catalog.product.related">

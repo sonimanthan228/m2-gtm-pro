@@ -13,6 +13,7 @@ var config = {
         'product-impression-event': 'Hatimeria_GtmEe/js/event/product-impression',
         'product-click-event': 'Hatimeria_GtmEe/js/event/product-click',
         'form-event': 'Hatimeria_GtmEe/js/event/form',
-    },
-
+        'promotion-impression-event': 'Hatimeria_GtmEe/js/event/promotion-impression',
+        'promotion-click-event': 'Hatimeria_GtmEe/js/event/promotion-click'
+    }
 };
