@@ -15,6 +15,7 @@ use Magento\Review\Model\ReviewSummaryFactory;
 use Magento\Framework\Session\Generic;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\CatalogSearch\Model\Advanced;
+use Psr\Log\LoggerInterface;
 use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
 use Hatimeria\GtmEe\Model\Config;
 
@@ -84,12 +85,25 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     protected $catalogSearchAdvanced;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * ComponentAbstract constructor.
      * @param StoreManagerInterface $storeManager
      * @param Session $checkoutSession
      * @param Registry $registry
      * @param Http $request
      * @param Config $config
+     * @param Configuration $productHelper
+     * @param ReviewCollection $reviewCollection
+     * @param ReviewCollectionFactory $reviewCollectionFactory
+     * @param ReviewSummaryFactory $reviewSummaryFactory
+     * @param Generic $session
+     * @param RedirectInterface $redirect
+     * @param Advanced $catalogSearchAdvanced
+     * @param LoggerInterface $logger
      */
     public function __construct(
         StoreManagerInterface $storeManager,
@@ -103,7 +117,8 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         ReviewSummaryFactory $reviewSummaryFactory,
         Generic $session,
         RedirectInterface $redirect,
-        Advanced $catalogSearchAdvanced
+        Advanced $catalogSearchAdvanced,
+        LoggerInterface $logger
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->storeManager = $storeManager;
@@ -116,6 +131,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         $this->session = $session;
         $this->redirect = $redirect;
         $this->catalogSearchAdvanced = $catalogSearchAdvanced;
+        $this->logger = $logger;
     }
 
     /**
@@ -140,8 +156,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
                 $data['event'] = $this->getEventName();
             }
         } catch (\Exception $e) {
-            //todo addLogger with config
-            $data = [];
+            $this->logger->error($e->getMessage());
         }
 
         return $data;
