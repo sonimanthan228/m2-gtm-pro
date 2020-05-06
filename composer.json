@@ -6,7 +6,8 @@
     "require": {
         "magento/module-translation": "*",
         "magento/magento-composer-installer": "*",
-        "magento/zendframework1": "*"
+        "magento/zendframework1": "*",
+        "hatimeria/m2-hatimeria-base": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.1.0"
