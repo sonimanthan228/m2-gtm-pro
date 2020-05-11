@@ -13,6 +13,7 @@ use Magento\Framework\Session\Generic;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\CatalogSearch\Model\Advanced;
 use Magento\Review\Model\ReviewFactory;
+use \Magento\Quote\Model\QuoteFactory;
 use Psr\Log\LoggerInterface;
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 use Hatimeria\GtmPro\Model\Config;
@@ -82,6 +83,8 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      */
     protected $reviewFactory;
 
+    protected $quoteFactory;
+
     /**
      * ComponentAbstract constructor.
      * @param StoreManagerInterface $storeManager
@@ -95,6 +98,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      * @param RedirectInterface $redirect
      * @param Advanced $catalogSearchAdvanced
      * @param LoggerInterface $logger
+     * @param QuoteFactory $quoteFactory
      */
     public function __construct(
         StoreManagerInterface $storeManager,
@@ -107,7 +111,8 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         Generic $session,
         RedirectInterface $redirect,
         Advanced $catalogSearchAdvanced,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        QuoteFactory $quoteFactory
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->storeManager = $storeManager;
@@ -120,6 +125,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         $this->redirect = $redirect;
         $this->catalogSearchAdvanced = $catalogSearchAdvanced;
         $this->logger = $logger;
+        $this->quoteFactory = $quoteFactory;
     }
 
     /**
@@ -172,14 +178,11 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     }
 
     /**
-     * @param Product $product
+     * @param $item
      * @return string
      */
     protected function getVariant(Item $item)
     {
-         //todo consider use Magento\Quote\Model\Cart\Totals\ItemConverter::getFormattedOptionValue()
-         // for get Variants with the keys
-         // or add Labels from $option['label']
         if ($item->getHasChildren()) {
             $variants = [];
             $options = $this->productHelper->getOptions($item);
