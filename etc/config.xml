@@ -14,7 +14,7 @@
                 <product_click_link_class>product-item-photo,product-item-link</product_click_link_class>
                 <form_tracking_enabled>1</form_tracking_enabled>
                 <form_tracking_form_data><![CDATA[{"_1586254150365_365":{"form_id":"newsletter-validate-detail","form_field_ids":"newsletter","event_name":"newsletter-form"},"_1587457420355_355":{"form_id":"contact-form","form_field_ids":"name,email,comment","event_name":"email-form"}} ]]></form_tracking_form_data>
-                <transaction>1</transaction>
+                <transactions_enabled>1</transactions_enabled>
                 <transaction_affiliation>1</transaction_affiliation>
                 <add_to_cart_tracking_enabled>1</add_to_cart_tracking_enabled>
                 <search_tracking_enabled>1</search_tracking_enabled>
@@ -24,6 +24,7 @@
                 <add_to_compare_tracking_enabled>1</add_to_compare_tracking_enabled>
                 <checkout_steps_tracking_enabled>1</checkout_steps_tracking_enabled>
                 <promotion_tracking_enabled>1</promotion_tracking_enabled>
+                <brand_attribute>manufacturer</brand_attribute>
             </event>
         </hatimeria_gtmpro>
     </default>

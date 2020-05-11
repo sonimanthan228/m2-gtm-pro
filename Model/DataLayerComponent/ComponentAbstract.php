@@ -9,8 +9,6 @@ use Magento\Framework\Registry;
 use Magento\Framework\App\Request\Http;
 use Magento\Catalog\Helper\Product\Configuration;
 use Magento\Quote\Model\Quote\Item;
-use Magento\Review\Model\ResourceModel\Review\Collection as ReviewCollection;
-use Magento\Review\Model\ResourceModel\Review\CollectionFactory as ReviewCollectionFactory;
 use Magento\Framework\Session\Generic;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\CatalogSearch\Model\Advanced;
@@ -55,16 +53,6 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     protected $productHelper;
 
     /**
-     * @var ReviewCollection
-     */
-    protected $reviewCollection;
-
-    /**
-     * @var ReviewCollectionFactory
-     */
-    protected $reviewsColFactory;
-
-    /**
      * @var ReviewSummaryFactory
      */
     protected $reviewSummaryFactory;
@@ -102,8 +90,6 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      * @param Http $request
      * @param Config $config
      * @param Configuration $productHelper
-     * @param ReviewCollection $reviewCollection
-     * @param ReviewCollectionFactory $reviewCollectionFactory
      * @param ReviewFactory $reviewFactory
      * @param Generic $session
      * @param RedirectInterface $redirect
@@ -117,8 +103,6 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         Http $request,
         Config $config,
         Configuration $productHelper,
-        ReviewCollection $reviewCollection,
-        ReviewCollectionFactory $reviewCollectionFactory,
         ReviewFactory $reviewFactory,
         Generic $session,
         RedirectInterface $redirect,
@@ -131,7 +115,6 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         $this->request = $request;
         $this->config = $config;
         $this->productHelper = $productHelper;
-        $this->reviewsColFactory = $reviewCollectionFactory;
         $this->reviewFactory = $reviewFactory;
         $this->session = $session;
         $this->redirect = $redirect;
@@ -226,10 +209,8 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     protected function getBrand(Product $product)
     {
         $brand = '';
-        if ($product->getBrand()) {
-            $brand = $product->getAttributeText('brand');
-        } elseif ($product->getManufacturer()) {
-            $brand = $product->getAttributeText('maunfacturer');
+        if ($brandAttribute = $this->config->getBrandAttribute()) {
+            $brand = $product->getAttributeText($this->config->getBrandAttribute());
         }
 
         return $brand;
@@ -237,22 +218,16 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
 
     /**
      * @param Product $product
-     * @return ReviewCollection
+     * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    protected function getReviewsCollection(Product $product)
+    protected function getReviewsCount(Product $product)
     {
-        if (null === $this->reviewCollection) {
-            $this->reviewCollection = $this->reviewsColFactory->create()->addStoreFilter(
-                $this->storeManager->getStore()->getId()
-            )->addStatusFilter(
-                \Magento\Review\Model\Review::STATUS_APPROVED
-            )->addEntityFilter(
-                'product',
-                $product->getId()
-            )->setDateOrder();
+        if ($product->getReviewsCount() === null) {
+            $this->reviewFactory->create()->getEntitySummary($product, $this->storeManager->getStore()->getId());
         }
-        return $this->reviewCollection;
+
+        return $product->getReviewsCount();
     }
 
     /**

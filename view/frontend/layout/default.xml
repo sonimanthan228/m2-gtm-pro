@@ -81,7 +81,7 @@
             <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\DataLayer" name="hatimeria.gtmpro.datalayer" template="Hatimeria_GtmPro::datalayer.phtml"/>
         </referenceContainer>
         <referenceBlock name="catalog.product.related">
-            <block class="Hatimeria\GtmPro\Block\Wishlist\Customer\Item\Column\DataLayerData" name="hatimeria.gtmpro.catalog.product.related" template="Hatimeria_GtmPro::wishlist/column/datalayerdata.phtml" cacheable="false"/>
+            <block class="Hatimeria\GtmPro\Block\Wishlist\Customer\Item\Column\DataLayerData" name="hatimeria.gtmpro.catalog.product.related" template="Hatimeria_GtmPro::wishlist/column/datalayerdata.phtml"/>
         </referenceBlock>
     </body>
 </page>

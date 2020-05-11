@@ -12,7 +12,6 @@ use Magento\Catalog\Model\Product;
  */
 class ProductView extends ComponentAbstract implements DataLayerComponentInterface
 {
-
     const EVENT_NAME = 'product-detail-view';
 
     /**
@@ -34,7 +33,7 @@ class ProductView extends ComponentAbstract implements DataLayerComponentInterfa
                          'price' => $this->formatPrice($product->getFinalPrice()),
                          'brand' => $this->getBrand($product),
                          'category' => $this->getCategoryName($product),
-                         'reviewCount' => $this->getReviewsCollection($product)->getSize(),
+                         'reviewCount' => $this->getReviewsCount($product),
                          'reviewSummary' => $this->getRatingSummary($product)
                      ]
                  ]

@@ -43,14 +43,14 @@
                     <depends>
                         <field id="hatimeria_gtmpro/event/product_click_enabled">1</field>
                     </depends>
-                    <comment>comma separated</comment>
+                    <comment>Add comma separated classes of all elements which have to be tracked after click</comment>
                 </field>
                 <field id="form_tracking_enabled" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Form Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
                 <field id="form_tracking_form_data" translate="label" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Ranges</label>
+                    <label>Forms</label>
                     <frontend_model>Hatimeria\GtmPro\Block\Adminhtml\Form\Field\Event\Form</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                     <depends>
@@ -100,7 +100,14 @@
                 <field id="promotion_tracking_enabled" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Promotion Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
-                    <comment><![CDATA[<b>Example:</b> <a href="promotion" data-promotion-id="id"(required) data-promotion-name="name"(optional) data-promotion-creative="creative(optional)" data-promotion-position="position"(optional | if empty then script will calculate position automatically)> </a>]]></comment>
+                    <comment>
+                        <![CDATA[ <b>Example:<b> <br/> a href="promotion" data-promotion-id="id-required") data-promotion-name="name-optional" data-promotion-creative="creative-optional" data-promotion-position="position-optional_calculated_automatically_if_not_added"]]>
+                    </comment>
+                </field>
+                <field id="brand_attribute" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Brand Attribute</label>
+                    <source_model>Hatimeria\GtmPro\Model\Config\Source\Attribute</source_model>
+                    <comment>will be added to product DataLayer data</comment>
                 </field>
             </group>
         </section>

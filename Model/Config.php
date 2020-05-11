@@ -4,6 +4,7 @@ namespace Hatimeria\GtmPro\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\Serializer\Json;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class Config
@@ -61,6 +62,9 @@ class Config
     const XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PROMOTION_TRACKING_ENABLED
         = 'hatimeria_gtmpro/event/promotion_tracking_enabled';
 
+    const XML_CONFIG_PATH_HATIMERIA_GTMPRO_BRAND_ATTRIBUTE
+        = 'hatimeria_gtmpro/event/brand_attribute';
+
     /**
      * @var ScopeConfigInterface
      */
@@ -72,16 +76,23 @@ class Config
     protected $serializer;
 
     /**
+     * @var StoreManagerInterface
+     */
+    protected $storeManager;
+
+    /**
      * Config constructor.
      * @param ScopeConfigInterface $scopeConfig
      * @param Json $serializer
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        Json $serializer
+        Json $serializer,
+        StoreManagerInterface $storeManager
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->serializer = $serializer;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -89,7 +100,11 @@ class Config
      */
     public function getContainerId():string
     {
-        return $this->scopeConfig->getValue(self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_CONTAINER_ID);
+        return $this->scopeConfig->getValue(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_CONTAINER_ID,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
     }
 
     /**
@@ -97,7 +112,11 @@ class Config
      */
     public function isModuleEnabled():bool
     {
-        return $this->scopeConfig->isSetFlag(self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_MODULE_ENABLED);
+        return $this->scopeConfig->isSetFlag(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_MODULE_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
     }
 
     /**
@@ -105,7 +124,11 @@ class Config
      */
     public function isProductImpressionTrackingEnabled():bool
     {
-        return $this->scopeConfig->isSetFlag(self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PRODUCT_IMPRESSION_ENABLED);
+        return $this->scopeConfig->isSetFlag(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PRODUCT_IMPRESSION_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
     }
 
     /**
@@ -113,7 +136,11 @@ class Config
      */
     public function getProductImpressionTrackClass()
     {
-        return $this->scopeConfig->getValue(self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_PRODUCT_IMPRESSION_TRACK_CLASS);
+        return $this->scopeConfig->getValue(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_PRODUCT_IMPRESSION_TRACK_CLASS,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
     }
 
     /**
@@ -121,7 +148,11 @@ class Config
      */
     public function isProductClickTrackingEnabled():bool
     {
-        return $this->scopeConfig->isSetFlag(self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PRODUCT_CLICK_ENABLED);
+        return $this->scopeConfig->isSetFlag(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PRODUCT_CLICK_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
     }
 
     /**
@@ -129,7 +160,11 @@ class Config
      */
     public function getProductClickElementClass()
     {
-        return  $this->scopeConfig->getValue(self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_PRODUCT_CLICK_ELEMENT_CLASS);
+        return  $this->scopeConfig->getValue(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_PRODUCT_CLICK_ELEMENT_CLASS,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
     }
 
     /**
@@ -139,7 +174,11 @@ class Config
     {
         return explode(
             ',',
-            $this->scopeConfig->getValue(self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_PRODUCT_CLICK_LINK_CLASS)
+            $this->scopeConfig->getValue(
+                self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_PRODUCT_CLICK_LINK_CLASS,
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+                $this->storeManager->getStore()->getId()
+            )
         );
     }
 
@@ -148,7 +187,11 @@ class Config
      */
     public function isFormTrackingEnabled():bool
     {
-        return $this->scopeConfig->isSetFlag(self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_FORM_TRACKING_ENABLED);
+        return $this->scopeConfig->isSetFlag(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_FORM_TRACKING_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
     }
 
     /**
@@ -157,7 +200,9 @@ class Config
     public function getFormTrackingData()
     {
         $serializedData = $this->scopeConfig->getValue(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_FORM_TRACKING_FORM_DATA
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_FORM_TRACKING_FORM_DATA,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
         $data = empty($serializedData) ? false : $this->serializer->unserialize($serializedData);
         foreach ($data as &$row) {
@@ -173,7 +218,9 @@ class Config
     public function isTransactionTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_TRANSACTION_ENABLED
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_TRANSACTION_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 
@@ -183,7 +230,9 @@ class Config
     public function getTransactionAffiliation()
     {
         return  $this->scopeConfig->getValue(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_TRANSACTION_AFFILIATION
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_TRANSACTION_AFFILIATION,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 
@@ -193,7 +242,9 @@ class Config
     public function isAddToCartTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_ADD_TO_CART_TRACKING_ENABLED
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_ADD_TO_CART_TRACKING_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 
@@ -203,7 +254,9 @@ class Config
     public function isSearchTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_SEARCH_TRACKING_ENABLED
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_SEARCH_TRACKING_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 
@@ -213,7 +266,9 @@ class Config
     public function isProductViewTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PRODUCT_VIEW_TRACKING_ENABLED
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PRODUCT_VIEW_TRACKING_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 
@@ -223,7 +278,9 @@ class Config
     public function isAddProductReviewTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_ADD_PRODUCT_REVIEW_TRACKING_ENABLED
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_ADD_PRODUCT_REVIEW_TRACKING_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 
@@ -233,7 +290,9 @@ class Config
     public function isAddToWishlistTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_ADD_TO_WISHLIST_TRACKING_ENABLED
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_ADD_TO_WISHLIST_TRACKING_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 
@@ -243,7 +302,9 @@ class Config
     public function isAddToCompareTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_ADD_TO_COMPARE_TRACKING_ENABLED
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_ADD_TO_COMPARE_TRACKING_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 
@@ -253,7 +314,9 @@ class Config
     public function isCheckoutStepsTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_CHECKOUT_STEPS_TRACKING_ENABLED
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_CHECKOUT_STEPS_TRACKING_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 
@@ -263,7 +326,22 @@ class Config
     public function isPromotionTrackingEnabled():bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PROMOTION_TRACKING_ENABLED
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PROMOTION_TRACKING_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+    }
+
+    /**
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getBrandAttribute()
+    {
+        return  $this->scopeConfig->getValue(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_BRAND_ATTRIBUTE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
         );
     }
 }
