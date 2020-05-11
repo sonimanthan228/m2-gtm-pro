@@ -11,8 +11,10 @@ define([
                 if (entry.intersectionRatio > 0 && !$(entry.target).hasClass('intersection-viewed')) {
                     $(entry.target).addClass('intersection-viewed');
                     var impressionData = $(entry.target).find("*[data-impression]").data('impression');
-                    addPositionToProductImpressionData(impressionData, entry);
-                    window.dataLayer.push(impressionData);
+                    if (impressionData) {
+                        addPositionToProductImpressionData(impressionData, entry);
+                        window.dataLayer.push(impressionData);
+                    }
                 }
             });
         });
