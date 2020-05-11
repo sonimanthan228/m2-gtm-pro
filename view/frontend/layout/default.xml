@@ -2,74 +2,86 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="head.additional">
-            <block ifconfig="hatimeria_gtmee/general/enabled" class="Hatimeria\GtmEe\Block\Tag" name="hatimeria.gtmee.tag" before="-" template="Hatimeria_GtmEe::tag.phtml"/>
-            <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmee.polyfill-intersection.script"
-                   template="Hatimeria_GtmEe::polyfill-intersection.phtml">
+            <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\Tag" name="hatimeria.gtmpro.tag" before="-" template="Hatimeria_GtmPro::tag.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmpro.polyfill-intersection.script"
+                   template="Hatimeria_GtmPro::polyfill-intersection.phtml">
                 <arguments>
                     <argument name="ifConfig" xsi:type="string"><![CDATA[
-                        config == hatimeria_gtmee/general/enabled &&
-                        config == hatimeria_gtmee/advanced/enable_product_impression
+                        config == hatimeria_gtmpro/general/enabled &&
+                        config == hatimeria_gtmpro/advanced/enable_product_impression
                     ]]></argument>
                 </arguments>
             </block>
         </referenceBlock>
+        <referenceContainer name="head.additional">
+            <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\Tag" name="hatimeria.gtmpro.tag" before="-" template="Hatimeria_GtmPro::tag.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmpro.polyfill-intersection.script"
+                   template="Hatimeria_GtmPro::polyfill-intersection.phtml">
+                <arguments>
+                    <argument name="ifConfig" xsi:type="string"><![CDATA[
+                        config == hatimeria_gtmpro/general/enabled &&
+                        config == hatimeria_gtmpro/advanced/enable_product_impression
+                    ]]></argument>
+                </arguments>
+            </block>
+        </referenceContainer>
         <referenceContainer name="after.body.start">
-            <block ifconfig="hatimeria_gtmee/general/enable"
-                   name="hatimeria.gtmee.tagnoscript"
-                   class="Hatimeria\GtmEe\Block\Tag"
-                   template="Hatimeria_GtmEe::tag-noscript.phtml"
+            <block ifconfig="hatimeria_gtmpro/general/enable"
+                   name="hatimeria.gtmpro.tagnoscript"
+                   class="Hatimeria\GtmPro\Block\Tag"
+                   template="Hatimeria_GtmPro::tag-noscript.phtml"
                    before="-"
             />
         </referenceContainer>
         <referenceContainer name="before.body.end">
-            <block name="hatimeria.gtmee.event.productimpression"
-                   class="Hatimeria\GtmEe\Block\Event\ProductImpression"
-                   template="Hatimeria_GtmEe::event/product-impression.phtml"
+            <block name="hatimeria.gtmpro.event.productimpression"
+                   class="Hatimeria\GtmPro\Block\Event\ProductImpression"
+                   template="Hatimeria_GtmPro::event/product-impression.phtml"
             >
                 <arguments>
                     <argument name="ifConfig" xsi:type="string"><![CDATA[
-                        config == hatimeria_gtmee/general/enabled &&
-                        config == hatimeria_gtmee/advanced/enable_product_impression
+                        config == hatimeria_gtmpro/general/enabled &&
+                        config == hatimeria_gtmpro/advanced/enable_product_impression
                     ]]></argument>
                 </arguments>
             </block>
-            <block name="hatimeria.gtmee.event.productclick"
-                   class="Hatimeria\GtmEe\Block\Event\ProductClick"
-                   template="Hatimeria_GtmEe::event/product-click.phtml"
+            <block name="hatimeria.gtmpro.event.productclick"
+                   class="Hatimeria\GtmPro\Block\Event\ProductClick"
+                   template="Hatimeria_GtmPro::event/product-click.phtml"
             >
                 <arguments>
                     <argument name="ifConfig" xsi:type="string"><![CDATA[
-                        config == hatimeria_gtmee/general/enabled &&
-                        config == hatimeria_gtmee/advanced/product_click_enabled
+                        config == hatimeria_gtmpro/general/enabled &&
+                        config == hatimeria_gtmpro/advanced/product_click_enabled
                     ]]></argument>
                 </arguments>
             </block>
-            <block name="hatimeria.gtmee.event.form"
-                   class="Hatimeria\GtmEe\Block\Event\Form"
-                   template="Hatimeria_GtmEe::event/form.phtml"
+            <block name="hatimeria.gtmpro.event.form"
+                   class="Hatimeria\GtmPro\Block\Event\Form"
+                   template="Hatimeria_GtmPro::event/form.phtml"
             >
                 <arguments>
                     <argument name="ifConfig" xsi:type="string"><![CDATA[
-                        config == hatimeria_gtmee/general/enabled &&
-                        config == hatimeria_gtmee/advanced/form_tracking_enabled
+                        config == hatimeria_gtmpro/general/enabled &&
+                        config == hatimeria_gtmpro/advanced/form_tracking_enabled
                     ]]></argument>
                 </arguments>
             </block>
-            <block name="hatimeria.gtmee.event.promotion-impression"
-                   class="Hatimeria\GtmEe\Block\Event\Promotion"
-                   template="Hatimeria_GtmEe::event/promotion.phtml"
+            <block name="hatimeria.gtmpro.event.promotion-impression"
+                   class="Hatimeria\GtmPro\Block\Event\Promotion"
+                   template="Hatimeria_GtmPro::event/promotion.phtml"
             >
                 <arguments>
                     <argument name="ifConfig" xsi:type="string"><![CDATA[
-                        config == hatimeria_gtmee/general/enabled &&
-                        config == hatimeria_gtmee/advanced/promotion_tracking_enabled
+                        config == hatimeria_gtmpro/general/enabled &&
+                        config == hatimeria_gtmpro/advanced/promotion_tracking_enabled
                     ]]></argument>
                 </arguments>
             </block>
-            <block ifconfig="hatimeria_gtmee/general/enabled" class="Hatimeria\GtmEe\Block\DataLayer" name="hatimeria.gtmee.datalayer" template="Hatimeria_GtmEe::datalayer.phtml"/>
+            <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\DataLayer" name="hatimeria.gtmpro.datalayer" template="Hatimeria_GtmPro::datalayer.phtml"/>
         </referenceContainer>
         <referenceBlock name="catalog.product.related">
-            <block class="Hatimeria\GtmEe\Block\Wishlist\Customer\Item\Column\DataLayerData" name="hatimeria.gtmee.catalog.product.related" template="Hatimeria_GtmEe::wishlist/column/datalayerdata.phtml" cacheable="false"/>
+            <block class="Hatimeria\GtmPro\Block\Wishlist\Customer\Item\Column\DataLayerData" name="hatimeria.gtmpro.catalog.product.related" template="Hatimeria_GtmPro::wishlist/column/datalayerdata.phtml" cacheable="false"/>
         </referenceBlock>
     </body>
 </page>
