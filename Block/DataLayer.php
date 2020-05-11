@@ -1,11 +1,11 @@
 <?php
 
-namespace Hatimeria\GtmEe\Block;
+namespace Hatimeria\GtmPro\Block;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Serialize\Serializer\Json;
-use Hatimeria\GtmEe\Api\DataLayerServiceInterface;
-use Hatimeria\GtmEe\Model\Config;
+use Hatimeria\GtmPro\Api\DataLayerServiceInterface;
+use Hatimeria\GtmPro\Model\Config;
 
 /**
  * Class DataLayer

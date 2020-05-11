@@ -1,7 +1,7 @@
 define([
     'jquery',
     'mage/utils/wrapper',
-    'Hatimeria_GtmEe/js/model/gtmee-step-manager',
+    'Hatimeria_GtmPro/js/model/gtmpro-step-manager',
     'uiRegistry'
 ], function ($, wrapper, gtmStepManager) {
     "use strict";

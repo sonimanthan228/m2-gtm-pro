@@ -1,14 +1,14 @@
 <?php
 
-namespace Hatimeria\GtmEe\Block\Catalog\Product\ProductList;
+namespace Hatimeria\GtmPro\Block\Catalog\Product\ProductList;
 
 use Magento\Catalog\Block\Product\ProductList\Item\Block;
 use Magento\Catalog\Block\Product\Context;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Catalog\Model\Product;
-use Hatimeria\GtmEe\Model\Config;
-use Hatimeria\GtmEe\Model\DataLayerComponent\ProductImpression;
-use Hatimeria\GtmEe\Model\DataLayerComponent\ProductClick;
+use Hatimeria\GtmPro\Model\Config;
+use Hatimeria\GtmPro\Model\DataLayerComponent\ProductImpression;
+use Hatimeria\GtmPro\Model\DataLayerComponent\ProductClick;
 
 /**
  * Class ItemDataLayerData

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\GtmEe\Block\Wishlist\Customer\Item\Column;
+namespace Hatimeria\GtmPro\Block\Wishlist\Customer\Item\Column;
 
 use Magento\Wishlist\Block\Customer\Wishlist\Item\Column;
 use Magento\Catalog\Model\Product\Image\UrlBuilder;
@@ -9,9 +9,9 @@ use Magento\Catalog\Block\Product\Context;
 use Magento\Framework\App\Http\Context as HttpContext;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Catalog\Model\Product;
-use Hatimeria\GtmEe\Model\Config as GtmConfig;
-use Hatimeria\GtmEe\Model\DataLayerComponent\ProductImpression;
-use Hatimeria\GtmEe\Model\DataLayerComponent\ProductClick;
+use Hatimeria\GtmPro\Model\Config as GtmConfig;
+use Hatimeria\GtmPro\Model\DataLayerComponent\ProductImpression;
+use Hatimeria\GtmPro\Model\DataLayerComponent\ProductClick;
 
 /**
  * Class DataLayerData

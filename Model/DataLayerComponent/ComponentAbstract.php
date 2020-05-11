@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Catalog\Model\Product;
@@ -16,8 +16,8 @@ use Magento\Framework\App\Response\RedirectInterface;
 use Magento\CatalogSearch\Model\Advanced;
 use Magento\Review\Model\ReviewFactory;
 use Psr\Log\LoggerInterface;
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
-use Hatimeria\GtmEe\Model\Config;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Model\Config;
 
 /**
  * Class ComponentAbstract

@@ -1,10 +1,10 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
 use Magento\Framework\Registry;
 use Magento\Store\Model\StoreManagerInterface;
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 use Magento\Catalog\Model\Product;
 
 /**

@@ -1,5 +1,5 @@
 <?php
-namespace Hatimeria\GtmEe\Block\Adminhtml\Form\Field\Event;
+namespace Hatimeria\GtmPro\Block\Adminhtml\Form\Field\Event;
 
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 

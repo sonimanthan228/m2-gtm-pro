@@ -1,48 +1,48 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-     <type name="Hatimeria\GtmEe\Model\DataLayerService">
+     <type name="Hatimeria\GtmPro\Model\DataLayerService">
         <arguments>
             <argument name="dataLayerComponent" xsi:type="array">
-                <item name="product_view" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\ProductView</item>
-                <item name="core_data" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\CoreData</item>
-                <item name="add_to_cart" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AddToCart</item>
-                <item name="remove_from_cart" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\RemoveFromCart</item>
-                <item name="transaction_data" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\Transaction</item>
-                <item name="search" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\Search</item>
-                <item name="advanced_search" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AdvancedSearch</item>
-                <item name="review_add" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\ReviewAdd</item>
-                <item name="add_to_wishlist" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AddProductToWishlist</item>
-                <item name="remove_from_wishlist" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\RemoveProductFromWishlist</item>
-                <item name="add_to_compare" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\AddProductToCompare</item>
-                <item name="remove_to_compare" xsi:type="object">Hatimeria\GtmEe\Model\DataLayerComponent\RemoveProductFromCompare</item>
+                <item name="product_view" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\ProductView</item>
+                <item name="core_data" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\CoreData</item>
+                <item name="add_to_cart" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddToCart</item>
+                <item name="remove_from_cart" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveFromCart</item>
+                <item name="transaction_data" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\Transaction</item>
+                <item name="search" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\Search</item>
+                <item name="advanced_search" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AdvancedSearch</item>
+                <item name="review_add" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\ReviewAdd</item>
+                <item name="add_to_wishlist" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToWishlist</item>
+                <item name="remove_from_wishlist" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromWishlist</item>
+                <item name="add_to_compare" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToCompare</item>
+                <item name="remove_to_compare" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromCompare</item>
             </argument>
         </arguments>
     </type>
-    <preference for="Hatimeria\GtmEe\Api\DataLayerServiceInterface" type="Hatimeria\GtmEe\Model\DataLayerService" />
-    <preference for="Hatimeria\GtmEe\Api\GuestCheckoutStepInterface" type="Hatimeria\GtmEe\Model\GuestCheckoutStep" />
-    <preference for="Hatimeria\GtmEe\Api\CheckoutStepInterface" type="Hatimeria\GtmEe\Model\CheckoutStep" />
+    <preference for="Hatimeria\GtmPro\Api\DataLayerServiceInterface" type="Hatimeria\GtmPro\Model\DataLayerService" />
+    <preference for="Hatimeria\GtmPro\Api\GuestCheckoutStepInterface" type="Hatimeria\GtmPro\Model\GuestCheckoutStep" />
+    <preference for="Hatimeria\GtmPro\Api\CheckoutStepInterface" type="Hatimeria\GtmPro\Model\CheckoutStep" />
     <type name="Magento\Catalog\Block\Product\AbstractProduct">
-        <plugin name="hatimeria-gtmee-product-abstract-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmpro-product-abstract-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
     <type name="Magento\Catalog\Block\Product\ListProduct">
-        <plugin name="hatimeria-gtmee-product-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmpro-product-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
     <type name="Magento\CatalogSearch\Block\SearchResult\ListProduct">
-        <plugin name="hatimeria-gtmee-search-result" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmpro-search-result" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
     <type name="Magento\Catalog\Block\Product\ProductList\Related">
-        <plugin name="hatimeria-gtmee-product-related-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmpro-product-related-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
     <type name="Magento\Catalog\Block\Product\ProductList\Upsell">
-        <plugin name="hatimeria-gtmee-product-upsell-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmpro-product-upsell-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
     <type name="Magento\Catalog\Block\Product\ProductList\Crosssell">
-        <plugin name="hatimeria-gtmee-product-crossell-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmpro-product-crossell-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
     <type name="Magento\Catalog\Block\Product\ProductList\Promotion">
-        <plugin name="hatimeria-gtmee-product-promotion-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmpro-product-promotion-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
     <type name="Magento\Catalog\Block\Product\ProductList\Random">
-        <plugin name="hatimeria-gtmee-product-random-data" type="Hatimeria\GtmEe\Plugin\Catalog\Block\Product\AbstractProduct"/>
+        <plugin name="hatimeria-gtmpro-product-random-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
 </config>

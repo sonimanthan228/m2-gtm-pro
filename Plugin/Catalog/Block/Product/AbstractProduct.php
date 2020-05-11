@@ -1,13 +1,13 @@
 <?php
 
-namespace Hatimeria\GtmEe\Plugin\Catalog\Block\Product;
+namespace Hatimeria\GtmPro\Plugin\Catalog\Block\Product;
 
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Block\Product\AbstractProduct as CatalogAbstractProduct;
 use Magento\Framework\Serialize\Serializer\Json;
-use Hatimeria\GtmEe\Model\Config;
-use Hatimeria\GtmEe\Model\DataLayerComponent\ProductImpression;
-use Hatimeria\GtmEe\Model\DataLayerComponent\ProductClick;
+use Hatimeria\GtmPro\Model\Config;
+use Hatimeria\GtmPro\Model\DataLayerComponent\ProductImpression;
+use Hatimeria\GtmPro\Model\DataLayerComponent\ProductClick;
 
 /**
  * Class AbstractProduct

@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="customer.wishlist.items">
-            <block class="Hatimeria\GtmEe\Block\Wishlist\Customer\Item\Column\DataLayerData" name="hatimeria.gtmee.wishlist.item.datalayerdata" template="Hatimeria_GtmEe::wishlist/column/datalayerdata.phtml"/>
+            <block class="Hatimeria\GtmPro\Block\Wishlist\Customer\Item\Column\DataLayerData" name="hatimeria.gtmpro.wishlist.item.datalayerdata" template="Hatimeria_GtmPro::wishlist/column/datalayerdata.phtml"/>
         </referenceBlock>
     </body>
 </page>

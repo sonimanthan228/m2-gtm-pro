@@ -2,7 +2,7 @@ define([
     'jquery',
     'mage/storage',
     'Magento_Checkout/js/checkout-data',
-    'Hatimeria_GtmEe/js/model/gtmee-url-manager',
+    'Hatimeria_GtmPro/js/model/gtmpro-url-manager',
 
     ], function ($, storage, checkoutData, gtmUrlManager) {
         'use strict';

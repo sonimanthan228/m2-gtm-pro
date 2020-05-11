@@ -2,14 +2,14 @@
 <page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="related.product.addto">
-            <block class="Hatimeria\GtmEe\Block\Catalog\Product\ProductList\ItemDataLayerData"
-                   name="hatimeria.gtmee.product.related" as="gtmee.related" after="-"
-                   template="Hatimeria_GtmEe::catalog/product/productlist/itemdatalayerdata.phtml"/>
+            <block class="Hatimeria\GtmPro\Block\Catalog\Product\ProductList\ItemDataLayerData"
+                   name="hatimeria.gtmpro.product.related" as="gtmpro.related" after="-"
+                   template="Hatimeria_GtmPro::catalog/product/productlist/itemdatalayerdata.phtml"/>
         </referenceBlock>
         <referenceBlock name="upsell.product.addto">
-            <block class="Hatimeria\GtmEe\Block\Catalog\Product\ProductList\ItemDataLayerData"
-                   name="hatimeria.gtmee.product.upsell" as="gtmee.upsell" after="-"
-                   template="Hatimeria_GtmEe::catalog/product/productlist/itemdatalayerdata.phtml"/>
+            <block class="Hatimeria\GtmPro\Block\Catalog\Product\ProductList\ItemDataLayerData"
+                   name="hatimeria.gtmpro.product.upsell" as="gtmpro.upsell" after="-"
+                   template="Hatimeria_GtmPro::catalog/product/productlist/itemdatalayerdata.phtml"/>
         </referenceBlock>
     </body>
 </page>

@@ -2,6 +2,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Hatimeria_GtmEe',
+    'Hatimeria_GtmPro',
     __DIR__
 );

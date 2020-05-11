@@ -1,5 +1,5 @@
 {
-    "name": "hatimeria/m2-gtmee",
+    "name": "hatimeria/m2-gtmpro",
     "description": "Hatimeria - Google Tag Manager module (Magento 2)",
     "type": "magento2-module",
     "version": "0.1.0",
@@ -17,7 +17,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Hatimeria\\GtmEe\\": ""
+            "Hatimeria\\GtmPro\\": ""
         }
     }
 }

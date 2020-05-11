@@ -1,8 +1,8 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model;
+namespace Hatimeria\GtmPro\Model;
 
-use Hatimeria\GtmEe\Api\DataLayerServiceInterface;
+use Hatimeria\GtmPro\Api\DataLayerServiceInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 class DataLayerService implements DataLayerServiceInterface
 {
     /**
-     * @var array|\Hatimeria\GtmEe\Api\DataLayerComponentInterface[]
+     * @var array|\Hatimeria\GtmPro\Api\DataLayerComponentInterface[]
      */
     private $dataLayerComponent;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\GtmEe\Block\Event;
+namespace Hatimeria\GtmPro\Block\Event;
 
 /**
  * Class ProductImpression

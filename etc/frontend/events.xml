@@ -1,28 +1,28 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="sales_quote_remove_item">
-        <observer name="hatimeria_gtmee_quote_remove_item" instance="Hatimeria\GtmEe\Observer\SalesQuoteRemoveItem" />
+        <observer name="hatimeria_gtmpro_quote_remove_item" instance="Hatimeria\GtmPro\Observer\SalesQuoteRemoveItem" />
     </event>
     <event name="catalog_block_product_list_collection">
-        <observer name="hatimeria_gtmee_catalog_block_product_list_collection" instance="Hatimeria\GtmEe\Observer\CatalogProductListCollection" />
+        <observer name="hatimeria_gtmpro_catalog_block_product_list_collection" instance="Hatimeria\GtmPro\Observer\CatalogProductListCollection" />
     </event>
     <event name="controller_action_postdispatch_review_product_post">
-        <observer name="hatimeria_gtmee_controller_action_dispatch_review_add" instance="Hatimeria\GtmEe\Observer\ReviewAdd" />
+        <observer name="hatimeria_gtmpro_controller_action_dispatch_review_add" instance="Hatimeria\GtmPro\Observer\ReviewAdd" />
     </event>
     <event name="wishlist_add_product">
-        <observer name="hatimeria_gtmee_wishlist_add_product" instance="Hatimeria\GtmEe\Observer\AddProductToWishlist" />
+        <observer name="hatimeria_gtmpro_wishlist_add_product" instance="Hatimeria\GtmPro\Observer\AddProductToWishlist" />
     </event>
     <event name="controller_action_predispatch_wishlist_index_remove">
-        <observer name="hatimeria_gtmee_controller_action_dispatch_wishlist_index_remove" instance="Hatimeria\GtmEe\Observer\RemoveProductFromWishlist" />
+        <observer name="hatimeria_gtmpro_controller_action_dispatch_wishlist_index_remove" instance="Hatimeria\GtmPro\Observer\RemoveProductFromWishlist" />
     </event>
     <event name="checkout_cart_product_add_after">
-        <observer name="hatimeria_gtmee_cart_product_add_after" instance="Hatimeria\GtmEe\Observer\CartProductAddAfter" />
+        <observer name="hatimeria_gtmpro_cart_product_add_after" instance="Hatimeria\GtmPro\Observer\CartProductAddAfter" />
     </event>
     <event name="catalog_product_compare_add_product">
-        <observer name="hatimeria_gtmee_compare_add_product" instance="Hatimeria\GtmEe\Observer\AddProductToCompare" />
+        <observer name="hatimeria_gtmpro_compare_add_product" instance="Hatimeria\GtmPro\Observer\AddProductToCompare" />
     </event>
     <event name="catalog_product_compare_remove_product">
-        <observer name="hatimeria_gtmee_compare_remove_product" instance="Hatimeria\GtmEe\Observer\RemoveProductFromCompare" />
+        <observer name="hatimeria_gtmpro_compare_remove_product" instance="Hatimeria\GtmPro\Observer\RemoveProductFromCompare" />
 
     </event>
 </config>

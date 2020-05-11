@@ -1,9 +1,9 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
 use Magento\Quote\Model\Quote\Item;
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
  * Class AddToCart
@@ -17,7 +17,7 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
      */
     public function processProduct(Item $item)
     {
-        $data = json_decode($this->checkoutSession->getGtmEeProductAddToCartData());
+        $data = json_decode($this->checkoutSession->getGtmProProductAddToCartData());
         if (!is_array($data)) {
             $data = [];
         }
@@ -32,7 +32,7 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
             'variant' => $this->getVariant($item),
             'quantity' => $product->getQty()
         ];
-        $this->checkoutSession->setGtmEeProductAddToCartData(json_encode($data));
+        $this->checkoutSession->setGtmProProductAddToCartData(json_encode($data));
     }
 
     /**
@@ -43,7 +43,7 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->checkoutSession->getGtmEeProductAddToCartData());
+        $products = json_decode($this->checkoutSession->getGtmProProductAddToCartData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
@@ -67,7 +67,7 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
      */
     protected function cleanSessionGtmProductAddToCartData()
     {
-        $this->checkoutSession->setGtmEeProductAddToCartData(false);
+        $this->checkoutSession->setGtmProProductAddToCartData(false);
     }
 
     /**

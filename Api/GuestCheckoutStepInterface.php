@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\GtmEe\Api;
+namespace Hatimeria\GtmPro\Api;
 
 /**
  * Interface GuestCheckoutStepInterface

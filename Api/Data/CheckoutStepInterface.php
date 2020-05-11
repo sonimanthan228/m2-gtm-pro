@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\GtmEe\Api\Data;
+namespace Hatimeria\GtmPro\Api\Data;
 
 /**
  * Interface CheckoutStepInterface

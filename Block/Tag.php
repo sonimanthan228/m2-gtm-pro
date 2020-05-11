@@ -1,9 +1,9 @@
 <?php
 
-namespace Hatimeria\GtmEe\Block;
+namespace Hatimeria\GtmPro\Block;
 
 use Magento\Framework\View\Element\Template;
-use Hatimeria\GtmEe\Model\Config;
+use Hatimeria\GtmPro\Model\Config;
 
 /**
  * Class Tag

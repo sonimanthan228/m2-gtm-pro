@@ -1,10 +1,10 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model;
+namespace Hatimeria\GtmPro\Model;
 
 use Magento\Quote\Model\QuoteIdMaskFactory;
-use Hatimeria\GtmEe\Api\GuestCheckoutStepInterface;
-use Hatimeria\GtmEe\Api\CheckoutStepInterface;
+use Hatimeria\GtmPro\Api\GuestCheckoutStepInterface;
+use Hatimeria\GtmPro\Api\CheckoutStepInterface;
 
 /**
  * Class GuestCheckoutStep

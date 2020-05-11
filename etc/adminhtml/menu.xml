@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Hatimeria_GtmEe::head" title="Gtm Pro" translate="title" module="Hatimeria_GtmEe" sortOrder="80" parent="Hatimeria::hatimeria_group" resource="Hatimeria_GtmEe::gtmee"/>
-        <add id="Hatimeria_GtmEe::config" title="Gtm Pro Configuration" module="Hatimeria_GtmEe" sortOrder="0" parent="Hatimeria_GtmEe::head" action="adminhtml/system_config/edit/section/hatimeria_gtmee" resource="Hatimeria_GtmEe::config"/>
+        <add id="Hatimeria_GtmPro::head" title="Gtm Pro" translate="title" module="Hatimeria_GtmPro" sortOrder="80" parent="Hatimeria::hatimeria_group" resource="Hatimeria_GtmPro::gtmpro"/>
+        <add id="Hatimeria_GtmPro::config" title="Gtm Pro Configuration" module="Hatimeria_GtmPro" sortOrder="0" parent="Hatimeria_GtmPro::head" action="adminhtml/system_config/edit/section/hatimeria_gtmpro" resource="Hatimeria_GtmPro::config"/>
     </menu>
 </config>

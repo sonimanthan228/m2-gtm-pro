@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Registry;
@@ -10,7 +10,7 @@ use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
 use Magento\Customer\Model\Session;
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
  * Class CoreData
@@ -92,10 +92,10 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
         $data = [];
         $data['siteVersion']  = $this->getSiteVersion();
         $data['pageCategory'] = $this->request->getFullActionName();
-//        $data['pageTemplate'] = '';
         $data['userId']       =
             $this->customerSession->isLoggedIn() ? $this->customerSession->getCustomerId() : 'guest';
-        $data['customerType'] = $this->customerSession->getData('group');
+        $data['customerType'] =
+            $this->customerSession->isLoggedIn() ? $this->customerSession->getData('group') : 'guest';
         $data['loggedIn']     = $this->customerSession->isLoggedIn() ? 'Logged In' : 'Not Logged In';
 
         return $data;

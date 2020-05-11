@@ -1,12 +1,12 @@
 <?php
 
-namespace Hatimeria\GtmEe\Observer;
+namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Session\Generic;
-use Hatimeria\GtmEe\Model\DataLayerComponent\ReviewAdd as ReviewAddComponent;
-use Hatimeria\GtmEe\Model\Config;
+use Hatimeria\GtmPro\Model\DataLayerComponent\ReviewAdd as ReviewAddComponent;
+use Hatimeria\GtmPro\Model\Config;
 
 /**
  * Class ReviewAdd

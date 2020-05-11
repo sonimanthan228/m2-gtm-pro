@@ -1,11 +1,11 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model;
+namespace Hatimeria\GtmPro\Model;
 
 use Magento\Quote\Api\CartTotalRepositoryInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
-use Hatimeria\GtmEe\Api\CheckoutStepInterface;
-use Hatimeria\GtmEe\Model\DataLayerComponent\CheckoutStep as CheckoutStepComponent;
+use Hatimeria\GtmPro\Api\CheckoutStepInterface;
+use Hatimeria\GtmPro\Model\DataLayerComponent\CheckoutStep as CheckoutStepComponent;
 
 /**
  * Class TotalsInformationManagement

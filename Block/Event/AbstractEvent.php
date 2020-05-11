@@ -1,9 +1,9 @@
 <?php
 
-namespace Hatimeria\GtmEe\Block\Event;
+namespace Hatimeria\GtmPro\Block\Event;
 
 use Magento\Framework\View\Element\Template;
-use Hatimeria\GtmEe\Model\Config;
+use Hatimeria\GtmPro\Model\Config;
 
 /**
  * Class AbstractEvent

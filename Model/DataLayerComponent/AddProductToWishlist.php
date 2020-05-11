@@ -1,9 +1,9 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
 use Magento\Quote\Model\Quote\Item;
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 use Magento\Catalog\Model\Product;
 
 /**
@@ -18,7 +18,7 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmEeProductAddToWishlistData());
+        $data = json_decode($this->session->getGtmProProductAddToWishlistData());
         if (!is_array($data)) {
             $data = [];
         }
@@ -31,7 +31,7 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
             'category' => $this->getCategoryName($product),
             'quantity' => $product->getQty()
         ];
-        $this->session->setGtmEeProductAddToWishlistData(json_encode($data));
+        $this->session->setGtmProProductAddToWishlistData(json_encode($data));
     }
 
     /**
@@ -42,7 +42,7 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->session->getGtmEeProductAddToWishlistData());
+        $products = json_decode($this->session->getGtmProProductAddToWishlistData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
@@ -51,7 +51,7 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
                ]
             ];
 
-            $this->cleanSessionGtmEeProductAddToWishlistData();
+            $this->cleanSessionGtmProProductAddToWishlistData();
         }
 
         return $data;
@@ -60,9 +60,9 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
     /**
      * @return void
      */
-    protected function cleanSessionGtmEeProductAddToWishlistData()
+    protected function cleanSessionGtmProProductAddToWishlistData()
     {
-        $this->session->setGtmEeProductAddToWishlistData(false);
+        $this->session->setGtmProProductAddToWishlistData(false);
     }
 
     /**

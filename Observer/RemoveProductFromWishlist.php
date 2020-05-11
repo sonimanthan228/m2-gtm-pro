@@ -1,13 +1,13 @@
 <?php
 
-namespace Hatimeria\GtmEe\Observer;
+namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
 use Magento\Wishlist\Model\ItemFactory;
-use Hatimeria\GtmEe\Model\Config;
-use Hatimeria\GtmEe\Model\DataLayerComponent\RemoveProductFromWishlist as RemoveProductFromWishlistComponent;
+use Hatimeria\GtmPro\Model\Config;
+use Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromWishlist as RemoveProductFromWishlistComponent;
 
 /**
  * Class RemoveProductFromWishlist

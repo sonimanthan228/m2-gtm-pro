@@ -1,12 +1,12 @@
 <?php
 
-namespace Hatimeria\GtmEe\Observer;
+namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
-use Hatimeria\GtmEe\Model\Config;
-use Hatimeria\GtmEe\Model\DataLayerComponent\AddProductToCompare as AddProductToCompareComponent;
+use Hatimeria\GtmPro\Model\Config;
+use Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToCompare as AddProductToCompareComponent;
 
 /**
  * Class AddProductToCompare

@@ -18,8 +18,8 @@ define([
                             step: step
                         } : {step: step},
                     urls = {
-                        'guest': '/guest-carts/:cartId/:step/gtmee-checkout-step-data',
-                        'customer': '/carts/mine/:step/gtmee-checkout-step-data'
+                        'guest': '/guest-carts/:cartId/:step/gtmpro-checkout-step-data',
+                        'customer': '/carts/mine/:step/gtmpro-checkout-step-data'
                     };
 
                 return this.getUrl(urls, params);

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
 use Magento\Quote\Model\Quote\Item;
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 use Magento\Catalog\Model\Product;
 
 /**
@@ -19,7 +19,7 @@ class RemoveProductFromCompare extends ComponentAbstract implements DataLayerCom
      */
     public function processData($productData)
     {
-        $data = json_decode($this->session->getGtmEeProductRemoveFromCompareData());
+        $data = json_decode($this->session->getGtmProProductRemoveFromCompareData());
         if (!is_array($data)) {
             $data = [];
         }
@@ -27,7 +27,7 @@ class RemoveProductFromCompare extends ComponentAbstract implements DataLayerCom
         $data[] = [
             'id' => $productData['product_id'],
         ];
-        $this->session->setGtmEeProductRemoveFromCompareData(json_encode($data));
+        $this->session->setGtmProProductRemoveFromCompareData(json_encode($data));
     }
 
     /**
@@ -38,7 +38,7 @@ class RemoveProductFromCompare extends ComponentAbstract implements DataLayerCom
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->session->getGtmEeProductRemoveFromCompareData());
+        $products = json_decode($this->session->getGtmProProductRemoveFromCompareData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
@@ -47,7 +47,7 @@ class RemoveProductFromCompare extends ComponentAbstract implements DataLayerCom
                ]
             ];
 
-            $this->cleanSessionGtmEeProductRemoveFromCompareData();
+            $this->cleanSessionGtmProProductRemoveFromCompareData();
         }
 
         return $data;
@@ -56,9 +56,9 @@ class RemoveProductFromCompare extends ComponentAbstract implements DataLayerCom
     /**
      * @return void
      */
-    protected function cleanSessionGtmEeProductRemoveFromCompareData()
+    protected function cleanSessionGtmProProductRemoveFromCompareData()
     {
-        $this->session->setGtmEeProductRemoveFromCompareData(false);
+        $this->session->setGtmProProductRemoveFromCompareData(false);
     }
 
     /**

@@ -1,13 +1,13 @@
 <?php
 
-namespace Hatimeria\GtmEe\Observer;
+namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
-use Hatimeria\GtmEe\Model\Config;
+use Hatimeria\GtmPro\Model\Config;
 use Magento\Framework\App\Request\Http;
-use Hatimeria\GtmEe\Model\DataLayerComponent\Search;
+use Hatimeria\GtmPro\Model\DataLayerComponent\Search;
 
 /**
  * Class CatalogProductListCollection

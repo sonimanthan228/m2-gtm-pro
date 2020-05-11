@@ -1,8 +1,8 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
  * Class ReviewAdd
@@ -28,10 +28,10 @@ class ReviewAdd extends ComponentAbstract implements DataLayerComponentInterface
     {
         $data = [];
         if ($this->config->isAddProductReviewTrackingEnabled()
-            && $reviewData = json_decode($this->session->getGtmEeAddProductReviewData(), true)) {
+            && $reviewData = json_decode($this->session->getGtmProAddProductReviewData(), true)) {
             //todo add more review data if needed
             $data['product_id'] = $reviewData['product_id'];
-            $this->cleanSessionGtmEeAddProductReviewData();
+            $this->cleanSessionGtmProAddProductReviewData();
         }
 
         return $data;
@@ -40,9 +40,9 @@ class ReviewAdd extends ComponentAbstract implements DataLayerComponentInterface
     /**
      * @return void
      */
-    protected function cleanSessionGtmEeAddProductReviewData()
+    protected function cleanSessionGtmProAddProductReviewData()
     {
-        $this->session->setGtmEeAddProductReviewData(false);
+        $this->session->setGtmProAddProductReviewData(false);
     }
 
     /**
@@ -51,6 +51,6 @@ class ReviewAdd extends ComponentAbstract implements DataLayerComponentInterface
     public function processReview($data)
     {
         $data['product_id'] = $this->coreRegistry->registry('product')->getId();
-        $this->session->setGtmEeAddProductReviewData(json_encode($data));
+        $this->session->setGtmProAddProductReviewData(json_encode($data));
     }
 }

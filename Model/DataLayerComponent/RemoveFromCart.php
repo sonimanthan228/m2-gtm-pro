@@ -1,9 +1,9 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
 use Magento\Quote\Model\Quote\Item;
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
  * Class RemoveFromCart
@@ -17,7 +17,7 @@ class RemoveFromCart extends ComponentAbstract implements DataLayerComponentInte
      */
     public function processProduct(Item $item)
     {
-        $data = json_decode($this->checkoutSession->getGtmEeProductRemoveFromCartData());
+        $data = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
         if (!is_array($data)) {
             $data = [];
         }
@@ -33,7 +33,7 @@ class RemoveFromCart extends ComponentAbstract implements DataLayerComponentInte
             'variant' => $this->getVariant($item),
             'quantity' => $item->getQty()
         ];
-        $this->checkoutSession->setGtmEeProductRemoveFromCartData(json_encode($data));
+        $this->checkoutSession->setGtmProProductRemoveFromCartData(json_encode($data));
     }
 
     /**
@@ -44,7 +44,7 @@ class RemoveFromCart extends ComponentAbstract implements DataLayerComponentInte
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->checkoutSession->getGtmEeProductRemoveFromCartData());
+        $products = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
@@ -63,7 +63,7 @@ class RemoveFromCart extends ComponentAbstract implements DataLayerComponentInte
      */
     protected function cleanSessionGtmProductRemoveFromCartData()
     {
-        $this->checkoutSession->setGtmEeProductRemoveFromCartData(false);
+        $this->checkoutSession->setGtmProProductRemoveFromCartData(false);
     }
 
     /**

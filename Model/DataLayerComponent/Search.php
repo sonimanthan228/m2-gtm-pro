@@ -1,8 +1,8 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
  * Class Search
@@ -18,12 +18,12 @@ class Search extends ComponentAbstract implements DataLayerComponentInterface
      */
     public function getComponentData($eventData)
     {
-        $data = json_decode($this->checkoutSession->getGtmEeSearchCollectionData(), true);
+        $data = json_decode($this->checkoutSession->getGtmProSearchCollectionData(), true);
         if (is_array($data)) {
             $data['searchTerm'] = $this->request->getParam('q');
             $data['searchResults'] = $data['searchResults'];
 
-            $this->cleanSessionGtmEeSearchCollectionData();
+            $this->cleanSessionGtmProSearchCollectionData();
         }
 
         return $data;
@@ -32,23 +32,23 @@ class Search extends ComponentAbstract implements DataLayerComponentInterface
     /**
      * @return void
      */
-    protected function cleanSessionGtmEeSearchCollectionData()
+    protected function cleanSessionGtmProSearchCollectionData()
     {
-        $this->checkoutSession->setGtmEeSearchCollectionData(false);
+        $this->checkoutSession->setGtmProSearchCollectionData(false);
     }
     /**
      * @param $collection
      */
     public function processCollection($collection)
     {
-        $data = json_decode($this->checkoutSession->getGtmEeSearchCollectionData());
+        $data = json_decode($this->checkoutSession->getGtmProSearchCollectionData());
         if (!is_array($data)) {
             $data = [];
         }
 
         $data['searchResults'] = $collection->getSize();
 
-        $this->checkoutSession->setGtmEeSearchCollectionData(json_encode($data));
+        $this->checkoutSession->setGtmProSearchCollectionData(json_encode($data));
     }
 
     /**

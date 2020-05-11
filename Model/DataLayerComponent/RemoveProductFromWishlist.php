@@ -1,8 +1,8 @@
 <?php
 
-namespace Hatimeria\GtmEe\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
-use Hatimeria\GtmEe\Api\DataLayerComponentInterface;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 use Magento\Catalog\Model\Product;
 
 /**
@@ -17,7 +17,7 @@ class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerCo
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmEeProductRemoveFromWishlistData());
+        $data = json_decode($this->session->getGtmProProductRemoveFromWishlistData());
         if (!is_array($data)) {
             $data = [];
         }
@@ -31,7 +31,7 @@ class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerCo
             'quantity' => $product->getQty()
         ];
 
-        $this->session->setGtmEeProductRemoveFromWishlistData(json_encode($data));
+        $this->session->setGtmProProductRemoveFromWishlistData(json_encode($data));
     }
 
     /**
@@ -42,7 +42,7 @@ class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerCo
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->session->getGtmEeProductRemoveFromWishlistData());
+        $products = json_decode($this->session->getGtmProProductRemoveFromWishlistData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
@@ -51,7 +51,7 @@ class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerCo
                ]
             ];
 
-            $this->cleanSessionGtmEeProductRemoveFromWishlistData();
+            $this->cleanSessionGtmProProductRemoveFromWishlistData();
         }
 
         return $data;
@@ -60,9 +60,9 @@ class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerCo
     /**
      * @return void
      */
-    protected function cleanSessionGtmEeProductRemoveFromWishlistData()
+    protected function cleanSessionGtmProProductRemoveFromWishlistData()
     {
-        $this->session->setGtmEeProductRemoveFromWishlistData(false);
+        $this->session->setGtmProProductRemoveFromWishlistData(false);
     }
 
     /**

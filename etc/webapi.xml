@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route url="/V1/guest-carts/:cartId/:step/gtmee-checkout-step-data" method="GET">
-        <service class="Hatimeria\GtmEe\Api\GuestCheckoutStepInterface" method="get"/>
+    <route url="/V1/guest-carts/:cartId/:step/gtmpro-checkout-step-data" method="GET">
+        <service class="Hatimeria\GtmPro\Api\GuestCheckoutStepInterface" method="get"/>
         <resources>
             <resource ref="anonymous" />
         </resources>
     </route>
-    <route url="/V1/carts/mine/:step/gtmee-checkout-step-data" method="GET">
-        <service class="Hatimeria\GtmEe\Api\CheckoutStepInterface" method="get"/>
+    <route url="/V1/carts/mine/:step/gtmpro-checkout-step-data" method="GET">
+        <service class="Hatimeria\GtmPro\Api\CheckoutStepInterface" method="get"/>
         <resources>
             <resource ref="self" />
         </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <hatimeria_gtmee>
+        <hatimeria_gtmpro>
             <general>
                 <enabled>0</enabled>
                 <container_id></container_id>
@@ -25,6 +25,6 @@
                 <checkout_steps_tracking_enabled>1</checkout_steps_tracking_enabled>
                 <promotion_tracking_enabled>1</promotion_tracking_enabled>
             </event>
-        </hatimeria_gtmee>
+        </hatimeria_gtmpro>
     </default>
 </config>
