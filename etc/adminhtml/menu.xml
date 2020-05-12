@@ -1,4 +1,11 @@
 <?xml version="1.0"?>
+<!--
+  ~  @category   Hatimeria
+  ~  @author      (office@hatimeria.com)
+  ~  @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+  ~  @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+  -->
+
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="Hatimeria_GtmPro::head" title="Gtm Pro" translate="title" module="Hatimeria_GtmPro" sortOrder="80" parent="Hatimeria::hatimeria_group" resource="Hatimeria_GtmPro::gtmpro"/>

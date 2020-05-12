@@ -1,4 +1,11 @@
 <?xml version="1.0"?>
+<!--
+  ~  @category   Hatimeria
+  ~  @author      (office@hatimeria.com)
+  ~  @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+  ~  @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+  -->
+
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
     <route url="/V1/guest-carts/:cartId/:step/gtmpro-checkout-step-data" method="GET">

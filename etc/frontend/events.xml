@@ -1,4 +1,11 @@
 <?xml version="1.0"?>
+<!--
+  ~  @category   Hatimeria
+  ~  @author      (office@hatimeria.com)
+  ~  @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+  ~  @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+  -->
+
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="sales_quote_remove_item">
         <observer name="hatimeria_gtmpro_quote_remove_item" instance="Hatimeria\GtmPro\Observer\SalesQuoteRemoveItem" />
