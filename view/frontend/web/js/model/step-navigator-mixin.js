@@ -14,9 +14,9 @@ define([
             }
         );
 
-        stepNavigator.handleHash = wrapper.wrap(stepNavigator.handleHash,
-            function (originalAction) {
-                var result = originalAction();
+        stepNavigator.setHash = wrapper.wrap(stepNavigator.setHash,
+            function (originalAction, hash) {
+                var result = originalAction(hash);
                 gtmStepManager.registerStepData();
                 return result;
             }

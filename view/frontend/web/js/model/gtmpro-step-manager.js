@@ -9,28 +9,31 @@ define([
 
         return {
             registerStepData: function () {
-                var step = window.location.hash
-                    ? window.location.hash.replace('#', '') : 'shipping';
-                storage.get(
-                    gtmUrlManager.getUrlForCheckoutStepData(step)
-                ).done(
-                    function (response) {
-                        if (response) {
-                            if (step == 'shipping' && window.checkoutConfig['selectedShippingMethod'] != null) {
-                                var method = window.checkoutConfig['selectedShippingMethod']['carrier_code'] +
-                                    '_' + window.checkoutConfig['selectedShippingMethod']['method_code'];
-                                response[0]['ecommerce']['add']['actionField']['option'] = 'shipping = ' + method;
-                            }
+                if ( window.location.hash) {
 
-                            if (step == 'payment' && checkoutData.getSelectedPaymentMethod()) {
-                                response[0]['ecommerce']['add']['actionField']['option'] = 'payment = '
-                                    + checkoutData.getSelectedPaymentMethod();
-                            }
+                    var step = window.location.hash.replace('#', '');
+                    storage.get(
+                        gtmUrlManager.getUrlForCheckoutStepData(step)
+                    ).done(
+                        function (response) {
+                            if (response) {
+                                if (step == 'shipping') {
+                                    var method =  $('input:checked', '.table-checkout-shipping-method').val();
+                                    if (method) {
+                                        response[0]['ecommerce']['add']['actionField']['option'] = 'shipping = ' + method;
+                                    }
+                                }
 
-                            window.dataLayer.push(response[0]);
+                                if (step == 'payment' && checkoutData.getSelectedPaymentMethod()) {
+                                    response[0]['ecommerce']['add']['actionField']['option'] = 'payment = '
+                                        + checkoutData.getSelectedPaymentMethod();
+                                }
+
+                                window.dataLayer.push(response[0]);
+                            }
                         }
-                    }
-                );
+                    );
+                }
 
                 return this;
             }

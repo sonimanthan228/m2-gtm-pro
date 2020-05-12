@@ -13,7 +13,7 @@ use Magento\Framework\Session\Generic;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\CatalogSearch\Model\Advanced;
 use Magento\Review\Model\ReviewFactory;
-use \Magento\Quote\Model\QuoteFactory;
+use Magento\Quote\Model\QuoteFactory;
 use Psr\Log\LoggerInterface;
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 use Hatimeria\GtmPro\Model\Config;
@@ -150,6 +150,8 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
                 $data['event'] = $this->getEventName();
             }
         } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+        } catch (\Throwable $e) {
             $this->logger->error($e->getMessage());
         }
 
