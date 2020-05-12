@@ -45,4 +45,8 @@
     <type name="Magento\Catalog\Block\Product\ProductList\Random">
         <plugin name="hatimeria-gtmpro-product-random-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
+    <type name="\Magento\CatalogWidget\Block\Product\ProductsList">
+        <plugin name="hatimeria-gtmpro-product-catalogwidget-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+
 </config>
