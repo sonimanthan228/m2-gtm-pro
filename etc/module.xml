@@ -3,6 +3,10 @@
     <module name="Hatimeria_GtmPro" setup_version="1.0.0">
         <sequence>
             <module name="Magento_Store"/>
+            <module name="Magento_Catalog"/>
+            <module name="Magento_CatalogSearch"/>
+            <module name="Magento_CatalogWidget"/>
+            <module name="Magento_Quote"/>
             <module name="Hatimeria_Base"/>
         </sequence>
     </module>
