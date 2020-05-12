@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="hatimeria_gtmpro" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1" >
-            <label>Google Tag Manager Enchanced Ecommerce</label>
+            <label>Google Tag Manager Enhanced Ecommerce</label>
             <tab>hatimeria</tab>
             <resource>Hatimeria_GtmPro::config</resource>
             <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -101,7 +101,7 @@
                     <label>Promotion Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                     <comment>
-                        <![CDATA[ <b>Example:<b> <br/> a href="promotion" data-promotion-id="id-required") data-promotion-name="name-optional" data-promotion-creative="creative-optional" data-promotion-position="position-optional_calculated_automatically_if_not_added"]]>
+                        <![CDATA[ <b>Example:<b> <br/> a href="promotion" data-promotion-id="id-required" data-promotion-name="name-optional" data-promotion-creative="creative-optional" data-promotion-position="position-optional_calculated_automatically_if_not_added"]]>
                     </comment>
                 </field>
                 <field id="brand_attribute" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">

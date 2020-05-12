@@ -13,11 +13,14 @@ define([
     }
 
     function fireProductClick(event, element) {
-        event.preventDefault();
-        var parent = $(event.target).parents('.' + productClickElementClass)[0];
-        var data = $(parent).find("*[data-click]").data('click');
-        window.dataLayer.push(data);
-        document.location = $(parent).find("*[data-click]").data('url');
+        if (!$(event.currentTarget).hasClass('product-clicked')) {
+            event.stopPropagation();
+            $(event.currentTarget).addClass('product-clicked');
+            var parent = $(event.target).parents('.' + productClickElementClass)[0];
+            var data = $(parent).find("*[data-click]").data('click');
+            window.dataLayer.push(data);
+            $(event.currentTarget).click();
+        }
     }
 
     return function (config) {

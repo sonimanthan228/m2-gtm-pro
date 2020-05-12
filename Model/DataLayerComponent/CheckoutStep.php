@@ -32,7 +32,7 @@ class CheckoutStep extends ComponentAbstract implements DataLayerComponentInterf
             foreach ($quote->getAllVisibleItems() as $item) {
                 $product = $item->getProduct();
                 $products[] = [
-                   'name' => $product->getName(),
+                   'name' => $this->processName($product->getName()),
                    'id' => $product->getId(),
                    'price' => $this->formatPrice($product->getFinalPrice()),
                    'brand' => $this->getBrand($product),

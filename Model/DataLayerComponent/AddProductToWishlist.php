@@ -24,7 +24,7 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
         }
 
         $data[] = [
-            'name' => $product->getName(),
+            'name' => $this->processName($product->getName()),
             'id' => $product->getId(),
             'price' => $this->formatPrice($product->getFinalPrice()),
             'brand' => $this->getBrand($product),

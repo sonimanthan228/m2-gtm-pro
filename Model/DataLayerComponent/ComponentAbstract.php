@@ -146,6 +146,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     public function getData($eventData)
     {
         try {
+            $data = [];
             if ($data = $this->getComponentData($eventData)) {
                 $data['event'] = $this->getEventName();
             }
@@ -247,5 +248,15 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
         }
 
         return $product->getRatingSummary();
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    protected function processName($name)
+    {
+        $name = strip_tags($name);
+        return str_replace("'", "", $name);
     }
 }

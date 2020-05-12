@@ -51,7 +51,7 @@ class Transaction extends ComponentAbstract implements DataLayerComponentInterfa
             foreach ($order->getAllVisibleItems() as $item) {
                 /** @var Order\Item $item */
                 $data['ecommerce']['purchase']['products'][] = [
-                   'name' => $item->getName(),
+                   'name' => $this->processName($item->getName()),
                    'id' => $item->getSku(),
                    'category' => $this->getCategoryName($item->getProduct()),
                    'price' => $this->formatPrice($item->getBasePrice()),

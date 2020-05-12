@@ -10,6 +10,7 @@ use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
 use Magento\Customer\Model\Session;
+use Magento\Customer\Api\GroupRepositoryInterface;
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
@@ -57,6 +58,11 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
     protected $request;
 
     /**
+     * @var GroupRepositoryInterface
+     */
+    protected $groupRepository;
+
+    /**
      * CoreData constructor.
      * @param Registry $registry
      * @param StoreManagerInterface $storeManager
@@ -64,6 +70,8 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
      * @param ScopeConfigInterface $scopeConfig
      * @param ThemeProviderInterface $themeProvider
      * @param Session $customerSession
+     * @param Http $request
+     * @param GroupRepositoryInterface $groupRepository
      */
     public function __construct(
         Registry $registry,
@@ -72,7 +80,8 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
         ScopeConfigInterface $scopeConfig,
         ThemeProviderInterface $themeProvider,
         Session $customerSession,
-        Http $request
+        Http $request,
+        GroupRepositoryInterface $groupRepository
     ) {
         $this->coreRegistry = $registry;
         $this->storeManager = $storeManager;
@@ -81,6 +90,7 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
         $this->themeProvider = $themeProvider;
         $this->customerSession = $customerSession;
         $this->request = $request;
+        $this->groupRepository = $groupRepository;
     }
 
     /**
@@ -95,7 +105,8 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
         $data['userId']       =
             $this->customerSession->isLoggedIn() ? $this->customerSession->getCustomerId() : 'guest';
         $data['customerType'] =
-            $this->customerSession->isLoggedIn() ? $this->customerSession->getData('group') : 'guest';
+            $this->customerSession->isLoggedIn() ?
+                $this->getCustomerGroupNameById($this->customerSession->getCustomerGroupId()) : 'Not Logged In';
         $data['loggedIn']     = $this->customerSession->isLoggedIn() ? 'Logged In' : 'Not Logged In';
 
         return $data;
@@ -159,5 +170,15 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
     protected function getEventName()
     {
         return self::EVENT_NAME;
+    }
+
+    /**
+     * @param $id
+     * @return string
+     */
+    protected function getCustomerGroupNameById($id)
+    {
+        $group = $this->groupRepository->getById($id);
+        return  $group->getCode();
     }
 }

@@ -10,7 +10,7 @@ define([
                 if (entry.intersectionRatio > 0 && !$(entry.target).hasClass('promotion-viewed')) {
                     $(entry.target).addClass('promotion-viewed');
                     var data = getBaseEventData();
-                    data['ecommerce']['promoView']['promotions'].push(getPromotionData(entry));
+                    data.ecommerce.promoView.promotions.push(getPromotionData(entry));
                     window.dataLayer.push(data);
                 }
             });
@@ -22,23 +22,23 @@ define([
     }
 
     function getBaseEventData() {
-        var data = [];
-        data['ecommerce'] = [];
-        data['ecommerce']['promoView'] = [];
-        data['ecommerce']['promoView']['promotions'] = [];
+        var data = {};
+        data.ecommerce = {};
+        data.ecommerce.promoView = {};
+        data.ecommerce.promoView.promotions = [];
 
         return data;
     }
 
     function getPromotionData(entry) {
         var data = [];
-        data['id'] = $(entry.target).data('promotion-id');
-        data['position'] = $(entry.target).index() + 1;
+        data.id = $(entry.target).data('promotion-id');
+        data.position = $(entry.target).index() + 1;
         if ($(entry.target).data('promotion-name')) {
-            data['name'] = $(entry.target).data('promotion-name');
+            data.name = $(entry.target).data('promotion-name');
         }
         if ($(entry.target).data('promotion-creative')) {
-            data['creative'] = $(entry.target).data('promotion-creative');
+            data.creative = $(entry.target).data('promotion-creative');
         }
 
         return data;

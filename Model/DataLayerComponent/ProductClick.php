@@ -32,7 +32,7 @@ class ProductClick extends ComponentAbstract implements DataLayerComponentInterf
                        'list' => $category
                    ],
                    'products' => [
-                       'name' => strip_tags($product->getName()),
+                       'name' => $this->processName($product->getName()),
                        'id' => $product->getId(),
                        'price' => $this->formatPrice($product->getFinalPrice()),
                        'brand' => $this->getBrand($product),

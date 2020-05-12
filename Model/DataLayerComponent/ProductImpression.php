@@ -24,7 +24,7 @@ class ProductImpression extends ComponentAbstract implements DataLayerComponentI
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'impressions' => [
-                    'name' => strip_tags($product->getName()),
+                    'name' => $this->processName($product->getName()),
                     'id' => $product->getId(),
                     'price' => $this->formatPrice($product->getFinalPrice()),
                    'brand' => $this->getBrand($product),
