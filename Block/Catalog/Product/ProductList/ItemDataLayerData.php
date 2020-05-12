@@ -89,7 +89,7 @@ class ItemDataLayerData extends Block
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getProductImpressionData()
     {
@@ -98,6 +98,9 @@ class ItemDataLayerData extends Block
         );
     }
 
+    /**
+     * @return string
+     */
     public function getProductClickData()
     {
         return $this->jsonSerializer->serialize(
