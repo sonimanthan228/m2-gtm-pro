@@ -18,7 +18,7 @@ define([
                 if (entry.intersectionRatio > 0 && !$(entry.target).hasClass('intersection-viewed')) {
                     $(entry.target).addClass('intersection-viewed');
                     var impressionData = $(entry.target).find("*[data-impression]").data('impression');
-                    if (impressionData.length != 0) {
+                    if (typeof impressionData !== "undefined" && impressionData.length != 0) {
                         addPositionToProductImpressionData(impressionData, entry);
                         window.dataLayer.push(impressionData);
                     }

@@ -27,6 +27,7 @@
                 <field id="product_impression_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Product Impression Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Check the user guide in case of issues</comment>
                 </field>
                 <field id="product_impression_track_class" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Product Impression Track Class</label>
@@ -37,6 +38,7 @@
                 <field id="product_click_enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Product Click Tracking</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Check the user guide in case of issues</comment>
                 </field>
                 <field id="product_click_element_class" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Product Click Element Class</label>

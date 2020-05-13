@@ -11,26 +11,12 @@
         <referenceBlock name="head.additional">
             <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\Tag" name="hatimeria.gtmpro.tag" before="-" template="Hatimeria_GtmPro::tag.phtml"/>
             <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmpro.polyfill-intersection.script"
-                   template="Hatimeria_GtmPro::polyfill-intersection.phtml">
-                <arguments>
-                    <argument name="ifConfig" xsi:type="string"><![CDATA[
-                        config == hatimeria_gtmpro/general/enabled &&
-                        config == hatimeria_gtmpro/advanced/enable_product_impression
-                    ]]></argument>
-                </arguments>
-            </block>
+                   template="Hatimeria_GtmPro::polyfill-intersection.phtml" ifconfig="hatimeria_gtmpro/general/enabled"/>
         </referenceBlock>
         <referenceContainer name="head.additional">
             <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\Tag" name="hatimeria.gtmpro.tag" before="-" template="Hatimeria_GtmPro::tag.phtml"/>
             <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmpro.polyfill-intersection.script"
-                   template="Hatimeria_GtmPro::polyfill-intersection.phtml">
-                <arguments>
-                    <argument name="ifConfig" xsi:type="string"><![CDATA[
-                        config == hatimeria_gtmpro/general/enabled &&
-                        config == hatimeria_gtmpro/advanced/enable_product_impression
-                    ]]></argument>
-                </arguments>
-            </block>
+                   template="Hatimeria_GtmPro::polyfill-intersection.phtml" ifconfig="hatimeria_gtmpro/general/enabled" />
         </referenceContainer>
         <referenceContainer name="after.body.start">
             <block ifconfig="hatimeria_gtmpro/general/enable"
