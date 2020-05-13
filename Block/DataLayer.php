@@ -1,17 +1,18 @@
 <?php
 /**
- *  @category   Hatimeria
- *  @author      (office@hatimeria.com)
- *  @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
- *  @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+ * @category   Hatimeria
+ * @author      (office@hatimeria.com)
+ * @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+ * @license    (https://www.gnu.org/licenses/gpl-3.0.html)
  */
 
 namespace Hatimeria\GtmPro\Block;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Serialize\Serializer\Json;
-use Hatimeria\GtmPro\Api\DataLayerServiceInterface;
+use Hatimeria\GtmPro\Model\DataLayerStaticService;
 use Hatimeria\GtmPro\Model\Config;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
  * Class DataLayer
@@ -26,7 +27,7 @@ class DataLayer extends Template
     /**
      * @var DataLayerServiceInterface
      */
-    protected $dataLayerService;
+    protected $dataLayerStaticService;
     /**
      * @var Config
      */
@@ -36,19 +37,19 @@ class DataLayer extends Template
      * DataLayer constructor.
      * @param Template\Context $context
      * @param Json $jsonSerializer
-     * @param DataLayerServiceInterface $dataLayerService
+     * @param DataLayerStaticService $dataLayerStaticService
      * @param Config $config
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         Json $jsonSerializer,
-        DataLayerServiceInterface $dataLayerService,
+        DataLayerStaticService $dataLayerStaticService,
         Config $config,
         array $data
     ) {
         $this->jsonSerializer = $jsonSerializer;
-        $this->dataLayerService = $dataLayerService;
+        $this->dataLayerStaticService = $dataLayerStaticService;
         $this->config = $config;
         parent::__construct($context, $data);
     }
@@ -56,9 +57,9 @@ class DataLayer extends Template
     /**
      * @return array
      */
-    public function getDataLayer()
+    public function getDataLayerStaticData()
     {
-        return $this->dataLayerService->getDataLayerComponentData();
+        return $this->dataLayerStaticService->getDataLayerComponentData();
     }
 
     protected function _toHtml()

@@ -17,6 +17,7 @@ var config = {
         }
     },
     paths: {
+        'data-layer-data': 'Hatimeria_GtmPro/js/data-layer-data',
         'product-impression-event': 'Hatimeria_GtmPro/js/event/product-impression',
         'product-click-event': 'Hatimeria_GtmPro/js/event/product-click',
         'form-event': 'Hatimeria_GtmPro/js/event/form',

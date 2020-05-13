@@ -1,9 +1,9 @@
 <?php
 /**
- *  @category   Hatimeria
- *  @author      (office@hatimeria.com)
- *  @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
- *  @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+ * @category   Hatimeria
+ * @author      (office@hatimeria.com)
+ * @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+ * @license    (https://www.gnu.org/licenses/gpl-3.0.html)
  */
 
 namespace Hatimeria\GtmPro\Model;
@@ -11,10 +11,11 @@ namespace Hatimeria\GtmPro\Model;
 use Magento\Quote\Api\CartTotalRepositoryInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Hatimeria\GtmPro\Api\CheckoutStepInterface;
-use Hatimeria\GtmPro\Model\DataLayerComponent\CheckoutStep as CheckoutStepComponent;
+use Hatimeria\GtmPro\Model\DataLayerCheckoutService;
+use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
- * Class TotalsInformationManagement
+ * Class CheckoutStep
  */
 class CheckoutStep implements CheckoutStepInterface
 {
@@ -29,24 +30,24 @@ class CheckoutStep implements CheckoutStepInterface
     protected $cartRepository;
 
     /**
-     * @var CheckoutStepComponent
+     * @var DataLayerCheckoutService
      */
-    protected $checkoutStepComponent;
+    protected $dataLayerCheckoutService;
 
     /**
      * CheckoutStep constructor.
      * @param CartRepositoryInterface $cartRepository
      * @param CartTotalRepositoryInterface $cartTotalRepository
-     * @param CheckoutStepComponent $checkoutStepComponent
+     * @param DataLayerCheckoutService $dataLayerCheckoutService
      */
     public function __construct(
         CartRepositoryInterface $cartRepository,
         CartTotalRepositoryInterface $cartTotalRepository,
-        CheckoutStepComponent $checkoutStepComponent
+        DataLayerCheckoutService $dataLayerCheckoutService
     ) {
         $this->cartRepository = $cartRepository;
         $this->cartTotalRepository = $cartTotalRepository;
-        $this->checkoutStepComponent = $checkoutStepComponent;
+        $this->dataLayerCheckoutService = $dataLayerCheckoutService;
     }
 
     /**
@@ -63,7 +64,7 @@ class CheckoutStep implements CheckoutStepInterface
             'step' => $step
         ];
 
-        return [$this->checkoutStepComponent->getData($eventData)];
+        return $this->dataLayerCheckoutService->getDataLayerComponentData($eventData);
     }
 
     /**
