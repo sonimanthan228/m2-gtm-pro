@@ -10,7 +10,8 @@
         "magento/module-quote": "~101.1.0",
         "magento/magento-composer-installer": ">=0.1.11",
         "magento/zendframework1": "~1.14.1",
-        "hatimeria/m2-hatimeria-base": "^1.0.0"
+        "hatimeria/m2-hatimeria-base": "^1.0.0",
+        "magento/framework": "~102.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "4.1.0"

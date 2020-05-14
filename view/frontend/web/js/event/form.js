@@ -29,8 +29,8 @@ define([
 
     function trackFormSubmit(event) {
         event.preventDefault();
-        var data = new Array();
-        data['event'] = $(event.target).data('eventname');
+        var data = {};
+        data.event = $(event.target).data('eventname');
         $(event.target).find('.trackfield').each(function(i, obj) {
             data[$(obj).attr('id')] = $(obj).val();
         });

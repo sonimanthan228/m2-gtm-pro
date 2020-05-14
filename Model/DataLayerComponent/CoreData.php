@@ -15,8 +15,8 @@ use Magento\Catalog\Model\Product;
 use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
-use Magento\Customer\Model\Session;
 use Magento\Customer\Api\GroupRepositoryInterface;
+use Magento\Customer\Model\SessionFactory;
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
@@ -54,11 +54,6 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
     protected $themeProvider;
 
     /**
-     * @var Session
-     */
-    protected $customerSession;
-
-    /**
      * @var Http
      */
     protected $request;
@@ -69,15 +64,20 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
     protected $groupRepository;
 
     /**
+     * @var SessionFactory
+     */
+    protected $customerSessionFactory;
+
+    /**
      * CoreData constructor.
      * @param Registry $registry
      * @param StoreManagerInterface $storeManager
      * @param ProductMetadataInterface $productMetadata
      * @param ScopeConfigInterface $scopeConfig
      * @param ThemeProviderInterface $themeProvider
-     * @param Session $customerSession
      * @param Http $request
      * @param GroupRepositoryInterface $groupRepository
+     * @param SessionFactory $customerSessionFactory
      */
     public function __construct(
         Registry $registry,
@@ -85,18 +85,18 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
         ProductMetadataInterface $productMetadata,
         ScopeConfigInterface $scopeConfig,
         ThemeProviderInterface $themeProvider,
-        Session $customerSession,
         Http $request,
-        GroupRepositoryInterface $groupRepository
+        GroupRepositoryInterface $groupRepository,
+        SessionFactory $customerSessionFactory
     ) {
         $this->coreRegistry = $registry;
         $this->storeManager = $storeManager;
         $this->productMetaData = $productMetadata;
         $this->scopeConfig = $scopeConfig;
         $this->themeProvider = $themeProvider;
-        $this->customerSession = $customerSession;
         $this->request = $request;
         $this->groupRepository = $groupRepository;
+        $this->customerSessionFactory = $customerSessionFactory;
     }
 
     /**
@@ -105,15 +105,17 @@ class CoreData extends ComponentAbstract implements DataLayerComponentInterface
      */
     public function getComponentData($eventData)
     {
+
         $data = [];
         $data['siteVersion']  = $this->getSiteVersion();
         $data['pageCategory'] = $this->request->getFullActionName();
+        $customerSession = $this->customerSessionFactory->create();
         $data['userId']       =
-            $this->customerSession->isLoggedIn() ? $this->customerSession->getCustomerId() : 'guest';
+            $customerSession->isLoggedIn() ? $customerSession->getCustomerId() : 'guest';
         $data['customerType'] =
-            $this->customerSession->isLoggedIn() ?
-                $this->getCustomerGroupNameById($this->customerSession->getCustomerGroupId()) : 'Not Logged In';
-        $data['loggedIn']     = $this->customerSession->isLoggedIn() ? 'Logged In' : 'Not Logged In';
+            $customerSession->isLoggedIn() ?
+                $this->getCustomerGroupNameById($customerSession->getCustomerGroupId()) : 'Not Logged In';
+        $data['loggedIn']     = $customerSession->isLoggedIn() ? 'Logged In' : 'Not Logged In';
 
         return $data;
     }
