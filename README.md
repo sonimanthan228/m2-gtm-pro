@@ -37,22 +37,20 @@ For Magento 2.3.x
 
 ### Installation
 
-```
-    ...
-    "repositories": [
-        ... ,
-        {
-            "type": "git",
-            "url": "git@bitbucket.org:hatimeria/m2-gtm-pro.git"
-        }
-    ],
-    "require": {
-        ... ,
-        "hatimeria/m2-gtm-pro": "dev-master"
-    },
-    ...
-```
+Install via composer:
 
+composer require hatimeria/m2-gtmpro
+
+You need to set up your magento access keys for be able to use composer installation.
+Please run bellow command: 
+
+composer global config http-basic.repo.magento.com <public_key> <private_key>
+
+If you don't know where to find your access keys check this tutorial:
+https://devdocs.magento.com/guides/v2.4/install-gde/prereq/connect-auth.html
+
+Important:
+You should use keys connected to you account which you used to buy an extension.
 
 ### Setup
 
