@@ -4,10 +4,6 @@
     "type": "magento2-module",
     "version": "1.0.2",
     "require": {
-        "magento/module-store": "*",
-        "magento/module-catalog": "*",
-        "magento/module-catalog-search": "*",
-        "magento/module-quote": "*",
         "hatimeria/m2-hatimeria-base": "^1.0.0",
         "magento/framework": "^102|^103"
     },
