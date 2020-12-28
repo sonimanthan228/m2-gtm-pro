@@ -37,21 +37,60 @@ For Magento 2.3.x
 
 ### Installation
 
-Install via composer:
+**Install via composer:** (recommended)
 
-composer require hatimeria/m2-gtmpro
+1. Do not copy files from the downloaded package and run the below command from console:
 
-You need to set up your magento access keys for be able to use composer installation.
+`composer require hatimeria/m2-gtmpro`
+
+2. You need to set up your magento access keys for be able to use composer installation.
 Please run bellow command: 
 
-composer global config http-basic.repo.magento.com <public_key> <private_key>
+`composer global config http-basic.repo.magento.com <public_key> <private_key>`
 
 If you don't know where to find your access keys check this tutorial:
 https://devdocs.magento.com/guides/v2.4/install-gde/prereq/connect-auth.html
 
-Important:
-You should use keys connected to you account which you used to buy an extension.
+######Important:
+You should use keys connected to your account which you used to buy an extension.
 
+This module require Hatimeria_Base module which will be automatically installed during installation via composer.
+
+
+You can also install Hatimeria_Base manually or separately via Composer (in case when you dont have magento access keys).
+
+**Manually:** (not recommended)
+
+###### GtmPro:
+1. Copy files from the downloaded package into app/code/Hatimeria/GtmPro
+###### Hatimeria_Base:
+
+OPTION1: 
+1. Download module from https://github.com/hatimeria/m2-hatimeria-base/tree/1.0.1
+2. Copy files into app/code/Hatimeria/Base.
+
+OPTION2:
+
+You can install Hatimeria_Base via composer directly from our repo.
+
+Add bellow code into composer.json
+```
+"repositories": [
+        ... ,
+        {
+            "type": "git",
+            "url": "git@github.com:hatimeria/m2-gtm-pro.git"
+        }
+    ]
+
+ "require": {
+        ... ,
+       "hatimeria/m2-hatimeria-base": "^1.0"
+    },
+```
+run bellow command from console:
+  
+`  composer update`
 ### Setup
 
 1. Create GTM Account and copy Container Id
