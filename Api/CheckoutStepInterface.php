@@ -16,7 +16,7 @@ interface CheckoutStepInterface
     /**
      * @param string $cartId
      * @param string $step
-     * @return array
+     * @return mixed
      */
     public function get($cartId, $step);
 }
