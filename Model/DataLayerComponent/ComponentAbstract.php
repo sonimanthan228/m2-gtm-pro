@@ -260,12 +260,12 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     }
 
     /**
-     * @param string $name
+     * @param Product $product
      * @return string
      */
-    public function processName($name)
+    public function getName(Product $product)
     {
-        $name = strip_tags($name);
+        $name = strip_tags($product->getName());
         return str_replace("'", "", $name);
     }
 
@@ -277,13 +277,13 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     public function getProductStructure(Product $product, bool $withQuantity = true)
     {
         $structure = [
-            'name' => $this->processName($product->getName()),
+            'name' => $this->getName($product),
             'id' => $product->getId(),
             'price' => $this->formatPrice($product->getFinalPrice()),
             'brand' => $this->getBrand($product),
             'category' => $this->getCategoryName($product)
         ];
-        
+
         if ($withQuantity) {
             $structure['quantity'] = $product->getQty();
         }
