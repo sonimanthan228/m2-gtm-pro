@@ -29,16 +29,10 @@ class RemoveFromCart extends ComponentAbstract implements DataLayerComponentInte
         }
 
         $product = $item->getProduct();
-
-        $data[] = [
-            'name' => $this->processName($product->getName()),
-            'id' => $product->getId(),
-            'price' => $this->formatPrice($product->getFinalPrice()),
-            'brand' => $this->getBrand($product),
-            'category' => $this->getCategoryName($product),
+        $data[] = array_merge($this->getProductStructure($product, false), [
             'variant' => $this->getVariant($item),
             'quantity' => $item->getQty()
-        ];
+        ]);
         $this->checkoutSession->setGtmProProductRemoveFromCartData(json_encode($data));
     }
 

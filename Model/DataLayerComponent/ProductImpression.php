@@ -29,14 +29,7 @@ class ProductImpression extends ComponentAbstract implements DataLayerComponentI
             $product = $eventData['object'];
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
-               'impressions' => [
-                    'name' => $this->processName($product->getName()),
-                    'id' => $product->getId(),
-                    'price' => $this->formatPrice($product->getFinalPrice()),
-                   'brand' => $this->getBrand($product),
-                    'category' => $this->getCategoryName($product)
- //                    'position' => '' getiing on the front
-                ]
+               'impressions' => $this->getProductStructure($product, false)
             ];
         }
 

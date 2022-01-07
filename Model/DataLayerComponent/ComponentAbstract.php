@@ -263,9 +263,31 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      * @param string $name
      * @return string
      */
-    protected function processName($name)
+    public function processName($name)
     {
         $name = strip_tags($name);
         return str_replace("'", "", $name);
+    }
+
+    /**
+     * @param Product $product
+     * @param bool $withQuantity
+     * @return array
+     */
+    public function getProductStructure(Product $product, bool $withQuantity = true)
+    {
+        $structure = [
+            'name' => $this->processName($product->getName()),
+            'id' => $product->getId(),
+            'price' => $this->formatPrice($product->getFinalPrice()),
+            'brand' => $this->getBrand($product),
+            'category' => $this->getCategoryName($product)
+        ];
+        
+        if ($withQuantity) {
+            $structure['quantity'] = $product->getQty();
+        }
+
+        return $structure;
     }
 }

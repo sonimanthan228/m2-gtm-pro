@@ -29,14 +29,7 @@ class AddProductToCompare extends ComponentAbstract implements DataLayerComponen
             $data = [];
         }
 
-        $data[] = [
-            'name' => $this->processName($product->getName()),
-            'id' => $product->getId(),
-            'price' => $this->formatPrice($product->getFinalPrice()),
-            'brand' => $this->getBrand($product),
-            'category' => $this->getCategoryName($product),
-            'quantity' => $product->getQty()
-        ];
+        $data[] = $this->getProductStructure($product);
         $this->session->setGtmProProductAddToCompareData(json_encode($data));
     }
 
