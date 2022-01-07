@@ -37,15 +37,10 @@ class CheckoutStep extends ComponentAbstract implements DataLayerComponentInterf
             $step = $eventData['step'];
             foreach ($quote->getAllVisibleItems() as $item) {
                 $product = $item->getProduct();
-                $products[] = [
-                   'name' => $this->processName($product->getName()),
-                   'id' => $product->getId(),
-                   'price' => $this->formatPrice($product->getFinalPrice()),
-                   'brand' => $this->getBrand($product),
-                   'category' => $this->getCategoryName($product),
+                $products[] = array_merge($this->getProductStructure($product, false), [
                    'variant' => $this->getVariant($item),
                    'quantity' => $item->getQty()
-                ];
+                ]);
             }
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),

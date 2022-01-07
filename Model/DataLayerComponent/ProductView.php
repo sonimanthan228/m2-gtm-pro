@@ -33,15 +33,10 @@ class ProductView extends ComponentAbstract implements DataLayerComponentInterfa
                 'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                 'detail' => [
                      'actionField' => [],
-                     'products' => [
-                         'name' => $this->processName($product->getName()),
-                         'id' => $product->getId(),
-                         'price' => $this->formatPrice($product->getFinalPrice()),
-                         'brand' => $this->getBrand($product),
-                         'category' => $this->getCategoryName($product),
+                     'products' => array_merge($this->getProductStructure($product, false), [
                          'reviewCount' => $this->getReviewsCount($product),
                          'reviewSummary' => $this->getRatingSummary($product)
-                     ]
+                     ])
                  ]
             ];
         }

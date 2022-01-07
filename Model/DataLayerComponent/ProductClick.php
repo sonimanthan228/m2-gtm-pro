@@ -30,20 +30,13 @@ class ProductClick extends ComponentAbstract implements DataLayerComponentInterf
         $data = [];
         if (array_key_exists('object', $eventData)) {
             $product = $eventData['object'];
-            $category = $this->getCategoryName($product);
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'detail' => [
                    'actionField' => [
-                       'list' => $category
+                       'list' => $this->getCategoryName($product)
                    ],
-                   'products' => [
-                       'name' => $this->processName($product->getName()),
-                       'id' => $product->getId(),
-                       'price' => $this->formatPrice($product->getFinalPrice()),
-                       'brand' => $this->getBrand($product),
-                       'category' => $category
-                   ]
+                   'products' => $this->getProductStructure($product, false)
                ]
             ];
         }

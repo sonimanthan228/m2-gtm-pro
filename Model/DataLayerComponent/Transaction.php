@@ -38,7 +38,7 @@ class Transaction extends ComponentAbstract implements DataLayerComponentInterfa
             /** @var Order $order */
             $order = $this->checkoutSession->getLastRealOrder();
             $quote = $this->quoteFactory->create()->load($order->getQuoteId());
-            
+
             $data['ecommerce'] = [
                'currencyCode' => $order->getOrderCurrencyCode(),
                'purchase' => [
@@ -56,14 +56,11 @@ class Transaction extends ComponentAbstract implements DataLayerComponentInterfa
 
             foreach ($order->getAllVisibleItems() as $item) {
                 /** @var Order\Item $item */
-                $data['ecommerce']['purchase']['products'][] = [
-                   'name' => $this->processName($item->getName()),
-                   'id' => $item->getSku(),
-                   'category' => $this->getCategoryName($item->getProduct()),
-                   'price' => $this->formatPrice($item->getBasePrice()),
+                $product = $item->getProduct();
+                $data['ecommerce']['purchase']['products'][] = array_merge($this->getProductStructure($product, false), [
                    'quantity' => (int)$item->getQtyOrdered(),
-                   'variant' => $this->getVariant($quote->getItemById($item->getQuoteItemId()))
-                ];
+                   'variant' => $this->getVariant($item)
+                ]);
             }
         }
 
