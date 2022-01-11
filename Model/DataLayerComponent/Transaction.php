@@ -32,9 +32,11 @@ class Transaction extends ComponentAbstract implements DataLayerComponentInterfa
     public function getComponentData($eventData)
     {
         $data = [];
-        if (!$this->config->isTransactionTrackingEnabled()
-           && $this->request->getFullActionName() == 'checkout_onepage_success' &&
-           !$this->checkoutSession->getQuoteId() && $this->checkoutSession->getLastOrderId()) {
+        if ($this->config->isModuleEnabled()
+            && $this->config->isTransactionTrackingEnabled()
+            && $this->request->getFullActionName() == 'checkout_onepage_success'
+            && $this->checkoutSession->getLastRealOrderId()
+        ) {
             /** @var Order $order */
             $order = $this->checkoutSession->getLastRealOrder();
             $quote = $this->quoteFactory->create()->load($order->getQuoteId());
@@ -55,11 +57,12 @@ class Transaction extends ComponentAbstract implements DataLayerComponentInterfa
             ];
 
             foreach ($order->getAllVisibleItems() as $item) {
-                /** @var Order\Item $item */
+                /** @var \Magento\Sales\Model\Order\Item $item */
                 $product = $item->getProduct();
                 $data['ecommerce']['purchase']['products'][] = array_merge($this->getProductStructure($product, false), [
                    'quantity' => (int)$item->getQtyOrdered(),
-                   'variant' => $this->getVariant($item)
+                    /** @TODO variant has to be fixed, It's not working entirely, because Order\Item is passed to the fuction that is expecting Qoute\Item */
+                   //'variant' => $this->getVariant($item)
                 ]);
             }
         }
