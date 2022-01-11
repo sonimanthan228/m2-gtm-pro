@@ -40,7 +40,7 @@ class Config
         = 'hatimeria_gtmpro/event/form_tracking_form_data';
 
     const XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_TRANSACTION_ENABLED
-        = 'hatimeria_gtmpro/event/transaction';
+        = 'hatimeria_gtmpro/event/transactions_enabled';
     const XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_TRANSACTION_AFFILIATION
         = 'hatimeria_gtmpro/event/transaction_affiliation';
 
