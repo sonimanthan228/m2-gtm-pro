@@ -9,7 +9,6 @@
 namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
 use Hatimeria\GtmPro\Model\DataLayerComponent\AddToCart;
@@ -25,11 +24,6 @@ class CartProductAddAfter implements ObserverInterface
     private $config;
 
     /**
-     * @var Session
-     */
-    private $checkoutSession;
-
-    /**
      * @var AddToCart
      */
     private $addToCartComponent;
@@ -37,16 +31,13 @@ class CartProductAddAfter implements ObserverInterface
     /**
      * CheckoutCartAddProductComplete constructor.
      * @param Config $config
-     * @param Session $checkoutSession
      * @param AddToCart $addToCartComponent
      */
     public function __construct(
         Config $config,
-        Session $checkoutSession,
         AddToCart $addToCartComponent
     ) {
         $this->config = $config;
-        $this->checkoutSession = $checkoutSession;
         $this->addToCartComponent = $addToCartComponent;
     }
 
@@ -56,11 +47,9 @@ class CartProductAddAfter implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        if (!$this->config->isModuleEnabled() && !$this->config->isAddToCartTrackingEnabled()) {
-            return $this;
+        if ($this->config->isModuleEnabled() && $this->config->isAddToCartTrackingEnabled()) {
+            $this->addToCartComponent->processProduct($observer->getQuoteItem());
         }
-        $item = $observer->getData('quote_item');
-        $this->addToCartComponent->processProduct($item);
 
         return $this;
     }

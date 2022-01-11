@@ -9,7 +9,6 @@
 namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
 use Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToWishlist as AddProductToWishlistComponent;
@@ -25,11 +24,6 @@ class AddProductToWishlist implements ObserverInterface
     private $config;
 
     /**
-     * @var Session
-     */
-    private $checkoutSession;
-
-    /**
      * @var AddProductToWishlistComponent
      */
     private $addProductToWishlistComponent;
@@ -37,16 +31,13 @@ class AddProductToWishlist implements ObserverInterface
     /**
      * AddProductToWishlist constructor.
      * @param Config $config
-     * @param Session $checkoutSession
      * @param AddProductToWishlistComponent $addProductToWishlistComponent
      */
     public function __construct(
         Config $config,
-        Session $checkoutSession,
         AddProductToWishlistComponent $addProductToWishlistComponent
     ) {
         $this->config = $config;
-        $this->checkoutSession = $checkoutSession;
         $this->addProductToWishlistComponent = $addProductToWishlistComponent;
     }
 
@@ -56,12 +47,9 @@ class AddProductToWishlist implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        if (!$this->config->isModuleEnabled() && !$this->config->isAddToWishlistTrackingEnabled()) {
-            return $this;
+        if ($this->config->isModuleEnabled() && $this->config->isAddToWishlistTrackingEnabled()) {
+            $this->addProductToWishlistComponent->processProduct($observer->getProduct());
         }
-
-        $product = $observer->getData('product');
-        $this->addProductToWishlistComponent->processProduct($product);
 
         return $this;
     }

@@ -9,7 +9,6 @@
 namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
 use Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromCompare as RemoveProductFromCompareComponent;
@@ -25,11 +24,6 @@ class RemoveProductFromCompare implements ObserverInterface
     private $config;
 
     /**
-     * @var Session
-     */
-    private $checkoutSession;
-
-    /**
      * @var RemoveProductFromCompareComponent
      */
     private $removeProductFromCompareComponent;
@@ -37,16 +31,13 @@ class RemoveProductFromCompare implements ObserverInterface
     /**
      * RemoveProductFromCompare constructor.
      * @param Config $config
-     * @param Session $checkoutSession
      * @param RemoveProductFromCompareComponent $removeProductFromCompareComponent
      */
     public function __construct(
         Config $config,
-        Session $checkoutSession,
         RemoveProductFromCompareComponent $removeProductFromCompareComponent
     ) {
         $this->config = $config;
-        $this->checkoutSession = $checkoutSession;
         $this->removeProductFromCompareComponent = $removeProductFromCompareComponent;
     }
 
@@ -56,12 +47,11 @@ class RemoveProductFromCompare implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        if (!$this->config->isModuleEnabled() && !$this->config->isAddToCompareTrackingEnabled()) {
-            return $this;
+        if ($this->config->isModuleEnabled() && $this->config->isAddToCompareTrackingEnabled()) {
+            /** @var \Magento\Catalog\Model\Product\Compare\Item $product */
+            $product = $observer->getProduct();
+            $this->removeProductFromCompareComponent->processData(['product_id' => $product->getProductId()]);
         }
-
-        $product = $observer->getData('product');
-        $this->removeProductFromCompareComponent->processData(['product_id' => $product->getProductId()]);
 
         return $this;
     }
