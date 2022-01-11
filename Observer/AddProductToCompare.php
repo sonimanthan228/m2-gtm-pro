@@ -9,7 +9,6 @@
 namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
 use Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToCompare as AddProductToCompareComponent;
@@ -25,11 +24,6 @@ class AddProductToCompare implements ObserverInterface
     private $config;
 
     /**
-     * @var Session
-     */
-    private $checkoutSession;
-
-    /**
      * @var AddProductToCompareComponent
      */
     private $addProductToCompareComponent;
@@ -37,16 +31,13 @@ class AddProductToCompare implements ObserverInterface
     /**
      * AddProductToCompare constructor.
      * @param Config $config
-     * @param Session $checkoutSession
      * @param AddProductToCompareComponent $addProductToCompareComponent
      */
     public function __construct(
         Config $config,
-        Session $checkoutSession,
         AddProductToCompareComponent $addProductToCompareComponent
     ) {
         $this->config = $config;
-        $this->checkoutSession = $checkoutSession;
         $this->addProductToCompareComponent = $addProductToCompareComponent;
     }
 
@@ -56,12 +47,9 @@ class AddProductToCompare implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        if (!$this->config->isModuleEnabled() && !$this->config->isAddToCompareTrackingEnabled()) {
-            return $this;
+        if ($this->config->isModuleEnabled() && $this->config->isAddToCompareTrackingEnabled()) {
+            $this->addProductToCompareComponent->processProduct($observer->getProduct());
         }
-
-        $product = $observer->getData('product');
-        $this->addProductToCompareComponent->processProduct($product);
 
         return $this;
     }

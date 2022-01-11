@@ -9,7 +9,6 @@
 namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
 use Magento\Wishlist\Model\ItemFactory;
 use Hatimeria\GtmPro\Model\Config;
@@ -31,11 +30,6 @@ class RemoveProductFromWishlist implements ObserverInterface
     private $config;
 
     /**
-     * @var Session
-     */
-    private $checkoutSession;
-
-    /**
      * @var RemoveProductFromWishlistComponent
      */
     private $removeProductToWishlistComponent;
@@ -44,18 +38,15 @@ class RemoveProductFromWishlist implements ObserverInterface
      * RemoveProductFromWishlist constructor.
      * @param ItemFactory $itemFactory
      * @param Config $config
-     * @param Session $checkoutSession
      * @param RemoveProductFromWishlistComponent $removeProductToWishlistComponent
      */
     public function __construct(
         ItemFactory $itemFactory,
         Config $config,
-        Session $checkoutSession,
         RemoveProductFromWishlistComponent $removeProductToWishlistComponent
     ) {
         $this->itemFactory = $itemFactory;
         $this->config = $config;
-        $this->checkoutSession = $checkoutSession;
         $this->removeProductToWishlistComponent = $removeProductToWishlistComponent;
     }
 
@@ -66,12 +57,10 @@ class RemoveProductFromWishlist implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        if (!$this->config->isModuleEnabled() && !$this->config->isAddToWishlistTrackingEnabled()) {
-            return $this;
+        if ($this->config->isModuleEnabled() && $this->config->isAddToWishlistTrackingEnabled()) {
+            $item = $this->itemFactory->create()->load($observer->getRequest()->getParam('item'));
+            $this->removeProductToWishlistComponent->processProduct($item->getProduct());
         }
-
-        $item = $this->itemFactory->create()->load($observer->getRequest()->getParam('item'));
-        $this->removeProductToWishlistComponent->processProduct($item->getProduct());
 
         return $this;
     }

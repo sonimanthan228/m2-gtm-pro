@@ -9,7 +9,6 @@
 namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
 use Hatimeria\GtmPro\Model\DataLayerComponent\RemoveFromCart;
@@ -25,11 +24,6 @@ class SalesQuoteRemoveItem implements ObserverInterface
     private $config;
 
     /**
-     * @var Session
-     */
-    private $checkoutSession;
-
-    /**
      * @var RemoveFromCart
      */
     private $removeFromCartComponent;
@@ -37,16 +31,13 @@ class SalesQuoteRemoveItem implements ObserverInterface
     /**
      * SalesQuoteRemoveItem constructor.
      * @param Config $config
-     * @param Session $checkoutSession
      * @param RemoveFromCart $removeFromCartComponent
      */
     public function __construct(
         Config $config,
-        Session $checkoutSession,
         RemoveFromCart $removeFromCartComponent
     ) {
         $this->config = $config;
-        $this->checkoutSession = $checkoutSession;
         $this->removeFromCartComponent = $removeFromCartComponent;
     }
 
@@ -56,12 +47,9 @@ class SalesQuoteRemoveItem implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        if (!$this->config->isModuleEnabled() && !$this->config->isAddToCartTrackingEnabled()) {
-            return $this;
+        if ($this->config->isModuleEnabled() && $this->config->isAddToCartTrackingEnabled()) {
+            $this->removeFromCartComponent->processProduct($observer->getQuoteItem());
         }
-
-        $item = $observer->getData('quote_item');
-        $this->removeFromCartComponent->processProduct($item);
 
         return $this;
     }

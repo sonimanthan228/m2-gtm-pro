@@ -9,7 +9,6 @@
 namespace Hatimeria\GtmPro\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Checkout\Model\Session;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
 use Magento\Framework\App\Request\Http;
@@ -20,7 +19,6 @@ use Hatimeria\GtmPro\Model\DataLayerComponent\Search;
  */
 class CatalogProductListCollection implements ObserverInterface
 {
-
     /**
      * @var Config
      */
@@ -58,14 +56,12 @@ class CatalogProductListCollection implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        if (!$this->config->isModuleEnabled()
-            && !$this->config->isSearchTrackingEnabled()
-            && $this->request->getFullActionName() != 'catalogsearch_result_index') {
-                return $this;
+        if ($this->config->isModuleEnabled()
+            && $this->config->isSearchTrackingEnabled()
+            && $this->request->getFullActionName() == 'catalogsearch_result_index'
+        ) {
+            $this->searchComponent->processCollection($observer->getCollection());
         }
-
-        $collection = $observer->getData('collection');
-        $this->searchComponent->processCollection($collection);
 
         return $this;
     }
