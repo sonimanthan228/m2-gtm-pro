@@ -29,8 +29,9 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
         }
 
         $product = $item->getProduct();
-        $data[] = array_merge($this->getProductStructure($product), [
-            'variant' => $this->getVariant($item)
+        $data[] = array_merge($this->getProductStructure($product, false), [
+            'variant' => $this->getVariant($item),
+            'quantity' => $item->getQty()
         ]);
         $this->checkoutSession->setGtmProProductAddToCartData(json_encode($data));
     }
