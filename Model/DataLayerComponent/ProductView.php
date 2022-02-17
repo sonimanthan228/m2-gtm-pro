@@ -29,14 +29,15 @@ class ProductView extends ComponentAbstract implements DataLayerComponentInterfa
     {
         $data = [];
         if ($this->config->isProductViewTrackingEnabled() && $product = $this->coreRegistry->registry('product')) {
+            $productStructure = array_merge($this->getProductStructure($product, false), [
+                'reviewCount' => $this->getReviewsCount($product),
+                'reviewSummary' => $this->getRatingSummary($product)
+            ]);
             $data['ecommerce'] = [
                 'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                 'detail' => [
                      'actionField' => [],
-                     'products' => array_merge($this->getProductStructure($product, false), [
-                         'reviewCount' => $this->getReviewsCount($product),
-                         'reviewSummary' => $this->getRatingSummary($product)
-                     ])
+                     'products' => [$productStructure]
                  ]
             ];
         }
