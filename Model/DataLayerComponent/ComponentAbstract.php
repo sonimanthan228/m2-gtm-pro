@@ -94,6 +94,8 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      */
     protected $quoteFactory;
 
+    protected $productsStructure = [];
+
     /**
      * ComponentAbstract constructor.
      * @param StoreManagerInterface $storeManager
@@ -224,7 +226,7 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
     protected function getBrand(Product $product)
     {
         $brand = '';
-        if ($brandAttribute = $this->config->getBrandAttribute()) {
+        if ($brandAttribute = $this->config->getBrandAttribute() && $product->getData($this->config->getBrandAttribute())) {
             $brand = $product->getAttributeText($this->config->getBrandAttribute());
         }
 
@@ -276,18 +278,23 @@ abstract class ComponentAbstract implements DataLayerComponentInterface
      */
     public function getProductStructure(Product $product, bool $withQuantity = true)
     {
-        $structure = [
-            'name' => $this->getName($product),
-            'id' => $product->getId(),
-            'price' => $this->formatPrice($product->getFinalPrice()),
-            'brand' => $this->getBrand($product),
-            'category' => $this->getCategoryName($product)
-        ];
+        $structureKey = $product->getId() . '_' . (int)$withQuantity;
+        if (!isset($this->productsStructure[$structureKey])) {
+            $structure = [
+                'name' => $this->getName($product),
+                'id' => $product->getId(),
+                'price' => $this->formatPrice($product->getFinalPrice()),
+                'brand' => $this->getBrand($product),
+                'category' => $this->getCategoryName($product)
+            ];
 
-        if ($withQuantity) {
-            $structure['quantity'] = $product->getQty();
+            if ($withQuantity) {
+                $structure['quantity'] = $product->getQty();
+            }
+
+            $this->productsStructure[$structureKey] = $structure;
         }
 
-        return $structure;
+        return $this->productsStructure[$structureKey];
     }
 }

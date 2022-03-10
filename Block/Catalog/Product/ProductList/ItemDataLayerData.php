@@ -8,18 +8,19 @@
 
 namespace Hatimeria\GtmPro\Block\Catalog\Product\ProductList;
 
-use Magento\Catalog\Block\Product\ProductList\Item\Block;
+use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Block\Product\Context;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Catalog\Model\Product;
 use Hatimeria\GtmPro\Model\Config;
 use Hatimeria\GtmPro\Model\DataLayerComponent\ProductImpression;
 use Hatimeria\GtmPro\Model\DataLayerComponent\ProductClick;
+use Magento\Catalog\Block\Product\AwareInterface as ProductAwareInterface;
 
 /**
  * Class ItemDataLayerData
  */
-class ItemDataLayerData extends Block
+class ItemDataLayerData extends \Magento\Framework\View\Element\Template implements ProductAwareInterface 
 {
     /**
      * @var Json
@@ -27,7 +28,7 @@ class ItemDataLayerData extends Block
     protected $jsonSerializer;
 
     /**
-     * @var
+     * @var Config
      */
     protected $config;
 
@@ -40,6 +41,11 @@ class ItemDataLayerData extends Block
      * @var ProductClick
      */
     protected $productClick;
+    
+    /**
+     * @var ProductInterface
+     */
+    protected $product;
 
     /**
      * ItemDataLayerData constructor.
@@ -63,6 +69,23 @@ class ItemDataLayerData extends Block
         $this->productImpression = $productImpression;
         $this->productClick = $productClick;
         parent::__construct($context, $data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProduct(ProductInterface $product)
+    {
+        $this->product = $product;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 
     /**
@@ -112,5 +135,40 @@ class ItemDataLayerData extends Block
         return $this->jsonSerializer->serialize(
             $this->productClick->getData(['object' => $this->getProduct()])
         );
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function getCacheLifetime()
+    {
+        return 86400;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheKeyInfo()
+    {
+        return array_merge(
+            parent::getCacheKeyInfo(),
+            [
+                $this->getProduct() ? $this->getProduct()->getSku() : 'EMPTY'
+            ]
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getCacheTags()
+    {
+        if ($this->getProduct() !== null) {
+            return array_merge(parent::getCacheTags(), [
+                'catalog_product_' . $this->getProduct()->getId()
+            ]);
+        }
+
+        return parent::getCacheTags();
     }
 }
