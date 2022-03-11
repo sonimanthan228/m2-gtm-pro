@@ -52,4 +52,9 @@ abstract class AbstractEvent extends Template
      * @return bool
      */
     abstract public function isEventEnabled();
+
+    protected function getCacheLifetime()
+    {
+        return 86400;
+    }
 }

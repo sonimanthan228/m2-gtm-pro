@@ -54,4 +54,9 @@ class Tag extends Template
         }
         return '';
     }
+
+    protected function getCacheLifetime()
+    {
+        return 86400;
+    }
 }
