@@ -42,7 +42,6 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = $this->session->getGtmProProductAddToWishlistData();
         if ($products = $this->session->getGtmProProductAddToWishlistData()) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),

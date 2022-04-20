@@ -25,7 +25,7 @@ class AddProductToCompare extends ComponentAbstract implements DataLayerComponen
     public function processProduct(Product $product)
     {
         if ($data = $this->session->getGtmProProductAddToCompareData()) {
-            $data = json_decode($this->session->getGtmProProductAddToCompareData(), true);
+            $data = json_decode($data, true);
         } else {
             $data = [];
         }
