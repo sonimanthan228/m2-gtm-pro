@@ -24,8 +24,9 @@ class Search extends ComponentAbstract implements DataLayerComponentInterface
      */
     public function getComponentData($eventData)
     {
-        $data = json_decode($this->checkoutSession->getGtmProSearchCollectionData(), true);
-        if (is_array($data)) {
+        $data = $this->checkoutSession->getGtmProSearchCollectionData();
+        if ($data) {
+            $data = json_decode($data, true);
             $data['searchTerm'] = $this->request->getParam('q');
             $data['searchResults'] = $data['searchResults'];
 
@@ -47,8 +48,9 @@ class Search extends ComponentAbstract implements DataLayerComponentInterface
      */
     public function processCollection($collection)
     {
-        $data = json_decode($this->checkoutSession->getGtmProSearchCollectionData());
-        if (!is_array($data)) {
+        if ($data = $this->checkoutSession->getGtmProSearchCollectionData()) {
+            $data = json_decode($data, true);
+        } else {
             $data = [];
         }
 

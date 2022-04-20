@@ -17,14 +17,15 @@ use Magento\Catalog\Model\Product;
 class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerComponentInterface
 {
     const EVENT_NAME = 'remove-from-wishlist';
-    
+
     /**
      * @param Product $product
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmProProductRemoveFromWishlistData());
-        if (!is_array($data)) {
+        if ($data = $this->session->getGtmProProductRemoveFromWishlistData()) {
+            $data = json_decode($data);
+        } else {
             $data = [];
         }
 
@@ -41,12 +42,11 @@ class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerCo
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->session->getGtmProProductRemoveFromWishlistData());
-        if (is_array($products)) {
+        if ($products = $this->session->getGtmProProductRemoveFromWishlistData()) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'remove' => [
-                   'products' => $products
+                   'products' => json_decode($products)
                ]
             ];
 

@@ -17,14 +17,15 @@ use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
 {
     const EVENT_NAME = 'add-to-cart';
-    
+
     /**
      * @param Item $item
      */
     public function processProduct(Item $item)
     {
-        $data = json_decode($this->checkoutSession->getGtmProProductAddToCartData());
-        if (!is_array($data)) {
+        if ($data = $this->checkoutSession->getGtmProProductAddToCartData()) {
+            $data = json_decode($data);
+        } else {
             $data = [];
         }
 
@@ -44,8 +45,7 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->checkoutSession->getGtmProProductAddToCartData());
-        if (is_array($products)) {
+        if ($products = $this->checkoutSession->getGtmProProductAddToCartData()) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'add' => [
@@ -53,7 +53,7 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
                        'list' => '',
                        'position' => ''
                    ],
-                   'products' => $products
+                   'products' => json_decode($products)
                ]
             ];
 

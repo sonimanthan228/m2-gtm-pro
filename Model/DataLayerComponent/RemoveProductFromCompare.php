@@ -18,14 +18,15 @@ use Magento\Catalog\Model\Product;
 class RemoveProductFromCompare extends ComponentAbstract implements DataLayerComponentInterface
 {
     const EVENT_NAME = 'remove-from-compare';
-    
+
     /**
      * @param $productData
      */
     public function processData($productData)
     {
-        $data = json_decode($this->session->getGtmProProductRemoveFromCompareData());
-        if (!is_array($data)) {
+        if ($data = $this->session->getGtmProProductRemoveFromCompareData()) {
+            $data = json_decode($data);
+        } else {
             $data = [];
         }
 
@@ -43,12 +44,11 @@ class RemoveProductFromCompare extends ComponentAbstract implements DataLayerCom
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->session->getGtmProProductRemoveFromCompareData());
-        if (is_array($products)) {
+        if ($products = $this->session->getGtmProProductRemoveFromCompareData()) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'remove' => [
-                   'products' => $products
+                   'products' => json_decode($products)
                ]
             ];
 
