@@ -25,6 +25,7 @@ define([
             $(event.currentTarget).addClass('product-clicked');
             var parent = $(event.target).parents('.' + productClickElementClass)[0];
             var data = $(parent).find("*[data-click]").data('click');
+            window.dataLayer.push({ ecommerce: null });
             window.dataLayer.push(data);
             $(event.currentTarget).click();
         }

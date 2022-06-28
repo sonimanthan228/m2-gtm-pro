@@ -9,24 +9,21 @@
 namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
 use Hatimeria\GtmPro\Model\Config;
+use Hatimeria\GtmPro\Model\V4\DataLayerComponent\CategoryView as CategoryView4;
 
 /**
  * Class ProductView
  */
-class ProductView extends AbstractComponent
+class CategoryView extends AbstractComponent
 {
-    protected \Hatimeria\GtmPro\Model\UA\DataLayerComponent\ProductView $productViewUa;
-    protected \Hatimeria\GtmPro\Model\V4\DataLayerComponent\ProductView $productView4;
+    protected CategoryView4 $categoryView4;
 
     public function __construct(
         Config $config,
-        \Hatimeria\GtmPro\Model\UA\DataLayerComponent\ProductView $productViewUa,
-        \Hatimeria\GtmPro\Model\V4\DataLayerComponent\ProductView $productView4
-    )
-    {
+        CategoryView4 $categoryView4
+    ) {
         parent::__construct($config);
-        $this->productViewUa = $productViewUa;
-        $this->productView4 = $productView4;
+        $this->categoryView4 = $categoryView4;
     }
 
     /**
@@ -36,8 +33,10 @@ class ProductView extends AbstractComponent
      */
     public function getComponentData($eventData)
     {
-        $system = $this->isGoogleAnalytics4() ? $this->productView4 : $this->productViewUa;
+        if ($this->isGoogleAnalytics4()) {
+            return $this->categoryView4->getComponentData($eventData);
+        }
 
-        return $system->getComponentData($eventData);
+        return [];
     }
 }

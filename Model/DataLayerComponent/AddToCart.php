@@ -8,32 +8,40 @@
 
 namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
+use Hatimeria\GtmPro\Model\Config;
+use Hatimeria\GtmPro\Model\UA\DataLayerComponent\AddToCart as AddToCartUa;
+use Hatimeria\GtmPro\Model\V4\DataLayerComponent\AddToCart as AddToCart4;
 use Magento\Quote\Model\Quote\Item;
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
 /**
  * Class AddToCart
  */
-class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
+class AddToCart extends AbstractComponent
 {
-    const EVENT_NAME = 'add-to-cart';
-    
+    protected AddToCartUa $addToCartUa;
+    protected AddToCart4 $addToCart4;
+
+    public function __construct(
+        Config      $config,
+        AddToCartUa $addToCartUa,
+        AddToCart4 $addToCart4
+    ) {
+        parent::__construct($config);
+        $this->addToCartUa = $addToCartUa;
+        $this->addToCart4 = $addToCart4;
+    }
+
     /**
      * @param Item $item
      */
     public function processProduct(Item $item)
     {
-        $data = json_decode($this->checkoutSession->getGtmProProductAddToCartData());
-        if (!is_array($data)) {
-            $data = [];
+        if ($this->isGoogleAnalytics4()) {
+            $this->addToCart4->processProduct($item);
+        } else {
+            $this->addToCartUa->processProduct($item);
         }
-
-        $product = $item->getProduct();
-        $data[] = array_merge($this->getProductStructure($product, false), [
-            'variant' => $this->getVariant($item),
-            'quantity' => $item->getQty()
-        ]);
-        $this->checkoutSession->setGtmProProductAddToCartData(json_encode($data));
     }
 
     /**
@@ -43,39 +51,9 @@ class AddToCart extends ComponentAbstract implements DataLayerComponentInterface
      */
     public function getComponentData($eventData)
     {
-        $data = [];
-        $products = json_decode($this->checkoutSession->getGtmProProductAddToCartData());
-        if (is_array($products)) {
-            $data['ecommerce'] = [
-               'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
-               'add' => [
-                   'actionField' => [
-                       'list' => '',
-                       'position' => ''
-                   ],
-                   'products' => $products
-               ]
-            ];
-
-            $this->cleanSessionGtmProductAddToCartData();
+        if ($this->isGoogleAnalytics4()) {
+            return $this->addToCart4->getComponentData($eventData);
         }
-
-        return $data;
-    }
-
-    /**
-     * @return void
-     */
-    protected function cleanSessionGtmProductAddToCartData()
-    {
-        $this->checkoutSession->setGtmProProductAddToCartData(false);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getEventName()
-    {
-        return self::EVENT_NAME;
+        return $this->addToCartUa->getComponentData($eventData);
     }
 }

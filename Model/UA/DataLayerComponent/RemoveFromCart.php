@@ -6,31 +6,34 @@
  * @license    (https://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-namespace Hatimeria\GtmPro\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\UA\DataLayerComponent;
 
 use Magento\Quote\Model\Quote\Item;
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
-use Magento\Catalog\Model\Product;
 
 /**
- * Class AddProductToCompare
+ * Class RemoveFromCart
  */
-class AddProductToCompare implements DataLayerComponentInterface
+class RemoveFromCart extends ComponentAbstract implements DataLayerComponentInterface
 {
-    const EVENT_NAME = 'add-to-compare';
+    const EVENT_NAME = 'remove-from-cart';
     
     /**
-     * @param Product $product
+     * @param Item $item
      */
-    public function processProduct(Product $product)
+    public function processProduct(Item $item)
     {
-        $data = json_decode($this->session->getGtmProProductAddToCompareData());
+        $data = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
         if (!is_array($data)) {
             $data = [];
         }
 
-        $data[] = $this->getProductStructure($product);
-        $this->session->setGtmProProductAddToCompareData(json_encode($data));
+        $product = $item->getProduct();
+        $data[] = array_merge($this->getProductStructure($product, false), [
+            'variant' => $this->getVariant($item),
+            'quantity' => $item->getQty()
+        ]);
+        $this->checkoutSession->setGtmProProductRemoveFromCartData(json_encode($data));
     }
 
     /**
@@ -41,16 +44,15 @@ class AddProductToCompare implements DataLayerComponentInterface
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->session->getGtmProProductAddToCompareData());
+        $products = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
-               'add' => [
+               'remove' => [
                    'products' => $products
                ]
             ];
-
-            $this->cleanSessionGtmProProductAddToCompareData();
+            $this->cleanSessionGtmProductRemoveFromCartData();
         }
 
         return $data;
@@ -59,9 +61,9 @@ class AddProductToCompare implements DataLayerComponentInterface
     /**
      * @return void
      */
-    protected function cleanSessionGtmProProductAddToCompareData()
+    protected function cleanSessionGtmProductRemoveFromCartData()
     {
-        $this->session->setGtmProProductAddToCompareData(false);
+        $this->checkoutSession->setGtmProProductRemoveFromCartData(false);
     }
 
     /**

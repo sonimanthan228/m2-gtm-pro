@@ -6,16 +6,15 @@
  * @license    (https://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-namespace Hatimeria\GtmPro\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\UA\DataLayerComponent;
 
-use Magento\Quote\Model\Quote\Item;
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 use Magento\Catalog\Model\Product;
 
 /**
  * Class AddProductToCompare
  */
-class AddProductToCompare implements DataLayerComponentInterface
+class AddProductToCompare extends ComponentAbstract implements DataLayerComponentInterface
 {
     const EVENT_NAME = 'add-to-compare';
     

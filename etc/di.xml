@@ -11,6 +11,7 @@
         <arguments>
             <argument name="dataLayerComponent" xsi:type="array">
                 <item name="product_view" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\ProductView</item>
+                <item name="category_view" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\CategoryView</item>
                 <item name="core_data" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\CoreData</item>
                 <item name="transaction_data" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\Transaction</item>
                 <item name="search" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\Search</item>

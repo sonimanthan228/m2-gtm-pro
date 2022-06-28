@@ -20,6 +20,7 @@ define([
                     var impressionData = $(entry.target).find("*[data-impression]").data('impression');
                     if (typeof impressionData !== "undefined" && impressionData.length != 0) {
                         addPositionToProductImpressionData(impressionData, entry);
+                        window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
                         window.dataLayer.push(impressionData);
                     }
                 }

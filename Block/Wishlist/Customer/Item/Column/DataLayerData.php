@@ -92,7 +92,9 @@ class DataLayerData extends Column
      */
     public function isProductImpressionTrackingEnabled()
     {
-        return $this->gtmConfig->isModuleEnabled() && $this->gtmConfig->isProductImpressionTrackingEnabled();
+        return $this->gtmConfig->isModuleEnabled()
+            && $this->gtmConfig->getVersion() !== GtmConfig\Source\Version::GA4
+            && $this->gtmConfig->isProductImpressionTrackingEnabled();
     }
 
     /**

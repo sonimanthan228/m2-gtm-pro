@@ -106,7 +106,9 @@ class ItemDataLayerData extends \Magento\Framework\View\Element\Template impleme
      */
     public function isProductImpressionTrackingEnabled()
     {
-        return $this->config->isModuleEnabled() && $this->config->isProductImpressionTrackingEnabled();
+        return $this->config->isModuleEnabled()
+            && $this->config->getVersion() !== Config\Source\Version::GA4
+            && $this->config->isProductImpressionTrackingEnabled();
     }
 
     /**

@@ -21,6 +21,8 @@ class Config
         = 'hatimeria_gtmpro/general/enabled';
     const XML_CONFIG_PATH_HATIMERIA_GTMPRO_CONTAINER_ID
         = 'hatimeria_gtmpro/general/container_id';
+    const XML_CONFIG_PATH_HATIMERIA_GTMPRO_VERSION
+        = 'hatimeria_gtmpro/general/version';
 
     const XML_CONFIG_PATH_HATIMERIA_GTMPRO_EVENT_PRODUCT_IMPRESSION_ENABLED
         = 'hatimeria_gtmpro/event/product_impression_enabled';
@@ -120,6 +122,14 @@ class Config
     {
         return $this->scopeConfig->isSetFlag(
             self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_MODULE_ENABLED,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+    }
+    public function getVersion(): int
+    {
+        return (int)$this->scopeConfig->getValue(
+            self::XML_CONFIG_PATH_HATIMERIA_GTMPRO_VERSION,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getId()
         );

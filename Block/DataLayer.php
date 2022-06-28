@@ -11,6 +11,7 @@ namespace Hatimeria\GtmPro\Block;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Serialize\Serializer\Json;
 use Hatimeria\GtmPro\Model\DataLayerStaticService;
+use Hatimeria\GtmPro\Model\V4\DataLayerStaticService as DataLayerStaticService4;
 use Hatimeria\GtmPro\Model\Config;
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 
@@ -28,6 +29,12 @@ class DataLayer extends Template
      * @var DataLayerServiceInterface
      */
     protected $dataLayerStaticService;
+
+    /**
+     * @var DataLayerStaticService4
+     */
+    protected $dataLayerStaticService4;
+
     /**
      * @var Config
      */
@@ -45,11 +52,13 @@ class DataLayer extends Template
         Template\Context $context,
         Json $jsonSerializer,
         DataLayerStaticService $dataLayerStaticService,
+        DataLayerStaticService4 $dataLayerStaticService4,
         Config $config,
         array $data
     ) {
         $this->jsonSerializer = $jsonSerializer;
         $this->dataLayerStaticService = $dataLayerStaticService;
+        $this->dataLayerStaticService4 = $dataLayerStaticService4;
         $this->config = $config;
         parent::__construct($context, $data);
     }
@@ -59,6 +68,10 @@ class DataLayer extends Template
      */
     public function getDataLayerStaticData()
     {
+        if ($this->config->getVersion() === Config\Source\Version::GA4) {
+            return $this->dataLayerStaticService4->getDataLayerComponentData();
+        }
+
         return $this->dataLayerStaticService->getDataLayerComponentData();
     }
 

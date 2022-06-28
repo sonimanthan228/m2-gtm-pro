@@ -18,6 +18,7 @@ define([
                     $(entry.target).addClass('promotion-viewed');
                     var data = getBaseEventData();
                     data.ecommerce.promoView.promotions.push(getPromotionData(entry));
+                    window.dataLayer.push({ ecommerce: null });
                     window.dataLayer.push(data);
                 }
             });

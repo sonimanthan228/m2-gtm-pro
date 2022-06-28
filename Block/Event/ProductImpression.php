@@ -8,11 +8,22 @@
 
 namespace Hatimeria\GtmPro\Block\Event;
 
+use Hatimeria\GtmPro\Model\Config\Source\Version;
+
 /**
  * Class ProductImpression
  */
 class ProductImpression extends AbstractEvent
 {
+    public function toHtml()
+    {
+        if ($this->config->getVersion() === Version::GA4) {
+            return '';
+        }
+
+        return parent::toHtml();
+    }
+
     /**
      * @return bool
      */

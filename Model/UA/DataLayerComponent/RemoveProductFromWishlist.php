@@ -6,31 +6,31 @@
  * @license    (https://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-namespace Hatimeria\GtmPro\Model\DataLayerComponent;
+namespace Hatimeria\GtmPro\Model\UA\DataLayerComponent;
 
-use Magento\Quote\Model\Quote\Item;
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 use Magento\Catalog\Model\Product;
 
 /**
- * Class AddProductToCompare
+ * Class RemoveProductFromWishlist
  */
-class AddProductToCompare implements DataLayerComponentInterface
+class RemoveProductFromWishlist extends ComponentAbstract implements DataLayerComponentInterface
 {
-    const EVENT_NAME = 'add-to-compare';
+    const EVENT_NAME = 'remove-from-wishlist';
     
     /**
      * @param Product $product
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmProProductAddToCompareData());
+        $data = json_decode($this->session->getGtmProProductRemoveFromWishlistData());
         if (!is_array($data)) {
             $data = [];
         }
 
         $data[] = $this->getProductStructure($product);
-        $this->session->setGtmProProductAddToCompareData(json_encode($data));
+
+        $this->session->setGtmProProductRemoveFromWishlistData(json_encode($data));
     }
 
     /**
@@ -41,16 +41,16 @@ class AddProductToCompare implements DataLayerComponentInterface
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->session->getGtmProProductAddToCompareData());
+        $products = json_decode($this->session->getGtmProProductRemoveFromWishlistData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
-               'add' => [
+               'remove' => [
                    'products' => $products
                ]
             ];
 
-            $this->cleanSessionGtmProProductAddToCompareData();
+            $this->cleanSessionGtmProProductRemoveFromWishlistData();
         }
 
         return $data;
@@ -59,9 +59,9 @@ class AddProductToCompare implements DataLayerComponentInterface
     /**
      * @return void
      */
-    protected function cleanSessionGtmProProductAddToCompareData()
+    protected function cleanSessionGtmProProductRemoveFromWishlistData()
     {
-        $this->session->setGtmProProductAddToCompareData(false);
+        $this->session->setGtmProProductRemoveFromWishlistData(false);
     }
 
     /**

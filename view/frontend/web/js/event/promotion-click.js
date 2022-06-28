@@ -24,6 +24,7 @@ define([
             $(event.currentTarget).addClass('promotion-clicked');
             var data = getBaseEventData();
             data.ecommerce.promoClick.promotions.push(getPromotionData(event.currentTarget));
+            window.dataLayer.push({ ecommerce: null });
             window.dataLayer.push(data);
             $(event.currentTarget).click();
         }
