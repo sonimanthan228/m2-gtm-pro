@@ -8,11 +8,11 @@
 
 namespace Hatimeria\GtmPro\Observer;
 
+use Hatimeria\GtmPro\Model\DataLayerComponent;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
 use Magento\Framework\App\Request\Http;
-use Hatimeria\GtmPro\Model\DataLayerComponent\Search;
 
 /**
  * Class CatalogProductListCollection
@@ -30,7 +30,7 @@ class CatalogProductListCollection implements ObserverInterface
     private $request;
 
     /**
-     * @var Search
+     * @var DataLayerComponent
      */
     private $searchComponent;
 
@@ -38,12 +38,12 @@ class CatalogProductListCollection implements ObserverInterface
      * CatalogProductListCollection constructor.
      * @param Config $config
      * @param Http $request
-     * @param Search $search
+     * @param DataLayerComponent $search
      */
     public function __construct(
         Config $config,
         Http $request,
-        Search $search
+        DataLayerComponent $search
     ) {
         $this->config = $config;
         $this->request = $request;

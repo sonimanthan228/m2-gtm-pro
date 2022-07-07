@@ -17,6 +17,7 @@ define([
         window.dataLayer = window.dataLayer || [];
         customerData.get('gtm').subscribe(function (gtmData) {
             $.each(gtmData.dataLayer, function( index, data ) {
+                window.dataLayer.push({ ecommerce: null });
                 window.dataLayer.push(data);
             });
         });

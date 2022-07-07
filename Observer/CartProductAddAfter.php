@@ -8,6 +8,7 @@
 
 namespace Hatimeria\GtmPro\Observer;
 
+use Hatimeria\GtmPro\Model\DataLayerComponent;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
@@ -24,18 +25,18 @@ class CartProductAddAfter implements ObserverInterface
     private $config;
 
     /**
-     * @var AddToCart
+     * @var DataLayerComponent
      */
     private $addToCartComponent;
 
     /**
      * CheckoutCartAddProductComplete constructor.
      * @param Config $config
-     * @param AddToCart $addToCartComponent
+     * @param DataLayerComponent $addToCartComponent
      */
     public function __construct(
         Config $config,
-        AddToCart $addToCartComponent
+        DataLayerComponent $addToCartComponent
     ) {
         $this->config = $config;
         $this->addToCartComponent = $addToCartComponent;

@@ -9,7 +9,6 @@
 namespace Hatimeria\GtmPro\Model;
 
 use Hatimeria\GtmPro\Api\DataLayerServiceInterface;
-use Psr\Log\LoggerInterface;
 
 /**
  * Class class DataLayerSectionService

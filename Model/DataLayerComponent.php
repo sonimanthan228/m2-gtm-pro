@@ -3,6 +3,8 @@
 namespace Hatimeria\GtmPro\Model;
 
 use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
+use Magento\Quote\Model\Quote\Item;
+use Psr\Log\LoggerInterface;
 
 class DataLayerComponent implements DataLayerComponentInterface
 {
@@ -20,11 +22,6 @@ class DataLayerComponent implements DataLayerComponentInterface
         $this->versionComponents = $versionComponents;
     }
 
-    public function isGoogleAnalytics4()
-    {
-        return $this->config->getVersion() === Config\Source\Version::GA4;
-    }
-
     public function getData($eventData)
     {
         try {
@@ -36,8 +33,21 @@ class DataLayerComponent implements DataLayerComponentInterface
             if ($data = $component->getComponentData($eventData)) {
                 $data['event'] = $component->getEventName();
             }
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $this->logger->error($e->getMessage());
+        }
+
+        return $data;
+    }
+
+    public function processProduct(Item $item)
+    {
+        try {
+            $data = [];
+            $component = $this->getVersionComponent();
+            if ($component && method_exists($component, 'processProduct')) {
+                $component->processProduct($item);
+            }
         } catch (\Throwable $e) {
             $this->logger->error($e->getMessage());
         }
@@ -47,6 +57,6 @@ class DataLayerComponent implements DataLayerComponentInterface
 
     protected function getVersionComponent(): ?DataLayerComponent\AbstractComponent
     {
-
+        return $this->versionComponents[$this->config->getVersion()] ?? null;
     }
 }

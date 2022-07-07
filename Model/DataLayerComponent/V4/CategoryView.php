@@ -77,7 +77,7 @@ class CategoryView extends ComponentAbstract
     {
         $data = [];
         if ($this->request->getFullActionName() === 'catalog_category_view'
-            && $category = $this->coreRegistry->registry('current_category')
+            && $category = $this->registry->registry('current_category')
         ) {
             $data['ecommerce'] = [
                 'item_list_name' => $category->getName(),

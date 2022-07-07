@@ -54,7 +54,7 @@ class ReviewAdd extends ComponentAbstract
      */
     public function processReview($data)
     {
-        $data['product_id'] = $this->coreRegistry->registry('product')->getId();
+        $data['product_id'] = $this->registry->registry('product')->getId();
         $this->session->setGtmProAddProductReviewData(json_encode($data));
     }
 }

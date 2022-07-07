@@ -28,7 +28,7 @@ class ProductView extends ComponentAbstract
     public function getComponentData($eventData): ?array
     {
         $data = [];
-        if ($this->config->isProductViewTrackingEnabled() && $product = $this->coreRegistry->registry('product')) {
+        if ($this->config->isProductViewTrackingEnabled() && $product = $this->registry->registry('product')) {
             $productStructure = $this->getProductStructure($product, true);
             $data['ecommerce'] = [
                 'items'    => [$productStructure],

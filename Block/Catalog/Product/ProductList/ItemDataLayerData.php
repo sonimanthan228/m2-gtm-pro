@@ -8,13 +8,11 @@
 
 namespace Hatimeria\GtmPro\Block\Catalog\Product\ProductList;
 
+use Hatimeria\GtmPro\Model\DataLayerComponent;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Block\Product\Context;
 use Magento\Framework\Serialize\Serializer\Json;
-use Magento\Catalog\Model\Product;
 use Hatimeria\GtmPro\Model\Config;
-use Hatimeria\GtmPro\Model\DataLayerComponent\ProductImpression;
-use Hatimeria\GtmPro\Model\DataLayerComponent\ProductClick;
 use Magento\Catalog\Block\Product\AwareInterface as ProductAwareInterface;
 
 /**
@@ -33,12 +31,12 @@ class ItemDataLayerData extends \Magento\Framework\View\Element\Template impleme
     protected $config;
 
     /**
-     * @var ProductImpression
+     * @var DataLayerComponent
      */
     protected $productImpression;
 
     /**
-     * @var ProductClick
+     * @var DataLayerComponent
      */
     protected $productClick;
     
@@ -52,16 +50,16 @@ class ItemDataLayerData extends \Magento\Framework\View\Element\Template impleme
      * @param Context $context
      * @param Config $config
      * @param Json $jsonSerializer
-     * @param ProductImpression $productImpression
-     * @param ProductClick $productClick
+     * @param DataLayerComponent $productImpression
+     * @param DataLayerComponent $productClick
      * @param array $data
      */
     public function __construct(
         Context $context,
         Config $config,
         Json $jsonSerializer,
-        ProductImpression $productImpression,
-        ProductClick $productClick,
+        DataLayerComponent $productImpression,
+        DataLayerComponent $productClick,
         array $data = []
     ) {
         $this->config = $config;
@@ -94,7 +92,7 @@ class ItemDataLayerData extends \Magento\Framework\View\Element\Template impleme
     protected function _toHtml()
     {
         if (($this->config->isModuleEnabled() && $this->isProductImpressionTrackingEnabled())
-            || ($this->config->isModuleEnabled() && $this->isProductImpressionTrackingEnabled())) {
+            || ($this->config->isModuleEnabled() && $this->isProductClickTrackingEnabled())) {
                 return parent::_toHtml();
         }
 

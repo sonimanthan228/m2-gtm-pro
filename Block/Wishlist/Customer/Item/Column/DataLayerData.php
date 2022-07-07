@@ -8,6 +8,7 @@
 
 namespace Hatimeria\GtmPro\Block\Wishlist\Customer\Item\Column;
 
+use Hatimeria\GtmPro\Model\DataLayerComponent;
 use Magento\Wishlist\Block\Customer\Wishlist\Item\Column;
 use Magento\Catalog\Model\Product\Image\UrlBuilder;
 use Magento\Framework\View\ConfigInterface;
@@ -16,8 +17,6 @@ use Magento\Framework\App\Http\Context as HttpContext;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Catalog\Model\Product;
 use Hatimeria\GtmPro\Model\Config as GtmConfig;
-use Hatimeria\GtmPro\Model\DataLayerComponent\ProductImpression;
-use Hatimeria\GtmPro\Model\DataLayerComponent\ProductClick;
 
 /**
  * Class DataLayerData
@@ -35,12 +34,12 @@ class DataLayerData extends Column
     protected $gtmConfig;
 
     /**
-     * @var ProductImpression
+     * @var DataLayerComponent
      */
     protected $productImpression;
 
     /**
-     * @var ProductClick
+     * @var DataLayerComponent
      */
     protected $productClick;
 
@@ -50,8 +49,8 @@ class DataLayerData extends Column
      * @param Context $httpContext
      * @param GtmConfig $gtmConfig
      * @param Json $jsonSerializer
-     * @param ProductImpression $productImpression
-     * @param ProductClick $productClick
+     * @param DataLayerComponent $productImpression
+     * @param DataLayerComponent $productClick
      * @param array $data
      * @param ConfigInterface|null $config
      * @param UrlBuilder|null $urlBuilder
@@ -61,8 +60,8 @@ class DataLayerData extends Column
         HttpContext $httpContext,
         GtmConfig $gtmConfig,
         Json $jsonSerializer,
-        ProductImpression $productImpression,
-        ProductClick $productClick,
+        DataLayerComponent $productImpression,
+        DataLayerComponent $productClick,
         array $data = [],
         ConfigInterface $config = null,
         UrlBuilder $urlBuilder = null
