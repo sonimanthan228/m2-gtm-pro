@@ -8,10 +8,10 @@
 
 namespace Hatimeria\GtmPro\Observer;
 
+use Hatimeria\GtmPro\Model\DataLayerComponent;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
-use Hatimeria\GtmPro\Model\DataLayerComponent\RemoveFromCart;
 
 /**
  * Class SalesQuoteRemoveItem
@@ -24,18 +24,18 @@ class SalesQuoteRemoveItem implements ObserverInterface
     private $config;
 
     /**
-     * @var RemoveFromCart
+     * @var DataLayerComponent
      */
     private $removeFromCartComponent;
 
     /**
      * SalesQuoteRemoveItem constructor.
      * @param Config $config
-     * @param RemoveFromCart $removeFromCartComponent
+     * @param DataLayerComponent $removeFromCartComponent
      */
     public function __construct(
         Config $config,
-        RemoveFromCart $removeFromCartComponent
+        DataLayerComponent $removeFromCartComponent
     ) {
         $this->config = $config;
         $this->removeFromCartComponent = $removeFromCartComponent;

@@ -18,9 +18,9 @@ class RemoveProductFromCompare extends ComponentAbstract
     /**
      * @param $productData
      */
-    public function processData($productData)
+    public function processProduct($productData)
     {
-        $data = json_decode($this->session->getGtmProProductRemoveFromCompareData());
+        $data = json_decode($this->session->getGtmProProductRemoveFromCompareData(), true);
         if (!is_array($data)) {
             $data = [];
         }
@@ -60,13 +60,5 @@ class RemoveProductFromCompare extends ComponentAbstract
     protected function cleanSessionGtmProProductRemoveFromCompareData()
     {
         $this->session->setGtmProProductRemoveFromCompareData(false);
-    }
-
-    /**
-     * @return string
-     */
-    public function getEventName(): string
-    {
-        return self::EVENT_NAME;
     }
 }

@@ -8,10 +8,10 @@
 
 namespace Hatimeria\GtmPro\Observer;
 
+use Hatimeria\GtmPro\Model\DataLayerComponent;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
-use Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToWishlist as AddProductToWishlistComponent;
 
 /**
  * Class AddProductToWishlist
@@ -24,25 +24,25 @@ class AddProductToWishlist implements ObserverInterface
     private $config;
 
     /**
-     * @var AddProductToWishlistComponent
+     * @var DataLayerComponent
      */
     private $addProductToWishlistComponent;
 
     /**
      * AddProductToWishlist constructor.
      * @param Config $config
-     * @param AddProductToWishlistComponent $addProductToWishlistComponent
+     * @param DataLayerComponent $addProductToWishlistComponent
      */
     public function __construct(
         Config $config,
-        AddProductToWishlistComponent $addProductToWishlistComponent
+        DataLayerComponent $addProductToWishlistComponent
     ) {
         $this->config = $config;
         $this->addProductToWishlistComponent = $addProductToWishlistComponent;
     }
 
     /**
-     * @param Observer $observer
+     * @param Observer $observerw
      * @return $this|void
      */
     public function execute(Observer $observer)

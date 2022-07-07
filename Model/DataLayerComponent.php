@@ -40,10 +40,9 @@ class DataLayerComponent implements DataLayerComponentInterface
         return $data;
     }
 
-    public function processProduct(Item $item)
+    public function processProduct($item)
     {
         try {
-            $data = [];
             $component = $this->getVersionComponent();
             if ($component && method_exists($component, 'processProduct')) {
                 $component->processProduct($item);
@@ -51,8 +50,6 @@ class DataLayerComponent implements DataLayerComponentInterface
         } catch (\Throwable $e) {
             $this->logger->error($e->getMessage());
         }
-
-        return $data;
     }
 
     protected function getVersionComponent(): ?DataLayerComponent\AbstractComponent

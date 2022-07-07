@@ -8,10 +8,10 @@
 
 namespace Hatimeria\GtmPro\Observer;
 
+use Hatimeria\GtmPro\Model\DataLayerComponent;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
-use Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromCompare as RemoveProductFromCompareComponent;
 
 /**
  * Class RemoveProductFromCompare
@@ -24,18 +24,18 @@ class RemoveProductFromCompare implements ObserverInterface
     private $config;
 
     /**
-     * @var RemoveProductFromCompareComponent
+     * @var DataLayerComponent
      */
     private $removeProductFromCompareComponent;
 
     /**
      * RemoveProductFromCompare constructor.
      * @param Config $config
-     * @param RemoveProductFromCompareComponent $removeProductFromCompareComponent
+     * @param DataLayerComponent $removeProductFromCompareComponent
      */
     public function __construct(
         Config $config,
-        RemoveProductFromCompareComponent $removeProductFromCompareComponent
+        DataLayerComponent $removeProductFromCompareComponent
     ) {
         $this->config = $config;
         $this->removeProductFromCompareComponent = $removeProductFromCompareComponent;
@@ -50,7 +50,7 @@ class RemoveProductFromCompare implements ObserverInterface
         if ($this->config->isModuleEnabled() && $this->config->isAddToCompareTrackingEnabled()) {
             /** @var \Magento\Catalog\Model\Product\Compare\Item $product */
             $product = $observer->getProduct();
-            $this->removeProductFromCompareComponent->processData(['product_id' => $product->getProductId()]);
+            $this->removeProductFromCompareComponent->processProduct(['product_id' => $product->getProductId()]);
         }
 
         return $this;

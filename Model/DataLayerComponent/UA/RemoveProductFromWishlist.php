@@ -22,7 +22,7 @@ class RemoveProductFromWishlist extends ComponentAbstract
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmProProductRemoveFromWishlistData());
+        $data = json_decode($this->session->getGtmProProductRemoveFromWishlistData(), true);
         if (!is_array($data)) {
             $data = [];
         }

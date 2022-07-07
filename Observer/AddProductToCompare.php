@@ -8,10 +8,10 @@
 
 namespace Hatimeria\GtmPro\Observer;
 
+use Hatimeria\GtmPro\Model\DataLayerComponent;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;
 use Hatimeria\GtmPro\Model\Config;
-use Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToCompare as AddProductToCompareComponent;
 
 /**
  * Class AddProductToCompare
@@ -24,18 +24,18 @@ class AddProductToCompare implements ObserverInterface
     private $config;
 
     /**
-     * @var AddProductToCompareComponent
+     * @var DataLayerComponent
      */
     private $addProductToCompareComponent;
 
     /**
      * AddProductToCompare constructor.
      * @param Config $config
-     * @param AddProductToCompareComponent $addProductToCompareComponent
+     * @param DataLayerComponent $addProductToCompareComponent
      */
     public function __construct(
         Config $config,
-        AddProductToCompareComponent $addProductToCompareComponent
+        DataLayerComponent $addProductToCompareComponent
     ) {
         $this->config = $config;
         $this->addProductToCompareComponent = $addProductToCompareComponent;

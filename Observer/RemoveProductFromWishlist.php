@@ -8,11 +8,11 @@
 
 namespace Hatimeria\GtmPro\Observer;
 
+use Hatimeria\GtmPro\Model\DataLayerComponent;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Wishlist\Model\ItemFactory;
 use Hatimeria\GtmPro\Model\Config;
-use Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromWishlist as RemoveProductFromWishlistComponent;
 
 /**
  * Class RemoveProductFromWishlist
@@ -30,7 +30,7 @@ class RemoveProductFromWishlist implements ObserverInterface
     private $config;
 
     /**
-     * @var RemoveProductFromWishlistComponent
+     * @var DataLayerComponent
      */
     private $removeProductToWishlistComponent;
 
@@ -38,12 +38,12 @@ class RemoveProductFromWishlist implements ObserverInterface
      * RemoveProductFromWishlist constructor.
      * @param ItemFactory $itemFactory
      * @param Config $config
-     * @param RemoveProductFromWishlistComponent $removeProductToWishlistComponent
+     * @param DataLayerComponent $removeProductToWishlistComponent
      */
     public function __construct(
         ItemFactory $itemFactory,
         Config $config,
-        RemoveProductFromWishlistComponent $removeProductToWishlistComponent
+        DataLayerComponent $removeProductToWishlistComponent
     ) {
         $this->itemFactory = $itemFactory;
         $this->config = $config;

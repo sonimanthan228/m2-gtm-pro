@@ -170,6 +170,32 @@
             <argument name="addToCartComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddToCart</argument>
         </arguments>
     </type>
+    <type name="Hatimeria\GtmPro\Observer\SalesQuoteRemoveItem">
+        <arguments>
+            <argument name="removeFromCartComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveFromCart</argument>
+        </arguments>
+    </type>
+    <type name="Hatimeria\GtmPro\Observer\AddProductToCompare">
+        <arguments>
+            <argument name="addProductToCompareComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToCompare</argument>
+        </arguments>
+    </type>
+    <type name="Hatimeria\GtmPro\Observer\RemoveProductFromCompare">
+        <arguments>
+            <argument name="removeProductFromCompareComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromCompare</argument>
+        </arguments>
+    </type>
+    <type name="Hatimeria\GtmPro\Observer\AddProductToWishlist">
+        <arguments>
+            <argument name="addProductToWishlistComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToWishlist</argument>
+        </arguments>
+    </type>
+    <type name="Hatimeria\GtmPro\Observer\RemoveProductFromWishlist">
+        <arguments>
+            <argument name="removeProductToWishlistComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromWishlist</argument>
+        </arguments>
+    </type>
+
     <preference for="Hatimeria\GtmPro\Api\DataLayerServiceInterface" type="Hatimeria\GtmPro\Model\DataLayerService" />
     <preference for="Hatimeria\GtmPro\Api\GuestCheckoutStepInterface" type="Hatimeria\GtmPro\Model\GuestCheckoutStep" />
     <preference for="Hatimeria\GtmPro\Api\CheckoutStepInterface" type="Hatimeria\GtmPro\Model\CheckoutStep" />
