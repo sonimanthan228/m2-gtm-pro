@@ -5,7 +5,8 @@
     "version": "1.0.11",
     "require": {
         "hatimeria/m2-hatimeria-base": "^1.0.0",
-        "magento/framework": "^102|^103"
+        "magento/framework": "^102|^103",
+        "ext-json": "*"
     },
     "autoload": {
         "files": [

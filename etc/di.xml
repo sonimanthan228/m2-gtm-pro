@@ -42,6 +42,99 @@
     <preference for="Hatimeria\GtmPro\Api\DataLayerServiceInterface" type="Hatimeria\GtmPro\Model\DataLayerService" />
     <preference for="Hatimeria\GtmPro\Api\GuestCheckoutStepInterface" type="Hatimeria\GtmPro\Model\GuestCheckoutStep" />
     <preference for="Hatimeria\GtmPro\Api\CheckoutStepInterface" type="Hatimeria\GtmPro\Model\CheckoutStep" />
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\ProductView" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\ProductView</item>
+                <item name="1">Hatimeria\GtmPro\Model\DataLayerComponent\V4\ProductView</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\CategoryView" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="1">Hatimeria\GtmPro\Model\DataLayerComponent\V4\CategoryView</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\CoreData" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\CoreData</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\Transaction" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\Transaction</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\Search" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\Search</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\AdvancedSearch" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\AdvancedSearch</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\AddToCart" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\AddToCart</item>
+                <item name="1">Hatimeria\GtmPro\Model\DataLayerComponent\V4\AddToCart</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\RemoveFromCart" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\RemoveFromCart</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\ReviewAdd" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\ReviewAdd</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToWishlist" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\AddProductToWishlist</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromWishlist" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\RemoveProductFromWishlist</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToCompare" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\AddProductToCompare</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromCompare" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0">Hatimeria\GtmPro\Model\DataLayerComponent\UA\RemoveProductFromCompare</item>
+            </argument>
+        </arguments>
+    </virtualType>
     <type name="Magento\Catalog\Block\Product\AbstractProduct">
         <plugin name="hatimeria-gtmpro-product-abstract-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>

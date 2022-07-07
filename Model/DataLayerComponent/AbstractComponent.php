@@ -3,44 +3,215 @@
 namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 
 use Hatimeria\GtmPro\Model\Config;
+use Magento\Catalog\Helper\Product\Configuration;
+use Magento\Catalog\Model\Category;
+use Magento\Catalog\Model\Product;
+use Magento\CatalogSearch\Model\Advanced;
+use Magento\Checkout\Model\Session;
+use Magento\Framework\App\Request\Http;
+use Magento\Framework\App\Response\RedirectInterface;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Registry;
+use Magento\Framework\Session\Generic;
+use Magento\Quote\Model\Quote\Item;
+use Magento\Quote\Model\QuoteFactory;
+use Magento\Review\Model\ReviewFactory;
+use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 
 abstract class AbstractComponent
 {
+    protected StoreManagerInterface $storeManager;
+    protected Session $checkoutSession;
+    protected Registry $registry;
+    protected Http $request;
     protected Config $config;
+    protected Configuration $productHelper;
+    protected ReviewFactory $reviewFactory;
+    protected Generic $session;
+    protected RedirectInterface $redirect;
+    protected Advanced $catalogSearchAdvanced;
     protected LoggerInterface $logger;
+    protected QuoteFactory $quoteFactory;
+    protected array $productCategories = [];
+    protected array $productsStructure = [];
 
+    /**
+     * ComponentAbstract constructor.
+     * @param StoreManagerInterface $storeManager
+     * @param Session $checkoutSession
+     * @param Registry $registry
+     * @param Http $request
+     * @param Config $config
+     * @param Configuration $productHelper
+     * @param ReviewFactory $reviewFactory
+     * @param Generic $session
+     * @param RedirectInterface $redirect
+     * @param Advanced $catalogSearchAdvanced
+     * @param LoggerInterface $logger
+     * @param QuoteFactory $quoteFactory
+     */
     public function __construct(
+        StoreManagerInterface $storeManager,
+        Session $checkoutSession,
+        Registry $registry,
+        Http $request,
         Config $config,
-        LoggerInterface $logger
-    )
-    {
+        Configuration $productHelper,
+        ReviewFactory $reviewFactory,
+        Generic $session,
+        RedirectInterface $redirect,
+        Advanced $catalogSearchAdvanced,
+        LoggerInterface $logger,
+        QuoteFactory $quoteFactory
+    ) {
+        $this->storeManager = $storeManager;
+        $this->checkoutSession = $checkoutSession;
+        $this->registry = $registry;
+        $this->request = $request;
         $this->config = $config;
+        $this->productHelper = $productHelper;
+        $this->reviewFactory = $reviewFactory;
+        $this->session = $session;
+        $this->redirect = $redirect;
+        $this->catalogSearchAdvanced = $catalogSearchAdvanced;
         $this->logger = $logger;
+        $this->quoteFactory = $quoteFactory;
     }
+    /**
+     * @param $eventData
+     * @return mixed
+     */
+    abstract public function getComponentData($eventData): ?array;
 
-    public function isGoogleAnalytics4()
+    /**
+     * @return string
+     */
+    public function getEventName(): string
     {
-        return $this->config->getVersion() === Config\Source\Version::GA4;
+        return static::EVENT_NAME;
     }
 
     /**
-     * @param $eventData
-     * @return array
+     * @param Product $product
+     * @return string
+     * @throws LocalizedException
      */
-    public function getData($eventData)
+    protected function getCategoryName(Product $product)
     {
-        try {
-            $data = [];
-            if ($data = $this->getComponentData($eventData)) {
-                $data['event'] = $this->getEventName();
-            }
-        } catch (\Exception $e) {
-            $this->logger->error($e->getMessage());
-        } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage());
+        $categories = $this->getCategories($product);
+
+        if (!empty($categories)) {
+            return implode('|', $categories);
         }
 
-        return $data;
+        return '';
+    }
+
+    /**
+     * @param Product $product
+     * @return array
+     * @throws LocalizedException
+     */
+    protected function getCategories(Product $product): array
+    {
+        if (!array_key_exists($product->getId(), $this->productCategories)) {
+            $categoryCollection = $product->getCategoryCollection()
+                ->addAttributeToSelect('name');
+
+            $categories = [];
+            if ($categoryCollection->count() > 0) {
+                foreach ($categoryCollection as $category) {
+                    /** @var Category $category */
+                    $categories[] = $category->getName();
+                }
+            }
+            $this->productCategories[$product->getId()] = $categories;
+        }
+
+        return $this->productCategories[$product->getId()];
+    }
+
+    /**
+     * @param Item $item
+     * @return string
+     */
+    protected function getVariant(Item $item): string
+    {
+        if ($item->getHasChildren()) {
+            $variants = [];
+            $options = $this->productHelper->getOptions($item);
+            foreach ($options as $option) {
+                $variants[$option['label']] = $option['value'];
+            }
+
+            return implode('|', $variants);
+        }
+
+        return '';
+    }
+
+    /**
+     * @param $price
+     * @return float
+     */
+    protected function formatPrice($price): float
+    {
+        return (double)number_format($price, 2, '.', '');
+    }
+
+    /**
+     * @param Product $product
+     * @return array|string|null
+     * @throws NoSuchEntityException
+     */
+    protected function getBrand(Product $product)
+    {
+        $brand = '';
+        $brandAttribute = $this->config->getBrandAttribute();
+        if ($brandAttribute && $product->getData($brandAttribute)) {
+            $brand = $product->getAttributeText($brandAttribute);
+        }
+
+        return $brand;
+    }
+
+    /**
+     * @param Product $product
+     * @return mixed
+     * @throws NoSuchEntityException
+     */
+    protected function getReviewsCount(Product $product)
+    {
+        if ($product->getReviewsCount() === null) {
+            $this->reviewFactory->create()->getEntitySummary($product, $this->storeManager->getStore()->getId());
+        }
+
+        return $product->getReviewsCount();
+    }
+
+    /**
+     * @param Product $product
+     * @return mixed
+     * @throws NoSuchEntityException
+     */
+    protected function getRatingSummary(Product $product)
+    {
+        if ($product->getRatingSummary() === null) {
+            $this->reviewFactory->create()->getEntitySummary($product, $this->storeManager->getStore()->getId());
+        }
+
+        return $product->getRatingSummary();
+    }
+
+    /**
+     * @param Product $product
+     * @return string
+     */
+    public function getName(Product $product): string
+    {
+        $name = strip_tags($product->getName());
+        return str_replace("'", "", $name);
     }
 }
