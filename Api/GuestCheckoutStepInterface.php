@@ -16,7 +16,8 @@ interface GuestCheckoutStepInterface
     /**
      * @param string $cartId
      * @param string $step
+     * @param string $param
      * @return mixed
      */
-    public function get($cartId, $step);
+    public function get($cartId, $step, $param);
 }

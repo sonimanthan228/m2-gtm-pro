@@ -7,4 +7,7 @@
     <action name="checkout/cart/delete">
         <section name="gtm"/>
     </action>
+    <action name="checkout/sidebar/removeItem">
+        <section name="gtm"/>
+    </action>
 </config>

@@ -17,25 +17,19 @@ define([
         return {
             registerStepData: function () {
                 if ( window.location.hash) {
-
                     var step = window.location.hash.replace('#', '');
+                    var stepParam = 'none';
+                    if (step == 'shipping' && $('input:checked', '.table-checkout-shipping-method').val()) {
+                        var stepParam =  $('input:checked', '.table-checkout-shipping-method').val();
+                    }
+                    if (step == 'payment' && checkoutData.getSelectedPaymentMethod()) {
+                        stepParam = checkoutData.getSelectedPaymentMethod();
+                    }
                     storage.get(
-                        gtmUrlManager.getUrlForCheckoutStepData(step)
+                        gtmUrlManager.getUrlForCheckoutStepData(step, stepParam)
                     ).done(
                         function (response) {
                             if (response) {
-                                if (step == 'shipping') {
-                                    var method =  $('input:checked', '.table-checkout-shipping-method').val();
-                                    if (method) {
-                                        response[0]['ecommerce']['add']['actionField']['option'] = 'shipping = ' + method;
-                                    }
-                                }
-
-                                if (step == 'payment' && checkoutData.getSelectedPaymentMethod()) {
-                                    response[0]['ecommerce']['add']['actionField']['option'] = 'payment = '
-                                        + checkoutData.getSelectedPaymentMethod();
-                                }
-
                                 window.dataLayer.push(response[0]);
                             }
                         }

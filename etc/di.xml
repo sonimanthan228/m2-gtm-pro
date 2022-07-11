@@ -22,6 +22,13 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\CartView" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="1" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\V4\CartView</item>
+            </argument>
+        </arguments>
+    </virtualType>
     <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\CoreData" type="Hatimeria\GtmPro\Model\DataLayerComponent">
         <arguments>
             <argument name="versionComponents" xsi:type="array">
@@ -33,6 +40,7 @@
         <arguments>
             <argument name="versionComponents" xsi:type="array">
                 <item name="0" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\UA\Transaction</item>
+                <item name="1" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\V4\Transaction</item>
             </argument>
         </arguments>
     </virtualType>
@@ -62,6 +70,7 @@
         <arguments>
             <argument name="versionComponents" xsi:type="array">
                 <item name="0" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\UA\RemoveFromCart</item>
+                <item name="1" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\V4\RemoveFromCart</item>
             </argument>
         </arguments>
     </virtualType>
@@ -76,6 +85,7 @@
         <arguments>
             <argument name="versionComponents" xsi:type="array">
                 <item name="0" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\UA\AddProductToWishlist</item>
+                <item name="1" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\V4\AddProductToWishlist</item>
             </argument>
         </arguments>
     </virtualType>
@@ -83,6 +93,7 @@
         <arguments>
             <argument name="versionComponents" xsi:type="array">
                 <item name="0" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\UA\RemoveProductFromWishlist</item>
+                <item name="1" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\V4\RemoveProductFromWishlist</item>
             </argument>
         </arguments>
     </virtualType>
@@ -115,12 +126,22 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="Hatimeria\GtmPro\Model\DataLayerComponent\CheckoutStep" type="Hatimeria\GtmPro\Model\DataLayerComponent">
+        <arguments>
+            <argument name="versionComponents" xsi:type="array">
+                <item name="0" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\UA\CheckoutStep</item>
+                <item name="1" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\V4\CheckoutStep</item>
+            </argument>
+        </arguments>
+    </virtualType>
 
      <type name="Hatimeria\GtmPro\Model\DataLayerStaticService">
         <arguments>
             <argument name="dataLayerComponent" xsi:type="array">
                 <item name="product_view" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\ProductView</item>
                 <item name="category_view" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\CategoryView</item>
+                <item name="cart_view" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\CartView</item>
+                <item name="checkout" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\CheckoutStep</item>
                 <item name="core_data" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\CoreData</item>
                 <item name="transaction_data" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\Transaction</item>
                 <item name="search" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\Search</item>

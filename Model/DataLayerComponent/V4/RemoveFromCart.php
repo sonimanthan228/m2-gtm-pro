@@ -6,16 +6,16 @@
  * @license    (https://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-namespace Hatimeria\GtmPro\Model\DataLayerComponent\UA;
+namespace Hatimeria\GtmPro\Model\DataLayerComponent\V4;
 
 use Magento\Quote\Model\Quote\Item;
 
 /**
- * Class RemoveFromCart
+ * Class AddToCart
  */
 class RemoveFromCart extends ComponentAbstract
 {
-    const EVENT_NAME = 'remove-from-cart';
+    const EVENT_NAME = 'remove_from_cart';
     
     /**
      * @param Item $item
@@ -29,8 +29,10 @@ class RemoveFromCart extends ComponentAbstract
 
         $product = $item->getProduct();
         $data[] = array_merge($this->getProductStructure($product, false), [
-            'variant' => $this->getVariant($item),
-            'quantity' => $item->getQty()
+            'variant'  => $this->getVariant($item),
+            'quantity' => (float)$item->getQty(),
+            'price'    => (float)$item->getPriceInclTax(),
+            'discount' => (float)$item->getDiscountAmount(),
         ]);
         $this->checkoutSession->setGtmProProductRemoveFromCartData(json_encode($data));
     }
@@ -46,10 +48,9 @@ class RemoveFromCart extends ComponentAbstract
         $products = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
         if (is_array($products)) {
             $data['ecommerce'] = [
-               'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
-               'remove' => [
-                   'products' => $products
-               ]
+                'currency' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
+                'value'    => $this->calculateValue($products),
+                'items'    => $products,
             ];
             $this->cleanSessionGtmProductRemoveFromCartData();
         }
@@ -63,5 +64,16 @@ class RemoveFromCart extends ComponentAbstract
     protected function cleanSessionGtmProductRemoveFromCartData()
     {
         $this->checkoutSession->setGtmProProductRemoveFromCartData(false);
+    }
+
+    protected function calculateValue(array $products): float
+    {
+        return array_reduce(
+            $products,
+            function($carry, $product) {
+                return $carry + (((float)$product['price'] - (float)$product['discount']) * (float)$product['quantity']);
+            },
+            0
+        );
     }
 }

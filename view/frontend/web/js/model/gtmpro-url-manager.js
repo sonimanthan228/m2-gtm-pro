@@ -18,15 +18,16 @@ define([
              * @param {Object} quote
              * @return {*}
              */
-            getUrlForCheckoutStepData: function (step) {
+            getUrlForCheckoutStepData: function (step, stepParam) {
                 var params = this.getCheckoutMethod() == 'guest' ? //eslint-disable-line eqeqeq
                         {
                             cartId: quote.getQuoteId(),
-                            step: step
-                        } : {step: step},
+                            step: step,
+                            param: stepParam
+                        } : {step: step, param: stepParam},
                     urls = {
-                        'guest': '/guest-carts/:cartId/:step/gtmpro-checkout-step-data',
-                        'customer': '/carts/mine/:step/gtmpro-checkout-step-data'
+                        'guest': '/guest-carts/:cartId/:step/gtmpro-checkout-step-data/:param',
+                        'customer': '/carts/mine/:step/gtmpro-checkout-step-data/:param'
                     };
 
                 return this.getUrl(urls, params);
@@ -53,6 +54,7 @@ define([
                     url = urls[this.getCheckoutMethod()];
                 }
 
+                console.log(url, urlParams);
                 return urlBuilder.createUrl(url, urlParams);
             },
 

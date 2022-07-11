@@ -42,10 +42,10 @@ class GuestCheckoutStep implements GuestCheckoutStepInterface
     /**
      * {@inheritDoc}
      */
-    public function get($cartId, $step)
+    public function get($cartId, $step, $param)
     {
         /** @var $quoteIdMask \Magento\Quote\Model\QuoteIdMask */
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
-        return $this->checkoutStep->get($quoteIdMask->getQuoteId(), $step);
+        return $this->checkoutStep->get($quoteIdMask->getQuoteId(), $step, $param);
     }
 }

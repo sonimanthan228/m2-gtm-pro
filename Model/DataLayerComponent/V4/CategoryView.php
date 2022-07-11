@@ -98,6 +98,6 @@ class CategoryView extends ComponentAbstract
 
     protected function getProductCollection(): Collection
     {
-        return $this->catalogLayer->getProductCollection();
+        return $this->check->getProductCollection();
     }
 }

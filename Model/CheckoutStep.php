@@ -53,15 +53,16 @@ class CheckoutStep implements CheckoutStepInterface
     /**
      * {@inheritDoc}
      */
-    public function get($cartId, $step)
+    public function get($cartId, $step, $param)
     {
         /** @var \Magento\Quote\Model\Quote $quote */
         $quote = $this->cartRepository->get($cartId);
         $this->validateQuote($quote);
 
         $eventData = [
-            'quote' => $quote,
-            'step' => $step
+            'quote'      => $quote,
+            'step'       => $step,
+            'step_param' => $param,
         ];
 
         return $this->dataLayerCheckoutService->getDataLayerComponentData($eventData);

@@ -11,6 +11,8 @@ namespace Hatimeria\GtmPro\Model\DataLayerComponent\V4;
 use Hatimeria\GtmPro\Model\DataLayerComponent\AbstractComponent;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Catalog\Model\Product;
+use Magento\Quote\Model\Quote\Item as QuoteItem;
+use Magento\Sales\Model\Order\Item as OrderItem;
 
 /**
  * Class ComponentAbstract
@@ -48,5 +50,36 @@ abstract class ComponentAbstract extends AbstractComponent
         }
 
         return $this->productsStructure[$structureKey];
+    }
+
+    /**
+     * @param QuoteItem|OrderItem $item
+     * @return array
+     * @throws LocalizedException
+     */
+    public function getCartItemStructure($item): array
+    {
+        $structureKey = $item->getId().'_'.$item->getProductId();
+        if (!isset($this->cartItemsStructure[$structureKey])) {
+            $product = $item->getProduct();
+            $structure = [
+                'item_id'    => $item->getProductId(),
+                'item_name'  => $this->getName($product),
+                'currency'   => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
+                'price'      => $this->formatPrice($item->getPriceInclTax()),
+                'discount'   => $this->formatPrice($item->getDiscountAmount()),
+                'quantity'   => $item->getQty() ?: $item->getQtyOrdered(),
+                'item_brand' => $this->getBrand($product),
+            ];
+            $number = '';
+            foreach($this->getCategories($product) as $categoryName) {
+                $structure['item_category' . $number] = $categoryName;
+                $number = $number === '' ? 2 : $number + 1;
+            }
+
+            $this->cartItemsStructure[$structureKey] = $structure;
+        }
+
+        return $this->cartItemsStructure[$structureKey];
     }
 }

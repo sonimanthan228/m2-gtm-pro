@@ -36,6 +36,7 @@ abstract class AbstractComponent
     protected QuoteFactory $quoteFactory;
     protected array $productCategories = [];
     protected array $productsStructure = [];
+    protected array $cartItemsStructure = [];
 
     /**
      * ComponentAbstract constructor.

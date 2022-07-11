@@ -41,14 +41,14 @@ class CheckoutStep extends ComponentAbstract
                 ]);
             }
             $data['ecommerce'] = [
-               'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
-               'add' => [
-                   'actionField' => [
-                        'step' => $this->getStep($step),
-                        'option' => '' //moved to frontend
-                   ],
-                   'products' => $products
-               ]
+                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
+                'add'          => [
+                    'actionField' => [
+                        'step'   => $this->getStep($step),
+                        'option' => $eventData['step_param'] !== 'none' ? $eventData['step_param'] : null,
+                    ],
+                    'products'    => $products,
+                ],
             ];
         }
 
