@@ -54,7 +54,6 @@ define([
                     url = urls[this.getCheckoutMethod()];
                 }
 
-                console.log(url, urlParams);
                 return urlBuilder.createUrl(url, urlParams);
             },
 
