@@ -22,7 +22,7 @@ class RemoveFromCart extends ComponentAbstract
      */
     public function processProduct(Item $item)
     {
-        $data = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
+        $data = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData(), true);
         if (!is_array($data)) {
             $data = [];
         }
@@ -45,7 +45,7 @@ class RemoveFromCart extends ComponentAbstract
     public function getComponentData($eventData): ?array
     {
         $data = [];
-        $products = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
+        $products = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData(), true);
         if (is_array($products)) {
             $data['ecommerce'] = [
                 'currency' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),

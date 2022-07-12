@@ -63,13 +63,14 @@ abstract class ComponentAbstract extends AbstractComponent
         if (!isset($this->cartItemsStructure[$structureKey])) {
             $product = $item->getProduct();
             $structure = [
-                'item_id'    => $item->getProductId(),
-                'item_name'  => $this->getName($product),
-                'currency'   => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
-                'price'      => $this->formatPrice($item->getPriceInclTax()),
-                'discount'   => $this->formatPrice($item->getDiscountAmount()),
-                'quantity'   => $item->getQty() ?: $item->getQtyOrdered(),
-                'item_brand' => $this->getBrand($product),
+                'item_id'      => $item->getProductId(),
+                'item_name'    => $this->getName($product),
+                'currency'     => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
+                'price'        => $this->formatPrice($item->getPriceInclTax()),
+                'discount'     => $this->formatPrice($item->getDiscountAmount()),
+                'quantity'     => $item->getQty() ?: $item->getQtyOrdered(),
+                'item_brand'   => $this->getBrand($product),
+                'item_variant' => $this->getItemVariant($item)
             ];
             $number = '';
             foreach($this->getCategories($product) as $categoryName) {
@@ -81,5 +82,36 @@ abstract class ComponentAbstract extends AbstractComponent
         }
 
         return $this->cartItemsStructure[$structureKey];
+    }
+
+    protected function getItemVariant($item): ?string
+    {
+        return $item instanceof QuoteItem ? $this->getQuoteItemVariant($item) : $this->getOrderItemVariant($item);
+    }
+
+    protected function getQuoteItemVariant(QuoteItem $item): ?string
+    {
+        if ($item->getProductType() === 'configurable') {
+            $options = $this->productHelper->getOptions($item);
+
+            return ltrim(array_reduce($options, function ($carry, $option) {
+                return $carry . ', ' . $option['value'];
+            }, ''), ', ');
+        }
+
+        return null;
+    }
+
+    protected function getOrderItemVariant(OrderItem $item): ?string
+    {
+        if ($item->getProductType() === 'configurable') {
+            $options = $item->getProductOptionByCode('attributes_info');
+
+            return ltrim(array_reduce($options, function ($carry, $option) {
+                return $carry . ', ' . $option['value'];
+            }, ''), ', ');
+        }
+
+        return null;
     }
 }
