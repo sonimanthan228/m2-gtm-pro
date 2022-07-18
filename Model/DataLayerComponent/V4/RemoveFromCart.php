@@ -28,9 +28,10 @@ class RemoveFromCart extends ComponentAbstract
         }
 
         $product = $item->getProduct();
+        $qtyChange = (float)$item->getOrigData('qty') - (float)$item->getQty();
         $data[] = array_merge($this->getProductStructure($product, false), [
             'variant'  => $this->getVariant($item),
-            'quantity' => (float)$item->getQty(),
+            'quantity' => $qtyChange,
             'price'    => (float)$item->getPriceInclTax(),
             'discount' => (float)$item->getDiscountAmount(),
         ]);

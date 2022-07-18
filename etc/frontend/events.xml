@@ -25,6 +25,9 @@
     <event name="checkout_cart_product_add_after">
         <observer name="hatimeria_gtmpro_cart_product_add_after" instance="Hatimeria\GtmPro\Observer\CartProductAddAfter" />
     </event>
+    <event name="checkout_cart_update_items_after">
+        <observer name="hatimeria_gtmpro_cart_product_update_after" instance="Hatimeria\GtmPro\Observer\CartUpdateAfter"/>
+    </event>
     <event name="catalog_product_compare_add_product">
         <observer name="hatimeria_gtmpro_compare_add_product" instance="Hatimeria\GtmPro\Observer\AddProductToCompare" />
     </event>

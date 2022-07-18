@@ -196,6 +196,12 @@
             <argument name="removeFromCartComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveFromCart</argument>
         </arguments>
     </type>
+    <type name="Hatimeria\GtmPro\Observer\CartUpdateAfter">
+        <arguments>
+            <argument name="removeFromCartComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveFromCart</argument>
+            <argument name="addToCartComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddToCart</argument>
+        </arguments>
+    </type>
     <type name="Hatimeria\GtmPro\Observer\AddProductToCompare">
         <arguments>
             <argument name="addProductToCompareComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToCompare</argument>

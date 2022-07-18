@@ -28,10 +28,11 @@ class AddToCart extends ComponentAbstract
         }
 
         $product = $item->getProduct();
+        $qtyChange = (float)$item->getQty() - (float)$item->getOrigData('qty');
         $data[] = array_merge($this->getProductStructure($product, false), [
             'variant'  => $this->getVariant($item),
-            'quantity' => (float)$item->getQty(),
-            'price'    => (float)$item->getPriceInclTax(),
+            'quantity' => $qtyChange,
+            'price'    => (float)$item->getPriceInclTax() ?? $item->getPrice(),
             'discount' => (float)$item->getDiscountAmount(),
         ]);
         $this->checkoutSession->setGtmProProductAddToCartData(json_encode($data));

@@ -21,7 +21,6 @@ define([
                 window.dataLayer.push(data);
             });
         });
-
     }
 
     return function () {
