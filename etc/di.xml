@@ -222,6 +222,11 @@
             <argument name="removeProductToWishlistComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromWishlist</argument>
         </arguments>
     </type>
+    <type name="Hatimeria\GtmPro\Observer\ReviewAdd">
+        <arguments>
+            <argument name="reviewAddComponent" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\ReviewAdd</argument>
+        </arguments>
+    </type>
 
     <preference for="Hatimeria\GtmPro\Api\DataLayerServiceInterface" type="Hatimeria\GtmPro\Model\DataLayerService" />
     <preference for="Hatimeria\GtmPro\Api\GuestCheckoutStepInterface" type="Hatimeria\GtmPro\Model\GuestCheckoutStep" />

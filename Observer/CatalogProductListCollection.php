@@ -60,7 +60,7 @@ class CatalogProductListCollection implements ObserverInterface
             && $this->config->isSearchTrackingEnabled()
             && $this->request->getFullActionName() == 'catalogsearch_result_index'
         ) {
-            $this->searchComponent->processCollection($observer->getCollection());
+            $this->searchComponent->processProduct($observer->getCollection());
         }
 
         return $this;

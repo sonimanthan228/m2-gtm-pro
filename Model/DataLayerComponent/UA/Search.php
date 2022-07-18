@@ -43,7 +43,7 @@ class Search extends ComponentAbstract
     /**
      * @param $collection
      */
-    public function processCollection($collection)
+    public function processProduct($collection)
     {
         $data = json_decode($this->checkoutSession->getGtmProSearchCollectionData());
         if (!is_array($data)) {
@@ -53,13 +53,5 @@ class Search extends ComponentAbstract
         $data['searchResults'] = $collection->getSize();
 
         $this->checkoutSession->setGtmProSearchCollectionData(json_encode($data));
-    }
-
-    /**
-     * @return string
-     */
-    public function getEventName(): string
-    {
-        return self::EVENT_NAME;
     }
 }
