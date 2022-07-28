@@ -29,6 +29,8 @@ class CartProductAddAfter implements ObserverInterface
      */
     private $addToCartComponent;
 
+    private $quoteItem = null;
+
     /**
      * CheckoutCartAddProductComplete constructor.
      * @param Config $config
@@ -49,7 +51,12 @@ class CartProductAddAfter implements ObserverInterface
     public function execute(Observer $observer)
     {
         if ($this->config->isModuleEnabled() && $this->config->isAddToCartTrackingEnabled()) {
-            $this->addToCartComponent->processProduct($observer->getQuoteItem());
+            if ('checkout_cart_product_add_after' === $observer->getEvent()->getName()) {
+                $this->quoteItem = $observer->getQuoteItem();
+            }
+            if ('checkout_cart_add_product_complete' === $observer->getEvent()->getName() && $this->quoteItem) {
+                $this->addToCartComponent->processProduct($this->quoteItem);
+            }
         }
 
         return $this;
