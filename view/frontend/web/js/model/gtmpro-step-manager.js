@@ -15,7 +15,7 @@ define([
         'use strict';
 
         return {
-            registerStepData: function () {
+            registerStepData: function (step) {
                 if ( window.location.hash) {
                     var step = window.location.hash.replace('#', '');
                     var stepParam = 'none';
@@ -24,6 +24,9 @@ define([
                     }
                     if (step == 'payment' && checkoutData.getSelectedPaymentMethod()) {
                         stepParam = checkoutData.getSelectedPaymentMethod();
+                    }
+                    if (!stepParam) {
+                        return this;
                     }
                     storage.get(
                         gtmUrlManager.getUrlForCheckoutStepData(step, stepParam)

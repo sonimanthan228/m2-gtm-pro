@@ -68,7 +68,7 @@ abstract class ComponentAbstract extends AbstractComponent
                 'currency'     => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                 'price'        => $this->formatPrice($item->getPriceInclTax() ?? $item->getPrice()),
                 'discount'     => $this->formatPrice($item->getDiscountAmount()),
-                'quantity'     => $item->getQty() ?: $item->getQtyOrdered(),
+                'quantity'     => (float)($item->getQty() ?: $item->getQtyOrdered()),
                 'item_brand'   => $this->getBrand($product),
                 'item_variant' => $this->getItemVariant($item)
             ];
