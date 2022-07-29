@@ -10,6 +10,7 @@ namespace Hatimeria\GtmPro\Model\DataLayerComponent\V4;
 
 use Hatimeria\GtmPro\Model\Config;
 use Magento\Catalog\Helper\Product\Configuration;
+use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\Layer\Resolver;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\CatalogSearch\Model\Advanced;
@@ -79,10 +80,21 @@ class CategoryView extends ComponentAbstract
         if ($this->request->getFullActionName() === 'catalog_category_view'
             && $category = $this->registry->registry('current_category')
         ) {
+            /** @var Category $category */
             $data['ecommerce'] = [
-                'item_list_name' => $category->getName(),
+                'item_list_name' => 'Listing',
                 'items'    => [],
             ];
+            $id  = 2;
+            foreach ($category->getParentCategories() as $parentCategory) {
+                $data['ecommerce']['item_list_name_' . $id++] = $parentCategory->getName();
+                if (6 === $id) {
+                    break;
+                }
+            }
+            if (6 > $id) {
+                $data['ecommerce']['item_list_name_' . $id] = $category->getName();
+            }
 
             $i = 0;
             foreach($this->getProductCollection() as $product) {
