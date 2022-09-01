@@ -28,7 +28,7 @@ class RemoveFromCart extends ComponentAbstract
         }
 
         $product = $item->getProduct();
-        $qtyChange = (float)$item->getOrigData('qty') - (float)$item->getQty();
+        $qtyChange = $item->isDeleted() ? (float)$item->getQty() : (float)$item->getOrigData('qty') - (float)$item->getQty();
         $data[] = array_merge($this->getProductStructure($product, false), [
             'variant'  => $this->getVariant($item),
             'quantity' => $qtyChange,

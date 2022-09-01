@@ -10,6 +10,9 @@
     <action name="checkout/sidebar/removeItem">
         <section name="gtm"/>
     </action>
+    <action name="checkout/sidebar/updateItemQty">
+        <section name="gtm"/>
+    </action>
     <action name="wishlist/ajax/add">
         <section name="gtm"/>
     </action>
