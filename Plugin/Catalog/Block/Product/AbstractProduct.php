@@ -10,6 +10,7 @@ namespace Hatimeria\GtmPro\Plugin\Catalog\Block\Product;
 
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Block\Product\AbstractProduct as CatalogAbstractProduct;
+use Magento\Catalog\Block\Product\ListProduct as ListProductBlock;
 use Hatimeria\GtmPro\Block\Catalog\Product\ProductList\ItemDataLayerData;
 
 /**
@@ -18,7 +19,7 @@ use Hatimeria\GtmPro\Block\Catalog\Product\ProductList\ItemDataLayerData;
 class AbstractProduct
 {
     /**
-     * @param CatalogAbstractProduct $subject
+     * @param CatalogAbstractProduct|ListProductBlock $subject
      * @param $result
      * @param Product $product
      * @return string
@@ -31,6 +32,6 @@ class AbstractProduct
             ->setTemplate('Hatimeria_GtmPro::catalog/product/productlist/itemdatalayerdata.phtml')
             ->toHtml();
 
-        return $result . $dataLayer;
+        return strstr($result, $dataLayer) ? $result : $result . $dataLayer;
     }
 }

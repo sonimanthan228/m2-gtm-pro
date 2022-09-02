@@ -48,6 +48,7 @@
         <arguments>
             <argument name="versionComponents" xsi:type="array">
                 <item name="0" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\UA\Search</item>
+                <item name="1" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\V4\Search</item>
             </argument>
         </arguments>
     </virtualType>

@@ -10,14 +10,13 @@ namespace Hatimeria\GtmPro\Model\DataLayerComponent\V4;
 
 use Hatimeria\GtmPro\Model\Config;
 use Magento\Catalog\Helper\Product\Configuration;
-use Magento\Catalog\Model\Category;
+use Magento\Catalog\Model\Layer;
 use Magento\Catalog\Model\Layer\Resolver;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\CatalogSearch\Model\Advanced;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\Response\RedirectInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Registry;
 use Magento\Framework\Session\Generic;
 use Magento\Quote\Model\QuoteFactory;
@@ -26,16 +25,13 @@ use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class ProductView
+ * Class Search
  */
-class CategoryView extends ComponentAbstract
+class Search extends ComponentAbstract
 {
     const EVENT_NAME = 'view_item_list';
 
-    /**
-     * @var Resolver
-     */
-    protected $catalogLayer;
+    protected Layer $searchLayer;
 
     public function __construct(
         StoreManagerInterface $storeManager,
@@ -66,36 +62,22 @@ class CategoryView extends ComponentAbstract
             $logger,
             $quoteFactory
         );
-        $this->catalogLayer = $layerResolver->get();
+        $this->searchLayer = $layerResolver->get();
     }
 
     /**
+     *
      * @param $eventData
-     * @return array
-     * @throws NoSuchEntityException
+     * @return array|mixed
      */
     public function getComponentData($eventData): ?array
     {
         $data = [];
-        if ($this->request->getFullActionName() === 'catalog_category_view'
-            && $category = $this->registry->registry('current_category')
-        ) {
-            /** @var Category $category */
+        if ($this->request->getFullActionName() === 'catalogsearch_result_index') {
             $data['ecommerce'] = [
-                'item_list_name' => 'Listing',
+                'item_list_name' => 'Search  Result',
                 'items'    => [],
             ];
-            $id  = 2;
-            foreach ($category->getParentCategories() as $parentCategory) {
-                $data['ecommerce']['item_list_name_' . $id++] = $parentCategory->getName();
-                if (6 === $id) {
-                    break;
-                }
-            }
-            if (6 > $id && $data['ecommerce']['item_list_name_' . ($id - 1)] !== $category->getName()) {
-                $data['ecommerce']['item_list_name_' . $id] = $category->getName();
-            }
-
             $i = 1;
             foreach($this->getProductCollection() as $product) {
                 $data['ecommerce']['items'][] = array_merge(
@@ -110,6 +92,6 @@ class CategoryView extends ComponentAbstract
 
     protected function getProductCollection(): Collection
     {
-        return $this->catalogLayer->getProductCollection();
+        return $this->searchLayer->getProductCollection();
     }
 }
