@@ -7,12 +7,27 @@
 
 define([
     'jquery',
-    'mage/storage',
+    'mage/url',
     'Magento_Checkout/js/checkout-data',
     'Hatimeria_GtmPro/js/model/gtmpro-url-manager',
 
-    ], function ($, storage, checkoutData, gtmUrlManager) {
+    ], function ($, urlBuilder, checkoutData, gtmUrlManager) {
         'use strict';
+
+        const get = function (url, global, contentType, headers) {
+        headers = headers || {};
+        global = global === undefined ? true : global;
+        contentType = contentType || 'application/json';
+
+            return $.ajax({
+                url: urlBuilder.build(url),
+                type: 'GET',
+                global: global,
+                contentType: contentType,
+                headers: headers,
+                async: false
+            });
+        };
 
         return {
             registerStepData: function (step) {
@@ -28,7 +43,7 @@ define([
                     if (!stepParam) {
                         return this;
                     }
-                    storage.get(
+                    get(
                         gtmUrlManager.getUrlForCheckoutStepData(step, stepParam)
                     ).done(
                         function (response) {
