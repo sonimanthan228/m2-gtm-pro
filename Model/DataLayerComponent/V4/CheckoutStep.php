@@ -36,7 +36,7 @@ class CheckoutStep extends ComponentAbstract
             $quote = $eventData['quote'] ?? $this->checkoutSession->getQuote();
             $data['ecommerce'] = [
                 'currency' => $quote->getQuoteCurrencyCode(),
-                'value'    => $this->formatPrice($quote->getSubtotalWithDiscount()),
+                'value'    => $this->formatPrice($this->getCartValue($quote)),
                 'items'    => $this->getCartItems($quote),
             ];
             switch ($this->getStep($eventData)) {
@@ -85,5 +85,10 @@ class CheckoutStep extends ComponentAbstract
     public function getEventName(): string
     {
         return (string)$this->eventName;
+    }
+
+    protected function getCartValue($quote): float
+    {
+        return $quote->getTotals()['subtotal']->getValueInclTax();
     }
 }

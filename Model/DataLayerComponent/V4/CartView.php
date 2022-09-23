@@ -54,6 +54,6 @@ class CartView extends ComponentAbstract
 
     protected function getCartValue(): float
     {
-        return (float)$this->checkoutSession->getQuote()->getSubtotalWithDiscount();
+        return $this->checkoutSession->getQuote()->getTotals()['subtotal']->getValueInclTax();
     }
 }
