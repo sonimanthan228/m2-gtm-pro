@@ -13,6 +13,7 @@ use Magento\Catalog\Helper\Product\Configuration;
 use Magento\Catalog\Model\Layer;
 use Magento\Catalog\Model\Layer\Resolver;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\CatalogSearch\Model\Advanced;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\Request\Http;
@@ -46,6 +47,7 @@ class Search extends ComponentAbstract
         Advanced $catalogSearchAdvanced,
         LoggerInterface $logger,
         QuoteFactory $quoteFactory,
+        CategoryCollectionFactory $collectionFactory,
         Resolver $layerResolver
     ) {
         parent::__construct(
@@ -60,7 +62,8 @@ class Search extends ComponentAbstract
             $redirect,
             $catalogSearchAdvanced,
             $logger,
-            $quoteFactory
+            $quoteFactory,
+            $collectionFactory
         );
         $this->searchLayer = $layerResolver->get();
     }

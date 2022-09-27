@@ -5,6 +5,8 @@ namespace Hatimeria\GtmPro\Model\DataLayerComponent;
 use Hatimeria\GtmPro\Model\Config;
 use Magento\Catalog\Helper\Product\Configuration;
 use Magento\Catalog\Model\Category;
+use Magento\Catalog\Model\ResourceModel\Category\Collection as CategoryCollection;
+use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\Catalog\Model\Product;
 use Magento\CatalogSearch\Model\Advanced;
 use Magento\Checkout\Model\Session;
@@ -34,6 +36,7 @@ abstract class AbstractComponent
     protected Advanced $catalogSearchAdvanced;
     protected LoggerInterface $logger;
     protected QuoteFactory $quoteFactory;
+    protected CategoryCollectionFactory $categoryCollectionFactory;
     protected array $productCategories = [];
     protected array $productsStructure = [];
     protected array $cartItemsStructure = [];
@@ -65,7 +68,8 @@ abstract class AbstractComponent
         RedirectInterface $redirect,
         Advanced $catalogSearchAdvanced,
         LoggerInterface $logger,
-        QuoteFactory $quoteFactory
+        QuoteFactory $quoteFactory,
+        CategoryCollectionFactory $categoryCollectionFactory
     ) {
         $this->storeManager = $storeManager;
         $this->checkoutSession = $checkoutSession;
@@ -79,6 +83,7 @@ abstract class AbstractComponent
         $this->catalogSearchAdvanced = $catalogSearchAdvanced;
         $this->logger = $logger;
         $this->quoteFactory = $quoteFactory;
+        $this->categoryCollectionFactory = $categoryCollectionFactory;
     }
     /**
      * @param $eventData
@@ -118,14 +123,36 @@ abstract class AbstractComponent
     protected function getCategories(Product $product): array
     {
         if (!array_key_exists($product->getId(), $this->productCategories)) {
+            $rootCategoryId = $this->storeManager->getStore()->getRootCategoryId();
             $categoryCollection = $product->getCategoryCollection()
-                ->addAttributeToSelect('name');
+                ->addAttributeToSelect('name')
+                ->setOrder('level', 'DESC');
 
             $categories = [];
+            $childCategories = [];
             if ($categoryCollection->count() > 0) {
                 foreach ($categoryCollection as $category) {
                     /** @var Category $category */
-                    $categories[] = $category->getName();
+                    $categoryPath = preg_replace("(.*\/$rootCategoryId\/)", "", $category->getPath());
+                    $childCategories = array_merge($childCategories, explode('/', $categoryPath));
+                }
+            }
+            if (!empty($childCategories)) {
+                /** @var CategoryCollection $categoryCollection */
+                $parentCategoryCollection = $this->categoryCollectionFactory->create();
+                $parentCategoryCollection->addIdFilter(array_unique($childCategories));
+                $parentCategoryCollection->addAttributeToSelect('name');
+                foreach ($categoryCollection as $category) {
+                    $categoryPathName = '';
+                    foreach ($category->getPathIds() as $categoryId) {
+                        if ($categoryId !== $category->getId()
+                            && $parentCategory = $parentCategoryCollection->getItemById($categoryId)
+                        ) {
+                            $categoryPathName .= $parentCategory->getName() . ' > ';
+                        }
+                    }
+                    $categoryPathName .= $category->getName();
+                    $categories[] = $this->trimPathName($categoryPathName);
                 }
             }
             $this->productCategories[$product->getId()] = $categories;
@@ -214,5 +241,23 @@ abstract class AbstractComponent
     {
         $name = strip_tags($product->getName());
         return str_replace("'", "", $name);
+    }
+
+    protected function trimPathName(string $categoryPathName)
+    {
+        if (strlen($categoryPathName) <= 100) {
+            return $categoryPathName;
+        }
+
+        return trim(
+            substr(
+                $categoryPathName,
+                strpos(
+                    $categoryPathName,
+                    '>',
+                    strlen($categoryPathName) - 100
+                ) + 2
+            )
+        );
     }
 }

@@ -10,6 +10,7 @@ namespace Hatimeria\GtmPro\Model\DataLayerComponent\UA;
 
 use Hatimeria\GtmPro\Model\Config;
 use Magento\Catalog\Helper\Product\Configuration;
+use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\CatalogSearch\Model\Advanced;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\Request\Http;
@@ -79,7 +80,8 @@ class CoreData extends ComponentAbstract
         RedirectInterface $redirect,
         Advanced $catalogSearchAdvanced,
         LoggerInterface $logger,
-        QuoteFactory $quoteFactory
+        QuoteFactory $quoteFactory,
+        CategoryCollectionFactory $collectionFactory
     ) {
         $this->productMetaData = $productMetadata;
         $this->scopeConfig = $scopeConfig;
@@ -98,7 +100,8 @@ class CoreData extends ComponentAbstract
             $redirect,
             $catalogSearchAdvanced,
             $logger,
-            $quoteFactory
+            $quoteFactory,
+            $collectionFactory
         );
 
     }
