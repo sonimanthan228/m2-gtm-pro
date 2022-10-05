@@ -16,7 +16,7 @@ use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 class ReviewAdd extends ComponentAbstract implements DataLayerComponentInterface
 {
     const EVENT_NAME = 'rate-product';
-    
+
     /**
      * @return string
      */
@@ -34,7 +34,8 @@ class ReviewAdd extends ComponentAbstract implements DataLayerComponentInterface
     {
         $data = [];
         if ($this->config->isAddProductReviewTrackingEnabled()
-            && $reviewData = json_decode($this->session->getGtmProAddProductReviewData(), true)) {
+            && $reviewData = json_decode((string)$this->session->getGtmProAddProductReviewData(), true)
+        ) {
             //todo add more review data if needed
             $data['product_id'] = $reviewData['product_id'];
             $this->cleanSessionGtmProAddProductReviewData();

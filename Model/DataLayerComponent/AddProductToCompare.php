@@ -18,13 +18,13 @@ use Magento\Catalog\Model\Product;
 class AddProductToCompare extends ComponentAbstract implements DataLayerComponentInterface
 {
     const EVENT_NAME = 'add-to-compare';
-    
+
     /**
      * @param Product $product
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmProProductAddToCompareData());
+        $data = json_decode((string)$this->session->getGtmProProductAddToCompareData());
         if (!is_array($data)) {
             $data = [];
         }
@@ -41,7 +41,7 @@ class AddProductToCompare extends ComponentAbstract implements DataLayerComponen
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->session->getGtmProProductAddToCompareData());
+        $products = json_decode((string)$this->session->getGtmProProductAddToCompareData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),

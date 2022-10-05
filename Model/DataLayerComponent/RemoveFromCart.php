@@ -17,13 +17,13 @@ use Hatimeria\GtmPro\Api\DataLayerComponentInterface;
 class RemoveFromCart extends ComponentAbstract implements DataLayerComponentInterface
 {
     const EVENT_NAME = 'remove-from-cart';
-    
+
     /**
      * @param Item $item
      */
     public function processProduct(Item $item)
     {
-        $data = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
+        $data = json_decode((string)$this->checkoutSession->getGtmProProductRemoveFromCartData());
         if (!is_array($data)) {
             $data = [];
         }
@@ -44,7 +44,7 @@ class RemoveFromCart extends ComponentAbstract implements DataLayerComponentInte
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
+        $products = json_decode((string)$this->checkoutSession->getGtmProProductRemoveFromCartData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),

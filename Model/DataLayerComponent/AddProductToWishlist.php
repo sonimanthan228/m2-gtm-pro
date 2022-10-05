@@ -18,13 +18,13 @@ use Magento\Catalog\Model\Product;
 class AddProductToWishlist extends ComponentAbstract implements DataLayerComponentInterface
 {
     const EVENT_NAME = 'add-to-wishlist';
-    
+
     /**
      * @param Product $product
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmProProductAddToWishlistData());
+        $data = json_decode((string)$this->session->getGtmProProductAddToWishlistData());
         if (!is_array($data)) {
             $data = [];
         }
@@ -41,7 +41,7 @@ class AddProductToWishlist extends ComponentAbstract implements DataLayerCompone
     public function getComponentData($eventData)
     {
         $data = [];
-        $products = json_decode($this->session->getGtmProProductAddToWishlistData());
+        $products = json_decode((string)$this->session->getGtmProProductAddToWishlistData());
         if (is_array($products)) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
