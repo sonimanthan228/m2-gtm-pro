@@ -32,11 +32,12 @@ class Transaction extends ComponentAbstract
             && $this->checkoutSession->getLastRealOrderId()
         ) {
             $order = $this->checkoutSession->getLastRealOrder();
+            $orderValue = (float)$order->getGrandTotal() - (float)$order->getShippingInclTax();
 
             $data['ecommerce'] = [
                 'currency'       => $order->getOrderCurrencyCode(),
                 'transaction_id' => $order->getIncrementId(),
-                'value'          => $this->formatPrice($order->getSubtotalInclTax()),
+                'value'          => $this->formatPrice($orderValue),
                 'tax'            => $this->formatPrice($order->getTaxAmount()),
                 'shipping'       => $this->formatPrice($order->getShippingAmount()),
                 'coupon'         => $order->getCouponCode(),
