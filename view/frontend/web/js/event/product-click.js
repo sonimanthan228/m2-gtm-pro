@@ -12,6 +12,7 @@ define([
     var productClasses = [];
     var productClickElementClass = '';
     function pushStep() {
+        window.dataLayer = window.dataLayer || [];
         $.each(productClasses, function( index, value ) {
             $("." + value).on("click", function (event) {
                 fireProductClick(event)

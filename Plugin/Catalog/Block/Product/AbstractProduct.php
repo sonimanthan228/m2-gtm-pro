@@ -32,6 +32,6 @@ class AbstractProduct
             ->setTemplate('Hatimeria_GtmPro::catalog/product/productlist/itemdatalayerdata.phtml')
             ->toHtml();
 
-        return strstr($result, $dataLayer) ? $result : $result . $dataLayer;
+        return empty($result) || empty($dataLayer) || strstr($result, $dataLayer) ? $result : $result . $dataLayer;
     }
 }

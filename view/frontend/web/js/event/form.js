@@ -34,6 +34,7 @@ define([
         $(event.target).find('.trackfield').each(function(i, obj) {
             data[$(obj).attr('id')] = $(obj).val();
         });
+        window.dataLayer = window.dataLayer || [];
         window.dataLayer.push(data);
         $(event.target).unbind('submit');
         $(event.target).submit();

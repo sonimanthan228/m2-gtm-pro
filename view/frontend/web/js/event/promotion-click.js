@@ -10,6 +10,7 @@ define([
 ], function($) {
     "use strict";
     function pushStep() {
+        window.dataLayer = window.dataLayer || [];
         const promotions = document.querySelectorAll('[data-promotion-id]');
         $.each(promotions, function( index, entry ) {
             $(entry).on("click", function (event) {

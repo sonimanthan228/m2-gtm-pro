@@ -31,6 +31,7 @@ define([
 
         return {
             registerStepData: function (step) {
+                window.dataLayer = window.dataLayer || [];
                 if ( window.location.hash) {
                     var step = window.location.hash.replace('#', '');
                     var stepParam = 'none';
