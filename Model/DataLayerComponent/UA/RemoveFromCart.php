@@ -16,14 +16,15 @@ use Magento\Quote\Model\Quote\Item;
 class RemoveFromCart extends ComponentAbstract
 {
     const EVENT_NAME = 'remove-from-cart';
-    
+
     /**
      * @param Item $item
      */
     public function processProduct(Item $item)
     {
-        $data = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
-        if (!is_array($data)) {
+        if ($data = $this->checkoutSession->getGtmProProductRemoveFromCartData()) {
+           $data = json_decode($data);
+        } else {
             $data = [];
         }
 
@@ -43,12 +44,11 @@ class RemoveFromCart extends ComponentAbstract
     public function getComponentData($eventData): ?array
     {
         $data = [];
-        $products = json_decode($this->checkoutSession->getGtmProProductRemoveFromCartData());
-        if (is_array($products)) {
+        if ($products = $this->checkoutSession->getGtmProProductRemoveFromCartData()) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'remove' => [
-                   'products' => $products
+                   'products' => json_decode($products)
                ]
             ];
             $this->cleanSessionGtmProductRemoveFromCartData();

@@ -14,7 +14,7 @@ namespace Hatimeria\GtmPro\Model\DataLayerComponent\UA;
 class RemoveProductFromCompare extends ComponentAbstract
 {
     const EVENT_NAME = 'remove-from-compare';
-    
+
     /**
      * @param $productData
      */

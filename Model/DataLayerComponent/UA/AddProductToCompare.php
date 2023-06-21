@@ -16,14 +16,15 @@ use Magento\Catalog\Model\Product;
 class AddProductToCompare extends ComponentAbstract
 {
     const EVENT_NAME = 'add-to-compare';
-    
+
     /**
      * @param Product $product
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmProProductAddToCompareData());
-        if (!is_array($data)) {
+        if ($data = $this->session->getGtmProProductAddToCompareData()) {
+            $data = json_decode($data, true);
+        } else {
             $data = [];
         }
 
@@ -39,12 +40,11 @@ class AddProductToCompare extends ComponentAbstract
     public function getComponentData($eventData): ?array
     {
         $data = [];
-        $products = json_decode($this->session->getGtmProProductAddToCompareData());
-        if (is_array($products)) {
+        if ($products = $this->session->getGtmProProductAddToCompareData()) {
             $data['ecommerce'] = [
                'currencyCode' => $this->storeManager->getStore()->getCurrentCurrency()->getCode(),
                'add' => [
-                   'products' => $products
+                   'products' => json_decode($products, true)
                ]
             ];
 

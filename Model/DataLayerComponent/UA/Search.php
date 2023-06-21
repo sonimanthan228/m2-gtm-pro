@@ -22,8 +22,9 @@ class Search extends ComponentAbstract
      */
     public function getComponentData($eventData): ?array
     {
-        $data = json_decode($this->checkoutSession->getGtmProSearchCollectionData(), true);
-        if (is_array($data)) {
+        $data = $this->checkoutSession->getGtmProSearchCollectionData();
+        if ($data) {
+            $data = json_decode($data, true);
             $data['searchTerm'] = $this->request->getParam('q');
             $data['searchResults'] = $data['searchResults'];
 
@@ -45,8 +46,9 @@ class Search extends ComponentAbstract
      */
     public function processProduct($collection)
     {
-        $data = json_decode($this->checkoutSession->getGtmProSearchCollectionData());
-        if (!is_array($data)) {
+        if ($data = $this->checkoutSession->getGtmProSearchCollectionData()) {
+            $data = json_decode($data, true);
+        } else {
             $data = [];
         }
 

@@ -16,7 +16,7 @@ use Magento\Catalog\Model\Product;
 class RemoveProductFromWishlist extends ComponentAbstract
 {
     const EVENT_NAME = 'remove-from-wishlist';
-    
+
     /**
      * @param Product $product
      */
