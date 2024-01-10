@@ -14,7 +14,7 @@
 
 #### Magento 2 module for integrate your store and send all needed data to Google Tag Manager by DataLayer. This module is very easy to install.
 
-For Magento 2.3.x
+For Magento 2.4.x
 
 ### Tracking Events:
 
