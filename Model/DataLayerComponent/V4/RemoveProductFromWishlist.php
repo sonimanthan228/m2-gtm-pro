@@ -16,14 +16,15 @@ use Magento\Catalog\Model\Product;
 class RemoveProductFromWishlist extends ComponentAbstract
 {
     const EVENT_NAME = 'remove_from_wishlist';
-    
+
     /**
      * @param Product $product
      */
     public function processProduct(Product $product)
     {
-        $data = json_decode($this->session->getGtmProProductRemoveFromWishlistData(), true);
-        if (!is_array($data)) {
+        if ($data = $this->session->getGtmProProductRemoveFromWishlistData()) {
+            $data = json_decode($data, true);
+        } else {
             $data = [];
         }
 
@@ -40,8 +41,8 @@ class RemoveProductFromWishlist extends ComponentAbstract
     public function getComponentData($eventData): ?array
     {
         $data = [];
-        $products = json_decode($this->session->getGtmProProductRemoveFromWishlistData());
-        if (is_array($products)) {
+        if ($products = $this->session->getGtmProProductRemoveFromWishlistData()) {
+            $products = json_decode($products, true);
             $data['ecommerce'] = [
                 'items' => $products
             ];

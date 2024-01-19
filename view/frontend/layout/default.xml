@@ -9,22 +9,21 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="head.additional">
-            <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\Tag" name="hatimeria.gtmpro.tag" before="-" template="Hatimeria_GtmPro::tag.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmpro.polyfill-intersection.script"
+                   template="Hatimeria_GtmPro::polyfill-intersection.phtml" ifconfig="hatimeria_gtmpro/general/enabled"/>
             <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmpro.polyfill-intersection.script"
                    template="Hatimeria_GtmPro::polyfill-intersection.phtml" ifconfig="hatimeria_gtmpro/general/enabled"/>
         </referenceBlock>
-        <referenceContainer name="head.additional">
-            <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\Tag" name="hatimeria.gtmpro.tag" before="-" template="Hatimeria_GtmPro::tag.phtml"/>
-            <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmpro.polyfill-intersection.script"
-                   template="Hatimeria_GtmPro::polyfill-intersection.phtml" ifconfig="hatimeria_gtmpro/general/enabled" />
-        </referenceContainer>
         <referenceContainer name="after.body.start">
             <block ifconfig="hatimeria_gtmpro/general/enable"
                    name="hatimeria.gtmpro.tagnoscript"
                    class="Hatimeria\GtmPro\Block\Tag"
                    template="Hatimeria_GtmPro::tag-noscript.phtml"
-                   before="-"
-            />
+                   before="-">
+                <arguments>
+                    <argument name="hyva_handle" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
         </referenceContainer>
         <referenceContainer name="before.body.end">
             <block name="hatimeria.gtmpro.event.productimpression"
@@ -36,6 +35,7 @@
                         config == hatimeria_gtmpro/general/enabled &&
                         config == hatimeria_gtmpro/advanced/enable_product_impression
                     ]]></argument>
+                    <argument name="hyva_handle" xsi:type="boolean">true</argument>
                 </arguments>
             </block>
             <block name="hatimeria.gtmpro.event.productclick"
@@ -47,6 +47,7 @@
                         config == hatimeria_gtmpro/general/enabled &&
                         config == hatimeria_gtmpro/advanced/product_click_enabled
                     ]]></argument>
+                    <argument name="hyva_handle" xsi:type="boolean">true</argument>
                 </arguments>
             </block>
             <block name="hatimeria.gtmpro.event.form"
@@ -58,6 +59,7 @@
                         config == hatimeria_gtmpro/general/enabled &&
                         config == hatimeria_gtmpro/advanced/form_tracking_enabled
                     ]]></argument>
+                    <argument name="hyva_handle" xsi:type="boolean">true</argument>
                 </arguments>
             </block>
             <block name="hatimeria.gtmpro.event.promotion-impression"
@@ -69,9 +71,14 @@
                         config == hatimeria_gtmpro/general/enabled &&
                         config == hatimeria_gtmpro/advanced/promotion_tracking_enabled
                     ]]></argument>
+                    <argument name="hyva_handle" xsi:type="boolean">true</argument>
                 </arguments>
             </block>
-            <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\DataLayer" name="hatimeria.gtmpro.datalayer" template="Hatimeria_GtmPro::datalayer.phtml"/>
+            <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\DataLayer" name="hatimeria.gtmpro.datalayer" template="Hatimeria_GtmPro::datalayer.phtml">
+                <arguments>
+                    <argument name="hyva_handle" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
         </referenceContainer>
         <referenceBlock name="catalog.product.related">
             <block class="Hatimeria\GtmPro\Block\Wishlist\Customer\Item\Column\DataLayerData" name="hatimeria.gtmpro.catalog.product.related" template="Hatimeria_GtmPro::wishlist/column/datalayerdata.phtml"/>

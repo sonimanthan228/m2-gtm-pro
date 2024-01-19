@@ -1,0 +1,43 @@
+<?php
+/**
+ *  @category   Hatimeria
+ *  @author      (office@hatimeria.com)
+ *  @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+ *  @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+ */
+
+/** @var \Hatimeria\GtmPro\Block\Tag $block */
+// @codingStandardsIgnoreFile
+?>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    <?php // Set default consent to denied ?>
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+    });
+    <?php // Removes ad cookies, tags will be redacted and requests
+        // is sent through without cookies.
+        // This only applies if ad_storage is set to "denied" ?>
+    gtag('set', 'ads_data_redaction', true);
+    <?php // This feature allows URL vars to passthrough
+        // May cause URL pollution ?>
+    gtag('set', 'url_passthrough', true);
+
+    function updateGoogleConsent(adStorage, analyticsStorage) {
+        gtag('consent', 'update', {
+            ad_storage: adStorage ? "granted" : "denied",
+            analytics_storage: analyticsStorage ? "granted" : "denied",
+        });
+    }
+
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '<?= $block->getDomain(); ?>/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','<?= $block->getContainerId() ?>');
+</script>

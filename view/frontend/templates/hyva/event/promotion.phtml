@@ -1,0 +1,101 @@
+<?php
+/**
+ * @category   Hatimeria
+ * @author      (office@hatimeria.com)
+ * @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+ * @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+ */
+
+/** @var \Hatimeria\GtmPro\Block\Event\Promotion $block */
+// @codingStandardsIgnoreFile
+?>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function initGtmPromotion() {
+        function initClick() {
+            const promotions = document.querySelectorAll('[data-promotion-id]');
+            promotions.forEach(entry => {
+                entry.addEventListener('click', firePromotionClick);
+            });
+        }
+
+        function firePromotionClick(event) {
+            if (!event.target.classList.contains('promotion-clicked')) {
+                event.stopPropagation();
+                event.target.classList.add('promotion-clicked');
+
+                let data = getBaseClickEventData();
+                data.ecommerce.promoClick.promotions.push(getPromotionData(event.target));
+                window.dataLayer.push(data);
+
+                event.target.dispatchEvent(new PointerEvent('click', {
+                    bubbles: true,
+                    isTrusted: true,
+                    cancelable: true,
+                    view: window
+                }));
+            }
+        }
+
+        function getBaseClickEventData() {
+            let data = {};
+            data.event = 'promotionClick';
+            data.ecommerce = {};
+            data.ecommerce.promoClick = {};
+            data.ecommerce.promoClick.promotions = [];
+
+            return data;
+        }
+
+        function initImpression() {
+            const promotions = document.querySelectorAll('[data-promotion-id]');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.intersectionRatio > 0 && !entry.target.classList.contains('promotion-viewed')) {
+                        entry.target.classList.add('promotion-viewed');
+                        let data = getBaseImpressionEventData();
+                        data.ecommerce.promoView.promotions.push(getPromotionData(entry.target));
+                        window.dataLayer.push(data);
+                    }
+                });
+            });
+
+            promotions.forEach(promotion => {
+                observer.observe(promotion);
+            });
+        }
+
+        function getBaseImpressionEventData() {
+            let data = {};
+            data.ecommerce = {};
+            data.ecommerce.promoView = {};
+            data.ecommerce.promoView.promotions = [];
+
+            return data;
+        }
+
+        function getPromotionData(entry) {
+            let data = {};
+            data.id = entry.dataset.promotionId;
+            data.position = [].indexOf.call(entry.parentElement.children, entry) + 1;
+            if (entry.dataset.promotionName) {
+                data.name = entry.dataset.promotionName;
+            }
+            if (entry.dataset.promotionCreative) {
+                data.creative = entry.dataset.promotionCreative;
+            }
+
+            return data;
+        }
+
+        return {
+            initClick: initClick,
+            initImpression: initImpression
+        }
+    }
+
+    initGtmPromotion().initClick();
+    initGtmPromotion().initImpression();
+
+</script>

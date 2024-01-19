@@ -1,0 +1,75 @@
+<?php
+/**
+ *  @category   Hatimeria
+ *  @author      (office@hatimeria.com)
+ *  @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+ *  @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+ */
+
+/** @var \Hatimeria\GtmPro\Block\Event\ProductImpression $block */
+// @codingStandardsIgnoreFile
+?>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayerDelayed = true;
+    window.dataLayerQueue = [];
+
+    function delayDataLayerPush() {
+        if (window.dataLayerDelayed) {
+            window.dataLayerQueue.push(arguments)
+        } else {
+            window.dataLayer.push(...arguments)
+        }
+    }
+
+    window.addEventListener('CookieInformationConsentGiven', function(event) {
+        window.dataLayerDelayed = false
+        window.dataLayerQueue.forEach(item => {
+            window.delayDataLayerPush(...item)
+        });
+        window.dataLayerQueue = []
+    });
+
+    window.addEventListener('category-product-slider-toggle', function(event) {
+        if (!event.detail.wrapper) {
+            return;
+        }
+        initGtmProductImpressions(event.detail.wrapper);
+    });
+
+    function initGtmProductImpressions(wrapper) {
+        const selector = wrapper ? wrapper : document;
+
+        const productClass = '<?= $block->getProductClass() ?>';
+        const impressionData = {};
+        const products = selector.querySelectorAll('.' + productClass);
+
+        products.forEach(entry => {
+            const impressionDataElement = entry.querySelector("[data-impression]");
+            if (!impressionDataElement) {
+                return
+            }
+            const impressionRawData = impressionDataElement.dataset.impression
+            const impressionObject = impressionRawData ? JSON.parse(impressionRawData) : ''
+
+            if (typeof impressionObject !== "undefined" && impressionObject.length !== 0) {
+                if (!impressionData.hasOwnProperty('ecommerce')) {
+                    impressionData['ecommerce'] = {
+                        currencyCode: impressionObject['ecommerce']['currencyCode'],
+                        impressions: []
+                    };
+                    impressionData['event'] = impressionObject['event'];
+                }
+                const position = [].indexOf.call(entry.parentElement.children, entry)
+                impressionObject['ecommerce']['impressions']['position'] = position + 1;
+                impressionData['ecommerce']['impressions'].push(impressionObject['ecommerce']['impressions']);
+            }
+        });
+
+        if (impressionData.hasOwnProperty('ecommerce')) {
+            window.delayDataLayerPush(impressionData);
+        }
+    }
+
+    initGtmProductImpressions();
+</script>

@@ -1,0 +1,53 @@
+<?php
+/**
+ *  @category   Hatimeria
+ *  @author      (office@hatimeria.com)
+ *  @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+ *  @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+ */
+
+/** @var \Hatimeria\GtmPro\Block\Event\ProductClick $block */
+// @codingStandardsIgnoreFile
+?>
+<script>
+    window.addEventListener('category-product-slider-widget-init', function(event) {
+        if (!event.detail.slider) {
+            return;
+        }
+        const wrapper = event.detail.slider.sliderContainer;
+        const glide = event.detail.slider.glide;
+        glide.on('update', function () {
+            initGtmProductClick(wrapper);
+        })
+    });
+    function initGtmProductClick(wrapper) {
+        const productClasses = <?= json_encode($block->getProductClickClasses()) ?>;
+        const productClickElementClass = '<?= $block->getProductClickElementClass() ?>';
+
+        productClasses.forEach(value => {
+            const selector = wrapper ? wrapper : document;
+
+            selector.querySelectorAll('.' + value).forEach(element => {
+                element.addEventListener('click', function (event) {
+                    if (!event.target.classList.contains('product-clicked')) {
+                        event.stopPropagation();
+                        event.target.classList.add('product-clicked');
+
+                        const parent = event.target.closest('.' + productClickElementClass);
+                        const data = parent.querySelector("[data-click]").dataset.click;
+
+                        window.dataLayer.push(JSON.parse(data));
+
+                        event.target.dispatchEvent(new PointerEvent('click', {
+                            bubbles: true,
+                            isTrusted: true,
+                            cancelable: true,
+                            view: window
+                        }));
+                    }
+                })
+            })
+        });
+    }
+    initGtmProductClick();
+</script>

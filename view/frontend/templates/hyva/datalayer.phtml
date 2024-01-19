@@ -1,0 +1,105 @@
+<?php
+/**
+ *  @category   Hatimeria
+ *  @author     (office@hatimeria.com)
+ *  @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+ *  @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+ */
+
+/** @var \Hatimeria\GtmPro\Block\DataLayer $block */
+// @codingStandardsIgnoreFile
+?>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    <?php foreach ($block->getDataLayerStaticData() as $event): ?>
+        window.dataLayer.push(<?= json_encode($event) ?>);
+    <?php endforeach; ?>
+
+    window.addEventListener('open-description-popup', function(event) {
+        if (event.detail.label) {
+            window.dataLayer.push({
+                event: 'bundle_read_more',
+                bundleOptionType: event.detail.label
+            });
+        }
+    });
+
+    window.addEventListener('private-content-loaded', function(event) {
+        const private_content_key = 'mage-cache-storage';
+
+        setTimeout(function() {
+            debugger;
+            const sectionData = event.detail.data
+            const gtmData = sectionData['gtm']
+
+            if (gtmData && gtmData.hasOwnProperty('dataLayer') && gtmData.dataLayer.length) {
+                debugger;
+                <?php /* Push section data to data layer */ ?>
+                window.dataLayer.push({ ecommerce: null });
+                gtmData.dataLayer.forEach(data => {
+                    window.dataLayer.push(data);
+                })
+
+                <?php /* Remove GTM section data from local storage to avoid reloading all sections by default Hyva mechanism */ ?>
+                if (hyva.getBrowserStorage) {
+                    const browserStorage = hyva.getBrowserStorage();
+                    let sections = JSON.parse(browserStorage.getItem(private_content_key));
+                    if (sections.gtm) {
+                        sections.gtm = {};
+                        browserStorage.setItem(private_content_key, JSON.stringify(sections));
+                    }
+                }
+            }
+        }, 100);
+    });
+
+    (function() {
+        const videoMarkers = [25,50,75];
+
+        function pushEvent(status, currentTime, name, url) {
+            const data = {
+                'event': 'video',
+                'video_status' : status,
+                'video_progress': currentTime,
+                'video_title': name,
+                'video_home': url
+            };
+            window.dataLayer.push(data);
+        }
+
+        function eventHandler(e) {
+            const progress = Math.floor(100 * Math.round(e.target.currentTime) / e.target.duration) || 0;
+
+            switch (e.type) {
+                case 'timeupdate':
+                    videoMarkers.forEach((marker, index) => {
+                        if(progress > marker && index > e.target.getAttribute('currentMarker') ){
+                            pushEvent('progress', marker, e.target.getAttribute('name'), window.location.href);
+                            e.target.setAttribute('currentMarker', index);
+                        }
+                    });
+                    break;
+                case 'play':
+                    pushEvent('play', progress, e.target.getAttribute('name'), window.location.href)
+                    break;
+                case 'pause':
+                    pushEvent('pause', progress, e.target.getAttribute('name'), window.location.href)
+                    break;
+                case 'ended':
+                    pushEvent('ended', 100, e.target.getAttribute('name'), window.location.href)
+                    break;
+            }
+        }
+
+        const videos = document.querySelectorAll('video[video-data-layer]');
+        videos.forEach((video) => {
+            video.setAttribute('currentMarker', -1);
+            video.setAttribute('name', decodeURIComponent(video.currentSrc.split('/')[video.currentSrc.split('/').length - 1]));
+            video.addEventListener("play", eventHandler, false);
+            video.addEventListener("pause", eventHandler, false);
+            video.addEventListener("ended", eventHandler, false);
+            video.addEventListener("timeupdate", eventHandler, false);
+        });
+    })();
+</script>

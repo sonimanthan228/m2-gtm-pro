@@ -259,4 +259,7 @@
     <type name="Magento\CatalogWidget\Block\Product\ProductsList">
         <plugin name="hatimeria-gtmpro-product-catalogwidget-data" type="Hatimeria\GtmPro\Plugin\Catalog\Block\Product\AbstractProduct"/>
     </type>
+    <type name="Magento\Framework\View\Element\Template">
+        <plugin name="hatimeria-gtmpro-template-data" type="Hatimeria\GtmPro\Plugin\Framework\View\Element\Template"/>
+    </type>
 </config>

@@ -1,0 +1,54 @@
+<?php
+/**
+ * @category   Hatimeria
+ * @author      (office@hatimeria.com)
+ * @copyright  Copyright (c) 2020 Hatimeria Sp. z o.o. Sp. k. ( https://www.hatimeria.com/ )
+ * @license    (https://www.gnu.org/licenses/gpl-3.0.html)
+ */
+
+/** @var \Hatimeria\GtmPro\Block\Event\Form $block */
+// @codingStandardsIgnoreFile
+?>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function initGtmForm() {
+        function init() {
+            const formData = <?= json_encode($block->getFormData()) ?>;
+            Object.keys(formData).forEach(key => {
+                const data = formData[key]
+                const form = document.querySelector('#' + data.form_id);
+
+                if (form) {
+                    form.dataset.eventname = data.event_name;
+                    data.form_field_ids.forEach(fieldId => {
+                        const formField = form.querySelector('#' + fieldId);
+                        if (formField) {
+                            formField.classList.add('trackfield');
+                        }
+                    });
+                    form.addEventListener('submit', gtmFormSubmitHandler, false);
+                }
+            });
+        }
+
+        const gtmFormSubmitHandler = function (event) {
+            event.preventDefault();
+            let data = {};
+            data.event = event.target.dataset.eventname;
+            event.target.querySelectorAll('.trackfield').forEach(obj => {
+                data[obj.getAttribute('id')] = obj.value;
+            });
+            window.dataLayer.push(data);
+
+            event.target.removeEventListener('submit', gtmFormSubmitHandler, false);
+            event.target.submit();
+        }
+
+        return {
+            init: init
+        }
+    }
+
+    initGtmForm().init();
+</script>

@@ -57,6 +57,11 @@ class CartProductAddAfter implements ObserverInterface
             if ('checkout_cart_add_product_complete' === $observer->getEvent()->getName() && $this->quoteItem) {
                 $this->addToCartComponent->processProduct($this->quoteItem);
             }
+            if ('sales_quote_product_add_after' === $observer->getEvent()->getName()) {
+                foreach ($observer->getItems() as $item) {
+                    $this->addToCartComponent->processProduct($item);
+                }
+            }
         }
 
         return $this;
