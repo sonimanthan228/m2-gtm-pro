@@ -11,8 +11,11 @@
         <referenceBlock name="head.additional">
             <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmpro.polyfill-intersection.script"
                    template="Hatimeria_GtmPro::polyfill-intersection.phtml" ifconfig="hatimeria_gtmpro/general/enabled"/>
-            <block class="Magento\Framework\View\Element\Template" name="hatimeria.gtmpro.polyfill-intersection.script"
-                   template="Hatimeria_GtmPro::polyfill-intersection.phtml" ifconfig="hatimeria_gtmpro/general/enabled"/>
+            <block ifconfig="hatimeria_gtmpro/general/enabled" class="Hatimeria\GtmPro\Block\Tag" name="hatimeria.gtmpro.tag" before="-" template="Hatimeria_GtmPro::tag.phtml">
+                <arguments>
+                    <argument name="hyva_handle" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
         </referenceBlock>
         <referenceContainer name="after.body.start">
             <block ifconfig="hatimeria_gtmpro/general/enable"

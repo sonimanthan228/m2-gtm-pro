@@ -9,32 +9,19 @@
 /** @var \Hatimeria\GtmPro\Block\DataLayer $block */
 // @codingStandardsIgnoreFile
 ?>
-
 <script>
     window.dataLayer = window.dataLayer || [];
     <?php foreach ($block->getDataLayerStaticData() as $event): ?>
         window.dataLayer.push(<?= json_encode($event) ?>);
     <?php endforeach; ?>
-
-    window.addEventListener('open-description-popup', function(event) {
-        if (event.detail.label) {
-            window.dataLayer.push({
-                event: 'bundle_read_more',
-                bundleOptionType: event.detail.label
-            });
-        }
-    });
-
     window.addEventListener('private-content-loaded', function(event) {
         const private_content_key = 'mage-cache-storage';
 
         setTimeout(function() {
-            debugger;
             const sectionData = event.detail.data
             const gtmData = sectionData['gtm']
 
             if (gtmData && gtmData.hasOwnProperty('dataLayer') && gtmData.dataLayer.length) {
-                debugger;
                 <?php /* Push section data to data layer */ ?>
                 window.dataLayer.push({ ecommerce: null });
                 gtmData.dataLayer.forEach(data => {

@@ -17,8 +17,12 @@ class Template
         \Magento\Framework\View\Element\Template $subject,
         $template
     ) {
-        if (in_array('hyva_default', $layoutHandle = $subject->getLayout()->getUpdate()->getHandles()) && $subject->getHyvaHandle()) {
-            $template = str_replace('Hatimeria_GtmPro::', 'Hatimeria_GtmPro::hyva/', $template);
+        try {
+            if ($subject->getLayout()->hasElement('root') && in_array('hyva_default', $subject->getLayout()->getUpdate()->getHandles()) && $subject->getHyvaHandle()) {
+                $template = str_replace('Hatimeria_GtmPro::', 'Hatimeria_GtmPro::hyva/', $template);
+            }
+        } catch (\Exception $e) {
+            return [$template];
         }
 
         return [$template];
