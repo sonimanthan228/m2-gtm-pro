@@ -59,4 +59,9 @@ class Tag extends Template
     {
         return 86400;
     }
+
+    public function isModuleEnabled()
+    {
+        return $this->config->isModuleEnabled();
+    }
 }
