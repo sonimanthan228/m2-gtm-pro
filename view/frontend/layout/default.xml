@@ -18,7 +18,7 @@
             </block>
         </referenceBlock>
         <referenceContainer name="after.body.start">
-            <block ifconfig="hatimeria_gtmpro/general/enable"
+            <block
                    name="hatimeria.gtmpro.tagnoscript"
                    class="Hatimeria\GtmPro\Block\Tag"
                    template="Hatimeria_GtmPro::tag-noscript.phtml"
