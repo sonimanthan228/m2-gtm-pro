@@ -10,31 +10,31 @@
      <type name="Hatimeria\GtmPro\Model\DataLayerStaticService">
         <arguments>
             <argument name="dataLayerComponent" xsi:type="array">
-                <item name="product_view" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\ProductView</item>
-                <item name="core_data" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\CoreData</item>
-                <item name="transaction_data" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\Transaction</item>
-                <item name="search" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\Search</item>
-                <item name="advanced_search" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AdvancedSearch</item>
+                <item name="product_view" xsi:type="object" sortOrder="10">Hatimeria\GtmPro\Model\DataLayerComponent\ProductView</item>
+                <item name="core_data" xsi:type="object" sortOrder="20">Hatimeria\GtmPro\Model\DataLayerComponent\CoreData</item>
+                <item name="transaction_data" xsi:type="object" sortOrder="30">Hatimeria\GtmPro\Model\DataLayerComponent\Transaction</item>
+                <item name="search" xsi:type="object" sortOrder="40">Hatimeria\GtmPro\Model\DataLayerComponent\Search</item>
+                <item name="advanced_search" xsi:type="object" sortOrder="50">Hatimeria\GtmPro\Model\DataLayerComponent\AdvancedSearch</item>
             </argument>
         </arguments>
     </type>
     <type name="Hatimeria\GtmPro\Model\DataLayerSectionService">
         <arguments>
             <argument name="dataLayerComponent" xsi:type="array">
-                <item name="add_to_cart" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddToCart</item>
-                <item name="remove_from_cart" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveFromCart</item>
-                <item name="review_add" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\ReviewAdd</item>
-                <item name="add_to_wishlist" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToWishlist</item>
-                <item name="remove_from_wishlist" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromWishlist</item>
-                <item name="add_to_compare" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToCompare</item>
-                <item name="remove_to_compare" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromCompare</item>
+                <item name="add_to_cart" xsi:type="object" sortOrder="10">Hatimeria\GtmPro\Model\DataLayerComponent\AddToCart</item>
+                <item name="remove_from_cart" xsi:type="object" sortOrder="20">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveFromCart</item>
+                <item name="review_add" xsi:type="object" sortOrder="30">Hatimeria\GtmPro\Model\DataLayerComponent\ReviewAdd</item>
+                <item name="add_to_wishlist" xsi:type="object" sortOrder="40">Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToWishlist</item>
+                <item name="remove_from_wishlist" xsi:type="object" sortOrder="50">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromWishlist</item>
+                <item name="add_to_compare" xsi:type="object" sortOrder="60">Hatimeria\GtmPro\Model\DataLayerComponent\AddProductToCompare</item>
+                <item name="remove_to_compare" xsi:type="object" sortOrder="70">Hatimeria\GtmPro\Model\DataLayerComponent\RemoveProductFromCompare</item>
             </argument>
         </arguments>
     </type>
     <type name="Hatimeria\GtmPro\Model\DataLayerCheckoutService">
         <arguments>
             <argument name="dataLayerComponent" xsi:type="array">
-                <item name="checkoutStep" xsi:type="object">Hatimeria\GtmPro\Model\DataLayerComponent\CheckoutStep</item>
+                <item name="checkoutStep" xsi:type="object" sortOrder="10">Hatimeria\GtmPro\Model\DataLayerComponent\CheckoutStep</item>
             </argument>
         </arguments>
     </type>
